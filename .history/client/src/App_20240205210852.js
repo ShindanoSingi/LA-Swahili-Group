@@ -1,4 +1,3 @@
-import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 

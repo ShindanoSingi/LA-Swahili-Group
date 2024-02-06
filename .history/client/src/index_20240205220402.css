@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --primary: #424F5F;
-  --secondary: #F3F3F3;
-  --tertiary: #F4A261;
-  --quaternary: #2A9D8F;
-  --quinary: #E9C46A;
-
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -22,7 +13,7 @@ body {
 
 .container{
   max-height: 100vh;
-  background-color: var(--primary);
+  background-color: #424F5F;
 }
 
 .container {
