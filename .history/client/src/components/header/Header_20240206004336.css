@@ -1,0 +1,33 @@
+.header {
+    background-color: #424F5F;
+}
+
+.logo-button {
+    border-radius: 50%;
+    background: #6E5049;
+    box-shadow: inset -14px -14px 27px #2d211e, inset 14px 14px 27px #af7f74;
+}
+
+.hambourger {
+    border-radius: 10px;
+    background: #6E5049;
+    box-shadow: inset -14px -14px 27px #2d211e, inset 14px 14px 27px #af7f74;
+}
+
+.menu {
+    border-radius: 9px;
+    background: #3E5F75;
+    box-shadow: inset -5px -5px 10px #38556c, inset 5px 5px 10px #5885a8;
+    width: 5rem;
+}
+
+.menu-item{
+    border-radius: 7px;
+background: #486D8A;
+box-shadow: inset -15px -15px 13px #2a3f50,
+            inset 15px 15px 13px #669bc4;
+            width: 4.5rem;
+            text-align: center;
+            margin: 0.5rem;
+            padding: 0 0.5rem;
+}

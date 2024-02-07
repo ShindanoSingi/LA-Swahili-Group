@@ -1,0 +1,10 @@
+.header {
+    background-color: var(--primary);
+}
+
+.logo-button {
+    border-radius: 50%;
+background: linear-gradient(45deg, #3b4756, #475566);
+box-shadow:  32px -32px 64px #1e242c,
+             -32px 32px 64px #667a92;
+}
