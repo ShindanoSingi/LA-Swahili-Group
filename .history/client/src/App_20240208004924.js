@@ -6,7 +6,7 @@ import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import Login from "./pages/login/Login";
 import UserDashBoard from "./pages/userDashBoard/UserDashBoard";
-import SuperUsersDashBoard from "./pages/superUsersDashBoard/SuperUsersDashBoard";
+import SuperUserDashBoard from "./pages/superUserDashBoard/SuperUserDashBoard";
 import { useEffect } from "react";
 
 
@@ -14,11 +14,11 @@ function App() {
 
       const navigate = useNavigate()
 
-      const user = 'superuser';
+      const user = 'user';
 
       useEffect(() => {
-            if (user === 'superuser') {
-                  navigate('/superuser')
+            if (user === 'user') {
+                  navigate('/user')
             }
       })
 
@@ -31,9 +31,9 @@ function App() {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/user" element={<UserDashBoard/>} />
-                        <Route path="/superuser" element={<SuperUsersDashBoard/>} />
+                        <Route path="/superuser" element={<SuperUserDashBoard/>} />
                         <Route path="/admin" element={<adminDashBoard/>} />
-                        <Route
+                        <Routes
                               path="/:rest*"
                               element={
                                     <h1>

@@ -14,11 +14,11 @@ function App() {
 
       const navigate = useNavigate()
 
-      const user = 'superuser';
+      const user = 'user';
 
       useEffect(() => {
-            if (user === 'superuser') {
-                  navigate('/superuser')
+            if (user === 'user') {
+                  navigate('/user')
             }
       })
 

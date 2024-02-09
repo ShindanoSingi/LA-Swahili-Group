@@ -14,11 +14,11 @@ function App() {
 
       const navigate = useNavigate()
 
-      const user = 'superuser';
+      const user = 'user';
 
       useEffect(() => {
-            if (user === 'superuser') {
-                  navigate('/superuser')
+            if (user === 'user') {
+                  navigate('/user')
             }
       })
 
@@ -33,7 +33,7 @@ function App() {
                         <Route path="/user" element={<UserDashBoard/>} />
                         <Route path="/superuser" element={<SuperUsersDashBoard/>} />
                         <Route path="/admin" element={<adminDashBoard/>} />
-                        <Route
+                        <Routes
                               path="/:rest*"
                               element={
                                     <h1>
