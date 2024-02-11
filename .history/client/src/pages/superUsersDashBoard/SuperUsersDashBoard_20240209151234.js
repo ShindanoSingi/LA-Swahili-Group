@@ -19,8 +19,8 @@ function SuperUsersDashBoard() {
                         </div>
                         <div className="flow-root max-h-[82vh] overflow-y-auto">
                               <ul >
-                                    <li className={`py-2 sm:py-2`}>
-                                          <div class=" space-y-2">
+                                    <li className={`py-3 sm:py-4`}>
+                                          <div class="m-2 space-y-2">
                                                 <div
                                                       class="group flex flex-col gap-2 rounded-lg bg-black p-5 text-white"
                                                       tabindex="1"
@@ -129,8 +129,8 @@ function SuperUsersDashBoard() {
                                                 </div>
                                           </div>
                                     </li>
-                                    <li className={`py-2 sm:py-2`}>
-                                          <div class=" space-y-2">
+                                    <li className={`py-3 sm:py-4`}>
+                                          <div class="m-2 space-y-2">
                                                 <div
                                                       class="group flex flex-col gap-2 rounded-lg bg-black p-5 text-white"
                                                       tabindex="1"
@@ -239,8 +239,8 @@ function SuperUsersDashBoard() {
                                                 </div>
                                           </div>
                                     </li>
-                                    <li className={`py-2 sm:py-2`}>
-                                          <div class=" space-y-2">
+                                    <li className={`py-3 sm:py-4`}>
+                                          <div class="m-2 space-y-2">
                                                 <div
                                                       class="group flex flex-col gap-2 rounded-lg bg-black p-5 text-white"
                                                       tabindex="1"

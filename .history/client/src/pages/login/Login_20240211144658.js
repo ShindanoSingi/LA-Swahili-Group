@@ -48,9 +48,9 @@ function Login() {
                                     >
                                           Login
                                     </button>
-                                    <div className="flex gap-4 justify-center mt-2">
+                                    <div className="flex gap-4">
                                           <p className="text-white text-center underline">Not registered yet?</p>
-                                          <p className="text-blue-500 text-center underline font-bold">Register</p>
+                                          <p className="text-white text-center underline">Register</p>
                                     </div>
 
                               </div>

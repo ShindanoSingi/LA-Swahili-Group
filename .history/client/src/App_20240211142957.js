@@ -14,7 +14,7 @@ function App() {
 
       const navigate = useNavigate()
 
-      const user = 'superusers';
+      const user = 'superuserS';
 
       useEffect(() => {
             if (user === 'superuser') {
