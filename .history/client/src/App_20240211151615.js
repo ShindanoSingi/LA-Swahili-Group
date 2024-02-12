@@ -9,7 +9,6 @@ import UserDashBoard from "./pages/userDashBoard/UserDashBoard";
 import SuperUsersDashBoard from "./pages/superUsersDashBoard/SuperUsersDashBoard";
 import { useEffect } from "react";
 import Register from "./pages/register/Register";
-import EditUser from "./pages/editUser/EditUser";
 
 
 function App() {
@@ -33,9 +32,8 @@ function App() {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register/>} />
-                        <Route path="/edit" element={<EditUser/>} />
                         <Route path="/user" element={<UserDashBoard/>} />
-                        <Route path="/super" element={<SuperUsersDashBoard/>} />
+                        <Route path="/superuser" element={<SuperUsersDashBoard/>} />
                         <Route path="/admin" element={<adminDashBoard/>} />
                         <Route
                               path="/:rest*"

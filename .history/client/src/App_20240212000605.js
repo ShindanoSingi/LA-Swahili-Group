@@ -33,9 +33,9 @@ function App() {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register/>} />
-                        <Route path="/edit" element={<EditUser/>} />
+                        <Route path="/editUser" element={<EditUser/>} />
                         <Route path="/user" element={<UserDashBoard/>} />
-                        <Route path="/super" element={<SuperUsersDashBoard/>} />
+                        <Route path="/superuser" element={<SuperUsersDashBoard/>} />
                         <Route path="/admin" element={<adminDashBoard/>} />
                         <Route
                               path="/:rest*"
