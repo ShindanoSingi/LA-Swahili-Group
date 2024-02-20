@@ -42,7 +42,7 @@ function AdminDashBoard() {
                                                                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                                               505-569-8562
                                                                         </p>
-                                                                        <span className="text-sm text-gray-200 border px-[0.1rem] py-[0.05rem]  truncate dark:text-gray-200">Added By: <span className="text-sm text-gray-500 truncate dark:text-gray-400">Shindano</span> </span>
+                                                                        <span className="text-sm text-gray-200 border truncate dark:text-gray-200">Added By: <span className="text-sm text-gray-500 truncate dark:text-gray-400">Shindano</span> </span>
                                                                   </div>
                                                             </div>
                                                             <div className="flex flex-col items-center">
@@ -156,7 +156,6 @@ function AdminDashBoard() {
                                                                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                                               505-569-8562
                                                                         </p>
-                                                                        <span className="text-sm text-gray-200 border px-[0.1rem] py-[0.05rem]  truncate dark:text-gray-200">Added By: <span className="text-sm text-gray-500 truncate dark:text-gray-400">Shindano</span> </span>
                                                                   </div>
                                                             </div>
                                                             <div className="flex flex-col items-center">
@@ -270,7 +269,6 @@ function AdminDashBoard() {
                                                                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                                               505-569-8562
                                                                         </p>
-                                                                        <span className="text-sm text-gray-200 border px-[0.1rem] py-[0.05rem]  truncate dark:text-gray-200">Added By: <span className="text-sm text-gray-500 truncate dark:text-gray-400">Shindano</span> </span>
                                                                   </div>
                                                             </div>
                                                             <div className="flex flex-col items-center">
