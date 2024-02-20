@@ -38,7 +38,7 @@ function App() {
                         <Route path="/user" element={<UserDashBoard/>} />
                         <Route path="/super" element={<SuperUsersDashBoard/>} />
                         <Route path="/admin" element={<AdminDashBoard/>} />
-                        <Route path="/contactform" element={<ContactForm />} />
+                        <Route path="/contactForm" element={<ContactForm />} />
                         <Route
                               path="/:rest*"
                               element={

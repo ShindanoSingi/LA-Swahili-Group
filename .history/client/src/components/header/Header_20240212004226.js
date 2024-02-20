@@ -13,7 +13,7 @@ function Header() {
                         LASG
                   </div>
                   </Link>
-
+                  
                   <div className="hambourger h-12 w-12 flex items-center justify-center">
                         <GiHamburgerMenu
                               className="text-[#FFFFFF] text-2xl"
