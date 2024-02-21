@@ -12,6 +12,8 @@ import Register from "./pages/register/Register";
 import EditUser from "./pages/editUser/EditUser";
 import AdminDashBoard from "./pages/adminDashBoard/AdminDashBoard";
 import ContactForm from "./pages/contactForm/ContactForm";
+import AddUserForm from "./pages/addUserForm/AddUserForm";
+import EditUserForm from "./pages/editUserForm/EditUserForm";
 
 function App() {
 
@@ -39,6 +41,8 @@ function App() {
                         <Route path="/super" element={<SuperUsersDashBoard/>} />
                         <Route path="/admin" element={<AdminDashBoard/>} />
                         <Route path="/contactform" element={<ContactForm />} />
+                        <Route path="/adduser" element={<AddUserForm/>}/>
+                        <Route path="/edituser" element={<EditUserForm/>}/>
                         <Route
                               path="/:rest*"
                               element={
