@@ -10,7 +10,7 @@ require('dotenv').config();
 // Register User
 router.post('/register', async (req, res) => {
       try {
-            const { firstName, lastName , password} = req.body;
+            const { firstName, lastName, password} = req.body;
             const phone = req.body.phone.replace(/\D/g, '');
 
             if (!firstName || !lastName || !password || !phone) {
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
                   })
             }
 
-            const user = await User.findOne({ phone });
+            const user = await User.findOne({ phone: phone });
 
             if (user) {
                     return res.send({
@@ -39,13 +39,16 @@ router.post('/register', async (req, res) => {
 
             const hash = await bcrypt.hash(password, salt);
             if (!hash) {
-                  return res.status(400).json({ message: "Something went wrong hashing the password" });
+                  return res.send({
+                        message: "Something went wrong. Please try again!",
+                        success: false
+
+                  })
             }
 
             const newUser = new User({
                   firstName,
                   lastName,
-                  email,
                   password: hash,
                   phone,
             });
@@ -75,7 +78,6 @@ router.post('/register', async (req, res) => {
                         id: savedUser.id,
                         firstName: savedUser.firstName,
                         lastName: savedUser.lastName,
-                        email: savedUser.email,
                         phone: savedUser.phone,
                   },
                   message: "User created successfully",
