@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: 'Last name is required'
     },
+    fullName:{
+        type: String,
+    },
     phone: {
         type: String,
         required: 'Phone number is required'

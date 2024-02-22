@@ -40,13 +40,14 @@ router.post('/register', async (req, res) => {
             // Hash the password
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(req.body.password, salt);
-            req.body.body = hashedPassword;
+            // req.body.passowrd = hashedPassword;
 
             const newUser = await User(
                   {
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
-                        phone: phone,
+                        fullName: req.body.firstName + ' ' + req.body.lastName,
+                        phone: req.body.phone.replace(/\D/g, ''),
                         password: hashedPassword
                   }
             ).save();
@@ -170,20 +171,23 @@ router.get('/get-user', authMiddleware, async (req, res) => {
 
 // Update User
 router.put('/update-user/:id', async (req, res) => {
+      const hashedPassowrd = await User.findOne({ _id: req.params.id });
       try {
+            // Hash the password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            // req.body.passowrd = hashedPassword;
+
             const user = await User.findOneAndUpdate(
                   { _id: req.params.id },
                   {
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
-                        phone: req.body.phone,
-                        password: req.body.password,
+                        fullName: req.body.firstName + ' ' + req.body.lastName,
+                        phone: req.body.phone.replace(/\D/g, ''),
+                        password: hashedPassword,
                         userRole: req.body.userRole,
-
                   },
-
-
-
                   { new: true }
             );
 
