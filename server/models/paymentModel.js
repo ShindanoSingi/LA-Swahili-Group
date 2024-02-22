@@ -12,6 +12,22 @@ const paymentSchema = new mongoose.Schema({
     paymentDate: {
         type: Date,
         default: Date.now
+    },
+    day: {
+        type: String,
+        required: 'Day is required'
+    },
+    month: {
+        type: String,
+        required: 'Month is required'
+    },
+    year: {
+        type: String,
+        required: 'Year is required'
+    },
+    paid:{
+        type: Boolean,
+        default: false
     }
 },
 {

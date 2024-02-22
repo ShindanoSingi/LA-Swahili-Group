@@ -176,11 +176,14 @@ router.put('/update-user/:id', async (req, res) => {
                   {
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
-                        phone: req.body.phone.replace(/\D/g, ''),
+                        phone: req.body.phone,
                         password: req.body.password,
-                        role: req.body.role,
-                        profilePicture: req.body.profilePicture
+                        userRole: req.body.userRole,
+
                   },
+
+
+
                   { new: true }
             );
 
