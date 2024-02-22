@@ -135,6 +135,15 @@ router.delete("/delete-payment/:id", authMiddleware, async (req, res) => {
                   const payment = await Payment.findByIdAndDelete({
                         _id: req.params.id
                   });
+
+                    const users = await User.find().populate("payments");
+                    users.forEach(async (user) => {
+                        user.payments = user.payments.filter(
+                              (payment) => payment._id !== req.params.id
+                        );
+                        (await user.save()).populate("payments");
+                    });
+
                   res.send({
                         payment,
                         success: true,
@@ -153,5 +162,82 @@ router.delete("/delete-payment/:id", authMiddleware, async (req, res) => {
             });
       }
 });
+
+// Get all users's payments total for a specific month and year
+router.get("/get-user-payments-total/:id/:month", async (req, res) => {
+      try {
+            const user = await User.findById({
+                  _id: req.params.id
+            }).populate("payments");
+
+            const totalAmount = user.payments
+                  .filter((payment) => payment.month === req.params.month)
+                  .reduce((total, payment) => total + payment.amount, 0);
+
+            res.send({
+                  totalAmount,
+                  success: true
+            });
+      }
+        catch (error) {
+                res.send({
+                    message: error.message,
+                    success: false
+                });
+        }
+    });
+
+// Get the total for all payment for a specific month and year
+router.get("/get-payments-total/:month", async (req, res) => {
+      try {
+            const payments = await Payment.find({
+                  month: req.params.month
+            });
+
+            const totalAmount = payments.reduce(
+                  (total, payment) => total + payment.amount,
+                  0
+            );
+
+            res.send({
+                  totalAmount,
+                  success: true
+            });
+      } catch (error) {
+            res.send({
+                  message: error.message,
+                  success: false
+            });
+      }
+});
+
+
+
+// Get user's payments
+router.get("/get-user-payments/:id", async (req, res) => {
+      try {
+            const user = await User.findById({
+                  _id: req.params.id
+            }).populate("payments");
+
+            const totalAmount = user.payments.reduce(
+                    (total, payment) => total + payment.amount,
+                    0
+            );
+
+            res.send({
+                  payments: user.payments,
+                totalAmount,
+                  success: true
+            });
+      } catch (error) {
+            res.send({
+                  message: error.message,
+                  success: false
+            });
+      }
+});
+
+
 
 module.exports = router;

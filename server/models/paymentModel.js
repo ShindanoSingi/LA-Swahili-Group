@@ -14,12 +14,15 @@ const paymentSchema = new mongoose.Schema({
     },
     day: {
         type: String,
+        default: '21'
     },
     month: {
         type: String,
+        default: '02'
     },
     year: {
         type: String,
+        default: '2024'
     },
     paid:{
         type: Boolean,
