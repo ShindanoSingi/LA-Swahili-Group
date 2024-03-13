@@ -7,8 +7,8 @@ import { toast } from "react-hot-toast";
 function Login() {
       const dispatch = useDispatch();
       const navigate = useNavigate();
-      const [email, password] = useState(['', ''])
-      
+      const [email, password] = useState()
+
       return (
             <div className="container">
                   <div className="w-[80%]">
