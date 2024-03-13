@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Login() {
+import { toast } from "react-hot-toast";
 
+
+function Login() {
+      const dispatch = useDispatch();
+      const navigate = useNavigate();
+      const [email, password] = useState(['', ''])
+      
       return (
             <div className="container">
                   <div className="w-[80%]">
