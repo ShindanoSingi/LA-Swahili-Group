@@ -7,7 +7,7 @@ import axios from 'axios';
 //     }
 // }
 
-export const LoginUser = async (user) => {
+export const loginUser = async (user) => {
     try {
         const response = await axios.post(`http://localhost:8080/api/users/login`, user, {
             headers:{
@@ -15,7 +15,7 @@ export const LoginUser = async (user) => {
                 Authorization: `Bear ${localStorage.getItem('token')}`
             }
         });
-        return response;
+        return response.data;
     } catch (error) {
         return error.message;
     }

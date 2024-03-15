@@ -7,7 +7,9 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
-import { LoginUser } from "../../apicalls/users";
+import { loginUser } from "../../apicalls/users";
+
+import './Login.css'
 
 function Login() {
       const dispatch = useDispatch();
@@ -16,18 +18,19 @@ function Login() {
             phone: '',
             password: '',
       })
-      const [hideEye, setHideEye] = useState([false])
+      const [hideEye, setHideEye] = useState(false)
 
-      const loginUser = async () => {
+      const handleLogin = async (e) => {
+            e.preventDefault();
             try {
                   dispatch(showLoader())
-                  const response = await LoginUser(user);
+                  const response = await loginUser(user);
                   console.log(response);
                   dispatch (hideLoader());
 
                   if(response.success){
                         toast.success(response.message);
-                        localStorage.setItem("token", response.data);
+                        localStorage.setItem("token", response.token);
                         navigate("/")
                   } else{
                         toast.error(response.message)
@@ -39,21 +42,16 @@ function Login() {
             }
       }
 
-      const showEyeFunc = () => {
+      const togglePasswordVisibility = () => {
             setHideEye(!hideEye)
       }
 
-      const hideEyeFunc = () => {
-            setHideEye(!hideEye)
-      }
 
       useEffect(() => {
-            showEyeFunc();
-            hideEyeFunc();
             if(localStorage.getItem("token")){
                   navigate("/")
             }
-      }, []);
+      }, [navigate]);
 
       return (
             <div className="container">
@@ -72,7 +70,7 @@ function Login() {
                                     <input
                                           type="text"
                                           id="phone"
-                                          // value={user.phone}
+                                          value={user.phone}
                                           onChange={(e) => setUser({...user, phone: e.target.value})}
                                           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                           placeholder="222-222-2222"
@@ -93,7 +91,7 @@ function Login() {
                                                 hideEye ? "password" : "text"
                                           }
                                           id="password"
-                                          // value={user.password}
+                                          value={user.password}
                                           onChange={(e) =>{
                                                 setUser({...user, password: e.target.value})
                                           }  }
@@ -101,7 +99,7 @@ function Login() {
                                           required
                                     />
                                     {
-                                          hideEye ? (<IoEyeSharp className=" absolute text-gray-200" onClick={hideEyeFunc} />) : (<FaEyeSlash className="absolute left-[40%] text-gray-200" onClick={showEyeFunc} />)
+                                          hideEye ? (<IoEyeSharp className=" eye text-gray-200" onClick={togglePasswordVisibility} />) : (<FaEyeSlash className="eye left-[40%] text-gray-200" onClick={togglePasswordVisibility} />)
                                     }
 
                                     </div>
@@ -110,7 +108,7 @@ function Login() {
                               <div>
                                     <button
                                           type="submit"
-                                          onClick={loginUser}
+                                          onClick={handleLogin}
                                           className="text-white mt-2 w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                           Login
