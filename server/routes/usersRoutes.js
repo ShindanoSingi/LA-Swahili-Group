@@ -74,24 +74,12 @@ router.post('/register', async (req, res) => {
 
 // Login User
 router.post('/login', async (req, res) => {
+
+      const phone = req.body.phone.replace(/\D/g, '');
+      const password = req.body.password;
+
       try {
-            const phone = req.body.phone.replace(/\D/g, '');
-            const password = req.body.password;
-
-            if (!phone || !password) {
-                  return res.send({
-                        message: 'Please enter all fields',
-                        success: false
-                  })
-            }
-
             const user = await User.findOne({ phone: phone });
-            if (!user) {
-                  return res.send({
-                        message: "User does not exist",
-                        success: false
-                  })
-            }
 
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {

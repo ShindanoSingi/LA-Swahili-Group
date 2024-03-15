@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 8080;
 const usersRouter = require('./routes/usersRoutes');
 const paymentsRoutes = require('./routes/paymentsRoutes');
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 app.use(express.json());
 

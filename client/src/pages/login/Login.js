@@ -1,13 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaEyeSlash } from "react-icons/fa6";
 
 import { toast } from "react-hot-toast";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { hideLoader, showLoader } from "../../redux/loaderSlice";
+import { LoginUser } from "../../apicalls/users";
 
 function Login() {
       const dispatch = useDispatch();
       const navigate = useNavigate();
-      const [email, password] = useState()
+      const [user, setUser] = useState({
+            phone: '',
+            password: '',
+      })
+      const [hideEye, setHideEye] = useState([false])
+
+      const loginUser = async () => {
+            try {
+                  dispatch(showLoader())
+                  const response = await LoginUser(user);
+                  console.log(response);
+                  dispatch (hideLoader());
+
+                  if(response.success){
+                        toast.success(response.message);
+                        localStorage.setItem("token", response.data);
+                        navigate("/")
+                  } else{
+                        toast.error(response.message)
+                  }
+
+            } catch (error) {
+                  dispatch(hideLoader)
+                  return error.message;
+            }
+      }
+
+      const showEyeFunc = () => {
+            setHideEye(!hideEye)
+      }
+
+      const hideEyeFunc = () => {
+            setHideEye(!hideEye)
+      }
+
+      useEffect(() => {
+            showEyeFunc();
+            hideEyeFunc();
+            if(localStorage.getItem("token")){
+                  navigate("/")
+            }
+      }, []);
 
       return (
             <div className="container">
@@ -19,36 +65,52 @@ function Login() {
                         <form className="max-w-sm mx-auto">
                               <div className="mb-3">
                                     <label
-                                          for="email"
                                           className="block mb-2 text-sm font-medium text-white dark:text-white"
                                     >
                                           Your phone number
                                     </label>
                                     <input
-                                          type="phone"
+                                          type="text"
                                           id="phone"
+                                          // value={user.phone}
+                                          onChange={(e) => setUser({...user, phone: e.target.value})}
                                           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                           placeholder="222-222-2222"
+                                          autoComplete="off"
                                           required
                                     />
+
                               </div>
                               <div className="mb-3">
                                     <label
-                                          for="password"
                                           className="block mb-2 text-sm font-medium text-white dark:text-white"
                                     >
                                           Your password
                                     </label>
-                                    <input
-                                          type="password"
+                                    <div className="flex items-center">
+                                          <input
+                                          type={
+                                                hideEye ? "password" : "text"
+                                          }
                                           id="password"
+                                          // value={user.password}
+                                          onChange={(e) =>{
+                                                setUser({...user, password: e.target.value})
+                                          }  }
                                           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                           required
                                     />
+                                    {
+                                          hideEye ? (<IoEyeSharp className=" absolute text-gray-200" onClick={hideEyeFunc} />) : (<FaEyeSlash className="absolute left-[40%] text-gray-200" onClick={showEyeFunc} />)
+                                    }
+
+                                    </div>
+
                               </div>
                               <div>
                                     <button
                                           type="submit"
+                                          onClick={loginUser}
                                           className="text-white mt-2 w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                           Login
