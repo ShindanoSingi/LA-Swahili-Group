@@ -9,32 +9,32 @@ import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { loginUser } from "../../apicalls/users";
 
+
 import './Login.css'
-import { response } from "express";
+import { setUserRole } from "../../redux/userSlice";
 
 function Login() {
       const dispatch = useDispatch();
-      const navigate = useNavigate();
       const [user, setUser] = useState({
             phone: '',
             password: '',
       })
       const [hideEye, setHideEye] = useState(false)
-const[userRole, setUserRole] = useState('')
+
+
 
       const handleLogin = async (e) => {
             e.preventDefault();
             try {
                   dispatch(showLoader())
                   const response = await loginUser(user);
-setUserRole(response.user.role);
                   console.log(response);
                   dispatch (hideLoader());
 
                   if(response.success){
                         toast.success(response.message);
                         localStorage.setItem("token", response.token);
-                        navigate("/")
+                        dispatch(setUserRole(response.role))
                   } else{
                         toast.error(response.message)
                   }
@@ -48,13 +48,6 @@ setUserRole(response.user.role);
       const togglePasswordVisibility = () => {
             setHideEye(!hideEye)
       }
-
-
-      useEffect(() => {
-            if(localStorage.getItem("token") ){
-                  navigate("/admin")
-            }
-      }, [navigate]);
 
       return (
             <div className="container">

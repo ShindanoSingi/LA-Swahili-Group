@@ -9,7 +9,7 @@ import axios from 'axios';
 
 export const loginUser = async (user) => {
     try {
-        const response = await axios.post(`http://localhost:8080/api/users/login`, user, {
+        const response = await axios.post(`/api/users/login`, user, {
             headers:{
                 "content-type":"application/json",
                 Authorization: `Bear ${localStorage.getItem('token')}`

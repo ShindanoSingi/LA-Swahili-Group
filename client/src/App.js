@@ -14,40 +14,50 @@ import AdminDashBoard from "./pages/adminDashBoard/AdminDashBoard";
 import ContactForm from "./pages/contactForm/ContactForm";
 import AddUserForm from "./pages/addUserForm/AddUserForm";
 import EditUserForm from "./pages/editUserForm/EditUserForm";
-import{ Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 function App() {
+    const {userRole} = useSelector((state) => state.userReducer)
+    const navigate = useNavigate();
 
-      const navigate = useNavigate()
+    useEffect(() => {
 
-      const user = 'superusers';
+        if(localStorage.getItem("token") && userRole === "Admin"){
+              navigate("/admin")
+        }
+        else  if(localStorage.getItem("token") && userRole === "Superuser"){
+              navigate("/super")
+        }
+        else  if(localStorage.getItem("token") && userRole === "User"){
+              navigate("/user")
+        }
 
-      useEffect(() => {
-            if (user === 'superuser') {
-                  navigate('/superuser')
-            }
-      })
+        else{
+              navigate("/login")
+        }
+  }, [navigate, userRole]);
 
       return (
             <>
-<Toaster
-position="bottom-right"
-reverseOrder="false"
-/>
+                  <Toaster position="bottom-right" reverseOrder="false" />
                   <Header />
                   <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register/>} />
-                        <Route path="/edit" element={<EditUser/>} />
-                        <Route path="/user" element={<UserDashBoard/>} />
-                        <Route path="/super" element={<SuperUsersDashBoard/>} />
-                        <Route path="/admin" element={<AdminDashBoard/>} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/edit" element={<EditUser />} />
+                        <Route path="/user" element={<UserDashBoard />} />
+                        <Route
+                              path="/super"
+                              element={<SuperUsersDashBoard />}
+                        />
+                        <Route path="/admin" element={<AdminDashBoard />} />
                         <Route path="/contactform" element={<ContactForm />} />
-                        <Route path="/adduser" element={<AddUserForm/>}/>
-                        <Route path="/edituser" element={<EditUserForm/>}/>
+                        <Route path="/adduser" element={<AddUserForm />} />
+                        <Route path="/edituser" element={<EditUserForm />} />
                         <Route
                               path="/:rest*"
                               element={
