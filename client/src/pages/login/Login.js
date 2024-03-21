@@ -4,24 +4,24 @@ import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa6";
 
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { loginUser } from "../../apicalls/users";
-
+import { setUserRole } from '../../redux/userSlice'
 
 import './Login.css'
-import { setUserRole } from "../../redux/userSlice";
 
 function Login() {
       const dispatch = useDispatch();
+      const navigate = useNavigate();
       const [user, setUser] = useState({
             phone: '',
             password: '',
       })
       const [hideEye, setHideEye] = useState(false)
 
-
+      const {userRole} = useSelector((state) => state.userReducer)
 
       const handleLogin = async (e) => {
             e.preventDefault();
@@ -48,6 +48,23 @@ function Login() {
       const togglePasswordVisibility = () => {
             setHideEye(!hideEye)
       }
+
+      useEffect(() => {
+
+            if(localStorage.getItem("token") && userRole === "Admin"){
+                  navigate("/admin")
+            }
+            else  if(localStorage.getItem("token") && userRole === "Superuser"){
+                  navigate("/super")
+            }
+            else  if(localStorage.getItem("token") && userRole === "User"){
+                  navigate("/user")
+            }
+
+            else{
+                  navigate("/login")
+            }
+      }, []);
 
       return (
             <div className="container">

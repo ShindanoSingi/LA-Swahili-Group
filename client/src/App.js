@@ -7,7 +7,7 @@ import Contact from "./pages/contact/Contact";
 import Login from "./pages/login/Login";
 import UserDashBoard from "./pages/userDashBoard/UserDashBoard";
 import SuperUsersDashBoard from "./pages/superUsersDashBoard/SuperUsersDashBoard";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import Register from "./pages/register/Register";
 import EditUser from "./pages/editUser/EditUser";
 import AdminDashBoard from "./pages/adminDashBoard/AdminDashBoard";
@@ -15,28 +15,28 @@ import ContactForm from "./pages/contactForm/ContactForm";
 import AddUserForm from "./pages/addUserForm/AddUserForm";
 import EditUserForm from "./pages/editUserForm/EditUserForm";
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function App() {
-    const {userRole} = useSelector((state) => state.userReducer)
-    const navigate = useNavigate();
+//     const {userRole} = useSelector((state) => state.userReducer)
+//     const navigate = useNavigate();
 
-    useEffect(() => {
+//     useEffect(() => {
 
-        if(localStorage.getItem("token") && userRole === "Admin"){
-              navigate("/admin")
-        }
-        else  if(localStorage.getItem("token") && userRole === "Superuser"){
-              navigate("/super")
-        }
-        else  if(localStorage.getItem("token") && userRole === "User"){
-              navigate("/user")
-        }
+//         if(localStorage.getItem("token") && userRole === "Admin"){
+//               navigate("/admin")
+//         }
+//         else  if(localStorage.getItem("token") && userRole === "Superuser"){
+//               navigate("/super")
+//         }
+//         else  if(localStorage.getItem("token") && userRole === "User"){
+//               navigate("/user")
+//         }
 
-        else{
-              navigate("/login")
-        }
-  }, [navigate, userRole]);
+//         else{
+//               navigate("/login")
+//         }
+//   }, [navigate, userRole]);
 
       return (
             <>

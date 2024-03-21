@@ -25,14 +25,31 @@ require('dotenv').config();
 
 // Register User
 router.post('/register', async (req, res) => {
+    console.log(req.body)
       try {
             // Check if the user is already registered
+            const firstName = req.body.firstName;
+            const lastName = req.body.lastName;
             const phone = req.body.phone.replace(/\D/g, '');
+            const password = req.body.password;
+
             const user = await User.findOne({ phone: phone });
 
-            if (user) {
+            const passwordConfirm = req.body.passwordConfirm;
+
+            console.log(password);
+            console.log(passwordConfirm);
+
+            if (password !== passwordConfirm) {
+                return res.send({
+                    message: 'Password mismatch',
+                    success: false,
+                });
+            }
+
+            if (user.firstName.length > 0) {
                   return res.send({
-                        message: "User already exists",
+                        message: "User with that phone number already exists",
                         success: false
                   })
             }
@@ -44,20 +61,13 @@ router.post('/register', async (req, res) => {
 
             const newUser = await User(
                   {
-                        firstName: req.body.firstName,
-                        lastName: req.body.lastName,
-                        fullName: req.body.firstName + ' ' + req.body.lastName,
-                        phone: req.body.phone.replace(/\D/g, ''),
+                        firstName: firstName,
+                        lastName: lastName,
+                        fullName: firstName + ' ' + lastName,
+                        phone: phone,
                         password: hashedPassword
                   }
             ).save();
-
-            if (!newUser) {
-                  return res.send({
-                        message: "Something went wrong. Please try again!",
-                        success: false
-                  })
-            }
 
             res.send({
                   message: "User registered successfully",
