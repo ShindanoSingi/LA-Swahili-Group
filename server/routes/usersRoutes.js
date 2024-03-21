@@ -107,6 +107,7 @@ router.post('/login', async (req, res) => {
                         firstName: user.firstName,
                         lastName: user.lastName,
                         phone: user.phone,
+                        role: user.role
                   },
                   message: "User logged in successfully",
                   success: true

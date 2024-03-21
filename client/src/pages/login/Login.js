@@ -10,6 +10,7 @@ import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { loginUser } from "../../apicalls/users";
 
 import './Login.css'
+import { response } from "express";
 
 function Login() {
       const dispatch = useDispatch();
@@ -19,12 +20,14 @@ function Login() {
             password: '',
       })
       const [hideEye, setHideEye] = useState(false)
+const[userRole, setUserRole] = useState('')
 
       const handleLogin = async (e) => {
             e.preventDefault();
             try {
                   dispatch(showLoader())
                   const response = await loginUser(user);
+setUserRole(response.user.role);
                   console.log(response);
                   dispatch (hideLoader());
 
@@ -48,8 +51,8 @@ function Login() {
 
 
       useEffect(() => {
-            if(localStorage.getItem("token")){
-                  navigate("/")
+            if(localStorage.getItem("token") ){
+                  navigate("/admin")
             }
       }, [navigate]);
 

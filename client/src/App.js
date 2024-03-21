@@ -14,6 +14,7 @@ import AdminDashBoard from "./pages/adminDashBoard/AdminDashBoard";
 import ContactForm from "./pages/contactForm/ContactForm";
 import AddUserForm from "./pages/addUserForm/AddUserForm";
 import EditUserForm from "./pages/editUserForm/EditUserForm";
+import{ Toaster } from "react-hot-toast";
 
 function App() {
 
@@ -29,6 +30,10 @@ function App() {
 
       return (
             <>
+<Toaster
+position="bottom-right"
+reverseOrder="false"
+/>
                   <Header />
                   <Routes>
                         <Route path="/" element={<Home />} />

@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
     },
-    userRole: {
+    role: {
         type: String,
         default: 'User'
     },
