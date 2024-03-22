@@ -5,6 +5,7 @@ const router = require("express").Router();
 const authMiddleware = require('../middlewares/authMiddleware');
 const multer = require('multer');
 const path = require('path');
+const {parsePhoneNumberFromString} = require('libphonenumber-js');
 
 // Multer configuration
 const storage = multer.diskStorage({
@@ -33,8 +34,6 @@ router.post('/register', async (req, res) => {
             const phone = req.body.phone.replace(/\D/g, '');
             const password = req.body.password;
 
-            const user = await User.findOne({ phone: phone });
-
             const passwordConfirm = req.body.passwordConfirm;
 
             console.log(password);
@@ -47,23 +46,35 @@ router.post('/register', async (req, res) => {
                 });
             }
 
-            if (user.firstName.length > 0) {
-                  return res.send({
-                        message: "User with that phone number already exists",
-                        success: false
-                  })
+            const phoneNumber = parsePhoneNumberFromString(phone, 'US');
+
+            // Check if the phone is valid
+            if(!phoneNumber || !phoneNumber.isValid()) {
+                return res.send({
+                    message: 'Invalid phone number',
+                    success: false,
+                })
+            }
+
+            const localPhoneNumber = phoneNumber.formatNational();
+
+            const existingUser = await User.findOne({phone: localPhoneNumber});
+            if (existingUser){
+                return res.send({
+                    message: 'User already registered',
+                    success: false,
+                });
             }
 
             // Hash the password
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(req.body.password, salt);
-            // req.body.passowrd = hashedPassword;
 
             const newUser = await User(
                   {
                         firstName: firstName,
                         lastName: lastName,
-                        fullName: firstName + ' ' + lastName,
+                        fullName: `${firstName} ${lastName}`,
                         phone: phone,
                         password: hashedPassword
                   }
