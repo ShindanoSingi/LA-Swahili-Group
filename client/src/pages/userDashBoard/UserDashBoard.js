@@ -11,7 +11,9 @@ function UserDashBoard() {
             return `#${colorCode}`;
       };
 
-      console.log(phoneNumberToColor("2077133140"))
+    //   console.log(phoneNumberToColor("2077133140"))
+
+    
 
       return (
             <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">

@@ -35,3 +35,19 @@ export const registerUser = async (user) => {
         return error.message;
     }
 }
+
+// Get users
+export const getUsers = async () => {
+    try {
+        const response = await axios.get(`/api/users/get-users`, {
+            headers:{
+                "content-type": "application/json",
+                Authorization: `Bear ${localStorage.getItem('token')}`
+            }
+        });
+        console.log(response)
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}

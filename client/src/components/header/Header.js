@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 function Header() {
       const [show, setShow] = useState(false);
 
+      const logout = () => {
+        
+      }
+
       return (
             <div className="header fixed top-0 w-full flex items-center justify-between p-2">
                   <Link to="/">
@@ -36,6 +40,9 @@ function Header() {
                               </Link>
                               <Link to="/login" onClick={() => setShow(!show)}>
                                     <li className="menu-item">Login</li>
+                              </Link>
+                              <Link onClick={() => setShow(!show)}>
+                                    <li className="menu-item">Logout</li>
                               </Link>
                         </ul>
                   )}

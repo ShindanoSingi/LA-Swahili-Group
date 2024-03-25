@@ -146,10 +146,14 @@ role:user.role,
 router.get('/get-users', async (req, res) => {
       try {
             const users = await User.find({}).populate('payments');
+
             res.send({
                   users,
                   success: true
             });
+
+      
+
       } catch (error) {
             res.send({
                     message: error.message,

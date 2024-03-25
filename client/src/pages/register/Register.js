@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { registerUser } from "../../apicalls/users";
 import toast from "react-hot-toast";
@@ -8,6 +8,9 @@ import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa6";
 
 function Register() {
+
+    const navigate = useNavigate();
+
       const dispatch = useDispatch();
       const [hideEye1, setHideEye1] = useState(false);
       const [hideEye2, setHideEye2] = useState(false);
@@ -32,7 +35,9 @@ function Register() {
 
                   if (response.success) {
                         toast.success(response.message);
+                        navigate('/login')
                   }
+
                   else{
                     toast.error(response.message);
                   }

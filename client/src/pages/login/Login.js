@@ -22,6 +22,8 @@ function Login() {
       const [hideEye, setHideEye] = useState(false)
 
       const {userRole} = useSelector((state) => state.userReducer)
+      console.log(userRole)
+      console.log(localStorage.getItem('token'))
 
       const handleLogin = async (e) => {
             e.preventDefault();
@@ -54,10 +56,10 @@ function Login() {
             if(localStorage.getItem("token") && userRole === "Admin"){
                   navigate("/admin")
             }
-            else  if(localStorage.getItem("token") && userRole === "Superuser"){
+            else  if(localStorage.getItem("token")  && userRole === "Superuser"){
                   navigate("/super")
             }
-            else  if(localStorage.getItem("token") && userRole === "User"){
+            else  if(localStorage.getItem("token")  && userRole === "User"){
                   navigate("/user")
             }
 
