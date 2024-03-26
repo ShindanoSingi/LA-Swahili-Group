@@ -10,7 +10,7 @@ router.post("/add-payment", authMiddleware, async (req, res) => {
                   _id: req.body.userId
             });
 
-            if (user.userRole === "Admin" || user.userRole === "Superuser") {
+            if (user.role === "Admin" || user.role === "Superuser") {
                   const payment = new Payment({
                         fullName: req.body.fullNames,
                         amount: req.body.amount,
@@ -31,6 +31,7 @@ router.post("/add-payment", authMiddleware, async (req, res) => {
                     })
                   res.send({
                         payment,
+                        addedBy: user.fullName,
                         success: true,
                         message: "Payment added successfully"
                   });
@@ -89,7 +90,7 @@ router.put("/update-payment/:id", authMiddleware, async (req, res) => {
                   _id: req.body.userId
             });
 
-            if (user.userRole === "Admin" || user.userRole === "Superuser") {
+            if (user.role === "Admin" || user.role === "Superuser") {
                   const payment = await Payment.findByIdAndUpdate(
                         {
                               _id: req.params.id
@@ -131,7 +132,7 @@ router.delete("/delete-payment/:id", authMiddleware, async (req, res) => {
                   _id: req.body.userId
             });
 
-            if (user.userRole === "Admin" || user.userRole === "Superuser") {
+            if (user.role === "Admin" || user.role === "Superuser") {
                   const payment = await Payment.findByIdAndDelete({
                         _id: req.params.id
                   });

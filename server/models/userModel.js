@@ -28,12 +28,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'User'
     },
+    totalAmount: {
+        type: Number,
+        default: 0
+    },
     payments: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Payment'
         }
-    ]
+    ],
+    addedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
 },
 {
     timestamps: true

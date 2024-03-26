@@ -6,6 +6,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const multer = require('multer');
 const path = require('path');
 const {parsePhoneNumberFromString} = require('libphonenumber-js');
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
 // Multer configuration
 const storage = multer.diskStorage({
@@ -24,6 +25,15 @@ const upload = multer({
 // dotenv configuration
 require('dotenv').config();
 
+const isLegalPhoneNumber = (phoneNumber) => {
+        try {
+            const parsedNumber = phoneUtil.parse(phoneNumber, 'US');
+            return phoneUtil.isValidNumber(parsedNumber);
+        } catch (error) {
+            return false;
+        }
+}
+
 // Register User
 router.post('/register', async (req, res) => {
     console.log(req.body)
@@ -31,13 +41,28 @@ router.post('/register', async (req, res) => {
             // Check if the user is already registered
             const firstName = req.body.firstName;
             const lastName = req.body.lastName;
-            const phone = req.body.phone.replace(/\D/g, '');
+            const phoneNumber = req.body.phone.replace(/\D/g, '');
+
+            console.log(phoneNumber)
+
+            if (!phoneNumber || !phoneNumber.match(/^\d{10}$/)) {
+                return res.send({
+                    message: 'Invalid phone number',
+                    success: false,
+                });
+            }
+
+            if (!isLegalPhoneNumber(phoneNumber)) {
+                return res.send({
+                    message: 'Invalid phone number',
+                    success: false,
+                });
+            }
+
+            // const phone = req.body.phone.replace(/\D/g, '');
             const password = req.body.password;
 
             const passwordConfirm = req.body.passwordConfirm;
-
-            console.log(password);
-            console.log(passwordConfirm);
 
             if (password !== passwordConfirm) {
                 return res.send({
@@ -46,19 +71,7 @@ router.post('/register', async (req, res) => {
                 });
             }
 
-            const phoneNumber = parsePhoneNumberFromString(phone, 'US');
-
-            // Check if the phone is valid
-            if(!phoneNumber || !phoneNumber.isValid()) {
-                return res.send({
-                    message: 'Invalid phone number',
-                    success: false,
-                })
-            }
-
-            const localPhoneNumber = phoneNumber.formatNational();
-
-            const existingUser = await User.findOne({phone: localPhoneNumber});
+            const existingUser = await User.findOne({phone: phoneNumber});
             if (existingUser){
                 return res.send({
                     message: 'User already registered',
@@ -75,7 +88,7 @@ router.post('/register', async (req, res) => {
                         firstName: firstName,
                         lastName: lastName,
                         fullName: `${firstName} ${lastName}`,
-                        phone: phone,
+                        phone: phoneNumber,
                         password: hashedPassword
                   }
             ).save();
@@ -147,12 +160,26 @@ router.get('/get-users', async (req, res) => {
       try {
             const users = await User.find({}).populate('payments');
 
-            res.send({
-                  users,
-                  success: true
-            });
+    //   Calculate the total amount paid by each user
+    users.forEach(user => {
+        let totalAmount = 0;
+        user.payments.forEach(payment => {
+            totalAmount += payment.amount;
+        });
 
-      
+        user.totalAmount = totalAmount;
+    });
+
+    totalOfAllUsers = 0;
+    users.forEach(user => {
+        totalOfAllUsers += user.totalAmount;
+    });
+
+    res.send({
+        users,
+        totalOfAllUsers,
+        success: true
+  });
 
       } catch (error) {
             res.send({
