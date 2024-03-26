@@ -1,6 +1,8 @@
-const axios = require('axios');
+// 'use strict';
 
-export const loginUser = async (user) => {
+import axios from 'axios';
+
+export const LoginUser = async (user) => {
     try {
         const response = await axios.post(`/api/users/login`, user, {
             headers:{
@@ -14,7 +16,7 @@ export const loginUser = async (user) => {
     }
 }
 
-export const registerUser = async (user) => {
+export const RegisterUser = async (user) => {
     try {
         const response = await axios.post(`/api/users/register`, user, {
             headers:{
@@ -29,8 +31,8 @@ export const registerUser = async (user) => {
     }
 }
 
-// Get users
-export const getUsers = async () => {
+// Get users all users
+export const GetUsers = async () => {
     try {
         const response = await axios.get(`/api/users/get-users`, {
             headers:{
@@ -38,8 +40,8 @@ export const getUsers = async () => {
                 Authorization: `Bear ${localStorage.getItem('token')}`
             }
         });
-        console.log(response)
-        return response;
+        console.log('I AM TIRED')
+        return response.data;
     } catch (error) {
         return error.message;
     }

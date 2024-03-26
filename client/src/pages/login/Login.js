@@ -1,3 +1,5 @@
+'use strict';
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoEyeSharp } from "react-icons/io5";
@@ -7,7 +9,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
-import { loginUser } from "../../apicalls/users";
+import { LoginUser, loginUser } from "../../apicalls/users";
 import { setUserRole } from '../../redux/userSlice'
 
 import './Login.css'
@@ -29,7 +31,7 @@ function Login() {
             e.preventDefault();
             try {
                   dispatch(showLoader())
-                  const response = await loginUser(user);
+                  const response = await LoginUser(user);
                   console.log(response);
                   dispatch (hideLoader());
 
