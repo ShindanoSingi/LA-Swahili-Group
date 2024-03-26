@@ -1,11 +1,4 @@
-import axios from 'axios';
-
-// const headers = {
-//     headers:{
-//         "content-type":"application/json",
-//         Authorization: `Bear ${localStorage.getItem('token')}`
-//     }
-// }
+const axios = require('axios');
 
 export const loginUser = async (user) => {
     try {
@@ -46,7 +39,7 @@ export const getUsers = async () => {
             }
         });
         console.log(response)
-        return response.data;
+        return response;
     } catch (error) {
         return error.message;
     }

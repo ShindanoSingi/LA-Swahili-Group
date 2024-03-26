@@ -1,7 +1,21 @@
+
 import React, { useEffect } from "react";
+import { setUser } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { showLoader, hideLoader } from "../../redux/loaderSlice";
+import { getUsers } from "../../apicalls/users";
+import toast from "react-hot-toast";
 const md5 = require("md5");
 
+
+
+
+
 function UserDashBoard() {
+      const {users} = useSelector((state) => state.userReducer);
+
+      const dispatch = useDispatch();
+
       let color = "";
 
       const phoneNumberToColor = (phoneNumber) => {
@@ -13,7 +27,25 @@ function UserDashBoard() {
 
     //   console.log(phoneNumberToColor("2077133140"))
 
-    
+    const getUsers = async () => {
+        try {
+            dispatch(showLoader())
+            const response = await getUsers();
+            dispatch(hideLoader())
+
+            if(response.success){
+                dispatch(setUser(response.users))
+            }
+        } catch (error) {
+            dispatch(hideLoader())
+            toast.error(error.message)
+        }
+    }
+
+    useEffect(() => {
+        getUsers();
+        console.log(users)
+    })
 
       return (
             <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
