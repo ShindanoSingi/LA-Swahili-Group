@@ -34,13 +34,7 @@ export const RegisterUser = async (user) => {
 // Get users all users
 export const GetUsers = async () => {
     try {
-        const response = await axios.get(`/api/users/get-users`, {
-            headers:{
-                "content-type": "application/json",
-                Authorization: `Bear ${localStorage.getItem('token')}`
-            }
-        });
-        console.log('I AM TIRED')
+        const response = await axios.get(`/api/users/get-users`);
         return response.data;
     } catch (error) {
         return error.message;

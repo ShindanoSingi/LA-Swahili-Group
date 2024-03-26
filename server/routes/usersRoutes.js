@@ -176,9 +176,11 @@ router.get('/get-users', async (req, res) => {
         totalOfAllUsers += user.totalAmount;
     });
 
+    users.grandTotal = totalOfAllUsers;
+
     res.send({
         users,
-        totalOfAllUsers,
+        grandTotal: totalOfAllUsers,
         success: true
   });
 
