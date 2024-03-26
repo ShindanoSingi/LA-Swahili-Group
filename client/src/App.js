@@ -15,29 +15,18 @@ import ContactForm from "./pages/contactForm/ContactForm";
 import AddUserForm from "./pages/addUserForm/AddUserForm";
 import EditUserForm from "./pages/editUserForm/EditUserForm";
 import { Toaster } from "react-hot-toast";
-// import { useSelector } from "react-redux";
-// import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
-//     const {userRole} = useSelector((state) => state.userReducer)
-//     const navigate = useNavigate();
+    const {userRole} = useSelector((state) => state.userReducer)
+    const navigate = useNavigate();
 
-//     useEffect(() => {
+    useEffect(() => {
 
-//         if(localStorage.getItem("token") && userRole === "Admin"){
-//               navigate("/admin")
-//         }
-//         else  if(localStorage.getItem("token") && userRole === "Superuser"){
-//               navigate("/super")
-//         }
-//         else  if(localStorage.getItem("token") && userRole === "User"){
-//               navigate("/user")
-//         }
-
-//         else{
-//               navigate("/login")
-//         }
-//   }, [navigate, userRole]);
+        if(!localStorage.getItem("token")){
+            navigate("/login")
+}}, [navigate, userRole]);
 
       return (
             <>

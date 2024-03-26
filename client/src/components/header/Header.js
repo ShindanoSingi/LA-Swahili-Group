@@ -7,7 +7,7 @@ function Header() {
       const [show, setShow] = useState(false);
 
       const logout = () => {
-        
+            localStorage.removeItem("token");
       }
 
       return (
@@ -41,7 +41,11 @@ function Header() {
                               <Link to="/login" onClick={() => setShow(!show)}>
                                     <li className="menu-item">Login</li>
                               </Link>
-                              <Link onClick={() => setShow(!show)}>
+                              <Link to='/login' onClick={() => {
+                                    logout();
+                                    setShow(!show);
+
+                              }}>
                                     <li className="menu-item">Logout</li>
                               </Link>
                         </ul>

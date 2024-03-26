@@ -52,21 +52,19 @@ function Login() {
       }
 
       useEffect(() => {
-
-            if(localStorage.getItem("token") && userRole === "Admin"){
-                  navigate("/admin")
+            if (localStorage.getItem("token")) {
+                if (userRole === "Admin") {
+                    navigate("/admin");
+                } else if (userRole === "Superuser") {
+                    navigate("/super");
+                }   else if (userRole === "User") {
+                    navigate("/user");
+                }
             }
-            else  if(localStorage.getItem("token")  && userRole === "Superuser"){
-                  navigate("/super")
+            else {
+                navigate("/login");
             }
-            else  if(localStorage.getItem("token")  && userRole === "User"){
-                  navigate("/user")
-            }
-
-            else{
-                  navigate("/login")
-            }
-      }, []);
+      }, [userRole, navigate]);
 
       return (
             <div className="container">
