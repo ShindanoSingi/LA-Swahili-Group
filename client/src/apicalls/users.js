@@ -45,7 +45,7 @@ export const GetUsers = async () => {
 // Get user by id
 export const GetUserById = async (id) => {
     try {
-        const response = await axios.get(`local/api/users/get-user/${id}`, {
+        const response = await axios.get(`/api/users/get-user/${id}`, {
             headers:{
                 "content-type": "application/json",
                 Authorization: `Bear ${localStorage.getItem('token')}`
