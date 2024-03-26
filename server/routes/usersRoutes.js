@@ -213,6 +213,24 @@ router.get('/get-user', authMiddleware, async (req, res) => {
 }
 );
 
+// Get another user
+router.get('/get-user/:id', async (req, res) => {
+
+        try {
+                const user = await User.findById({_id: req.params.id});
+                res.send({
+                        user,
+                        success: true,
+                        message: 'User fetched successfully'
+                });
+            } catch (error) {
+                res.send({
+                        message: error.message,
+                        success: false
+                })
+            }
+});
+
 // Update User
 router.put('/update-user/:id', async (req, res) => {
       const hashedPassowrd = await User.findOne({ _id: req.params.id });

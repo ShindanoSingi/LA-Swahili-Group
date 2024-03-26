@@ -17,6 +17,7 @@ import EditUserForm from "./pages/editUserForm/EditUserForm";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import UserPage from "./pages/userPage/UserPage";
 
 function App() {
     const {userRole} = useSelector((state) => state.userReducer)
@@ -40,6 +41,7 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/edit" element={<EditUser />} />
                         <Route path="/user" element={<UserDashBoard />} />
+                        <Route path="/user/:id" element={<UserPage />} />
                         <Route
                               path="/super"
                               element={<SuperUsersDashBoard />}

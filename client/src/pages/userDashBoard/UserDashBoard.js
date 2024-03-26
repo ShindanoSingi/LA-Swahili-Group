@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showLoader, hideLoader } from "../../redux/loaderSlice";
 import { GetUsers } from "../../apicalls/users";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 const md5 = require("md5");
 
 function UserDashBoard() {
@@ -67,7 +68,8 @@ function UserDashBoard() {
                                     className="divide-y divide-gray-200 dark:divide-gray-700"
                               >
                                     {users && users.map((user, index) => (
-                                        <li className={`py-3 sm:py-4`}>
+                                        <Link to={`/user/${user._id}`}>
+                                            <li className={`py-3 sm:py-4`}>
                                         <div className="flex items-center">
                                               <div className="flex-shrink-0">
                                               <img class="w-10 h-10 rounded-full" src={
@@ -95,6 +97,8 @@ function UserDashBoard() {
                                               </div>
                                         </div>
                                   </li>
+                                        </Link>
+
                                     ))}
                               </ul>
                         </div>
