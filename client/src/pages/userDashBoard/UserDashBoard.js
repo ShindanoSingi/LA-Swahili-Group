@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 'use strict';
 
 import React, { useEffect } from "react";
@@ -72,17 +73,19 @@ function UserDashBoard() {
                                             <li className={`py-3 sm:py-4`}>
                                         <div className="flex items-center">
                                               <div className="flex-shrink-0">
-                                              <img class="w-10 h-10 rounded-full" src={
-                                                                user.profilePicture ? user.profilePicture : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&background=${phoneNumberToColor(user.phone)}&color=fff`
-                                                          }
-                                                          alt={user.fullName}/>
-                                                    {/* <img
-                                                          className="w-8 h-8 fluid rounded-full"
-                                                          src={
-                                                                user.profilePicture ? user.profilePicture : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&background=${phoneNumberToColor(user.phone)}&color=fff`
-                                                          }
-                                                          alt={user.fullName}
-                                                    /> */}
+                                              {
+                                                    user.profilePicture ? (
+                                                        <img class="w-10 h-10 rounded-full" src={require(`../../images/${user.profilePicture}`)} alt={user.firstName}
+                                                        className="w-8 h-8 fluid rounded-full"
+                                                        />
+                                                    ) : <img
+                                                    className="w-8 h-8 fluid rounded-full"
+                                                    src={
+                                                          user.profilePicture ? user.profilePicture : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&background=${phoneNumberToColor(user.phone)}&color=fff`
+                                                    }
+                                                    alt={user.fullName}
+                                              />
+                                              }
                                               </div>
                                               <div className="flex-1 min-w-0 ms-4">
                                                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">

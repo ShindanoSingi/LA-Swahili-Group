@@ -6,16 +6,15 @@ const router = require("express").Router();
 const authMiddleware = require('../middlewares/authMiddleware');
 const multer = require('multer');
 const path = require('path');
-const {parsePhoneNumberFromString} = require('libphonenumber-js');
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
 // Multer configuration
 const storage = multer.diskStorage({
       destination: function (req, file, cb) {
-            cb(null, 'images/');
+            cb(null, '../client/src/images/');
       },
       filename: function (req, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+            cb(null, Date.now() + path.extname(file.originalname));
       },
 });
 
@@ -301,11 +300,12 @@ router.delete('/delete-user/:id', async (req, res) => {
 
 // Update user profile picture
 router.put('/update-picture/:id', upload.single('profilePicture'), async (req, res) => {
+    console.log(req.file.path)
       try {
             const user = await User.findOneAndUpdate(
                   { _id: req.params.id },
                   {
-                        profilePicture: req.file.path,
+                        profilePicture: req.file.filename,
                   },
                   { new: true }
             );
@@ -316,6 +316,8 @@ router.put('/update-picture/:id', upload.single('profilePicture'), async (req, r
                         success: false
                   })
             }
+
+            user.save();
 
             res.send({
                   user,
