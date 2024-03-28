@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 'use strict';
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { setGrandTotal, setUsers } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoader, hideLoader } from "../../redux/loaderSlice";
@@ -12,10 +12,13 @@ const md5 = require("md5");
 
 function UserDashBoard() {
       const {users, grandTotal} = useSelector((state) => state.userReducer);
+      const [sizes, setSizes] = [{
+            width: 0,
+            height: 0
+
+      }]
 
       const dispatch = useDispatch();
-
-      let color = "";
 
       const phoneNumberToColor = (phoneNumber) => {
             const cleanedPhoneNumber = phoneNumber.replace(/\D/g, "");
@@ -69,14 +72,20 @@ function UserDashBoard() {
                                     className="divide-y divide-gray-200 dark:divide-gray-700"
                               >
                                     {users && users.map((user, index) => (
-                                        <Link to={`/user/${user._id}`}>
+                                        <Link to={`/user/${
+                                            user._id
+                                        }`} key={`${
+                                            user._id
+
+                                        }`}>
                                             <li className={`py-3 sm:py-4`}>
-                                        <div className="flex items-center">
+                                        <div className="flex items-center border-b pb-1 border-b-slate-500">
                                               <div className="flex-shrink-0">
+
                                               {
                                                     user.profilePicture ? (
-                                                        <img class="w-10 h-10 rounded-full" src={require(`../../images/${user.profilePicture}`)} alt={user.firstName}
-                                                        className="w-8 h-8 fluid rounded-full"
+                                                        <img src={require(`../../images/${user.profilePicture}`)} alt={user.firstName}
+                                                        className={`h-8 w-8  fluid rounded-full`}
                                                         />
                                                     ) : <img
                                                     className="w-8 h-8 fluid rounded-full"
