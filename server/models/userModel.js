@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'User'
     },
+    isMember: {
+        type: Boolean,
+        default: false
+    },
     totalAmount: {
         type: Number,
         default: 0

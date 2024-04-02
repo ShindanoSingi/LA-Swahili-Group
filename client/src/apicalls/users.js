@@ -57,3 +57,18 @@ export const GetUserById = async (id) => {
         return error.message;
     }
 }
+
+// Update user picture
+export const UpdateUserPicture = async (id, picture) => {
+    try {
+        const response = await axios.put(`/api/users/update-picture/${id}`, picture, {
+            headers:{
+                "content-type": "application/json",
+                Authorization: `Bear ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}

@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserById } from "../../apicalls/users";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { setUser } from "../../redux/userSlice";
 
 function UserPage() {
@@ -32,8 +32,10 @@ function UserPage() {
             <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
                   <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                     <div className="flex justify-between w-full">
-                        <button className="bg-green-700 rounded-full px-2 py-1">Update</button>
-                        <button className="bg-red-700 rounded-full px-2 py-1">Delete</button>
+                        <Link to='/updateuserpicture'>
+                        <button className="bg-green-700 rounded-full px-2 py-1 hover:bg-green-900">Update</button>
+                        </Link>
+                        <button className="bg-red-700 rounded-full px-2 py-1 hover:bg-red-900 ">Delete</button>
                     </div>
                         <div className="flex items-center flex-col">
                               {user.profilePicture ? (

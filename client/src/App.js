@@ -18,6 +18,7 @@ import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import UserPage from "./pages/userPage/UserPage";
+import UpdateUserPicture from "./pages/updateUserPicture/UpdateUserPicture";
 
 function App() {
     const {userRole} = useSelector((state) => state.userReducer)
@@ -42,6 +43,7 @@ function App() {
                         <Route path="/edit" element={<EditUser />} />
                         <Route path="/user" element={<UserDashBoard />} />
                         <Route path="/user/:id" element={<UserPage />} />
+                        <Route path="/updateuserpicture" element={<UpdateUserPicture />} />
                         <Route
                               path="/super"
                               element={<SuperUsersDashBoard />}
