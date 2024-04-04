@@ -59,8 +59,11 @@ export const GetUserById = async (id) => {
 }
 
 // Update user picture
-export const UpdateUserPicture = async (id, picture) => {
+export const UpdateUserPictureFunc = async (id, picture) => {
     try {
+        const formData = new FormData();
+        formData.append("profilePicture", picture);
+
         const response = await axios.put(`/api/users/update-picture/${id}`, picture, {
             headers:{
                 "content-type": "application/json",

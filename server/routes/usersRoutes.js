@@ -283,12 +283,12 @@ router.delete('/delete-user/:id', async (req, res) => {
                         success: false
                   })
             }
-
+            
             res.send({
                   success: true,
                   message: 'User deleted successfully'
             });
-
+      
       } catch (error) {
             res.send({
                     message: error.message,
@@ -309,22 +309,22 @@ router.put('/update-picture/:id', upload.single('profilePicture'), async (req, r
                   },
                   { new: true }
             );
-
+            
             if (!user) {
                   return res.send({
                         message: "User not found",
                         success: false
                   })
             }
-
+            
             user.save();
-
+            
             res.send({
                   user,
                   success: true,
                   message: 'Profile picture updated successfully'
             });
-
+      
       } catch (error) {
             res.send({
                     message: error.message,

@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const dbConfig = require('./config/dbconfig');
 const PORT = process.env.PORT || 8080;
+const bodyParser = require('body-parser');
 
 // Connect to MongoDB
 const usersRouter = require('./routes/usersRoutes');
@@ -14,6 +15,13 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
+app.use(bodyParser.urlencoded({
+    extended: true,
+    limit: '50mb'
+}));
 
 const server = require('http').createServer(app);
 

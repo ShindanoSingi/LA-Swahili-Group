@@ -43,7 +43,7 @@ function App() {
                         <Route path="/edit" element={<EditUser />} />
                         <Route path="/user" element={<UserDashBoard />} />
                         <Route path="/user/:id" element={<UserPage />} />
-                        <Route path="/updateuserpicture" element={<UpdateUserPicture />} />
+                        <Route path="/updateuserpicture/:id" element={<UpdateUserPicture />} />
                         <Route
                               path="/super"
                               element={<SuperUsersDashBoard />}
