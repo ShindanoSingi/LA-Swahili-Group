@@ -14,7 +14,7 @@ const Button = ({background, color, width, text, onClick, type}) => {
         backgroundColor: background || 'none',
     }
 
-    if (type === 'active') {
+    if (type === 'green') {
         buttonStyle.backgroundColor = '#38556c'
     }
     if (type === 'inactive') {

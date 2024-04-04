@@ -1,7 +1,6 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -12,6 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
     "feather-icons": "^4.29.1",
     "install": "^0.13.0",
     "md5": "^2.3.0",
@@ -52,5 +52,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

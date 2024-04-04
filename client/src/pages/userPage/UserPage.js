@@ -1,11 +1,11 @@
-"use strict";
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUserById } from "../../apicalls/users";
+import { DeleteUserPicture, GetUserById } from "../../apicalls/users";
 import { Link, useParams } from "react-router-dom";
 import { setUser } from "../../redux/userSlice";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
+import toast from "react-hot-toast";
+const Loader = require("react-loader-spinner").default;
 
 function UserPage() {
       const { user } = useSelector((state) => state.userReducer);
@@ -27,6 +27,21 @@ function UserPage() {
             }
       };
 
+      const deletePicture = async () => {
+            try {
+                  showLoader();
+                  const response = await DeleteUserPicture(userId.id);
+                    hideLoader();
+                  if (response.success) {
+                        toast.success(response.message);
+                  }
+            } catch (error) {
+                    hideLoader();
+                  toast.error(error.message);
+            }
+
+      }
+
       useEffect(() => {
             getUserById(userId);
       }, []);
@@ -39,21 +54,20 @@ function UserPage() {
                     <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex justify-between w-full">
                               <Link to={`/updateuserpicture/${user._id}`}>
-                                    <button className="bg-green-700 rounded-full px-2 py-1 hover:bg-green-900">
+                                    <button className="bg-green-700 rounded-full px-3 py-1 hover:bg-green-900">
                                           Update
                                     </button>
                               </Link>
-                              <button className="bg-red-700 rounded-full px-2 py-1 hover:bg-red-900 ">
+                              <button className="bg-red-700 rounded-full px-3 py-1 hover:bg-red-900 " onClick={deletePicture}>
                                     Delete
                               </button>
                         </div>
                         <div className="flex items-center flex-col">
+
                               {user.profilePicture ? (
-                                    <img
-                                          src={require(`../../images/${user.profilePicture}`)}
-                                          alt={user.firstName}
-                                          className={`h-18 w-18  fluid rounded-full`}
-                                    />
+                                <div tabindex="0" class="focus:outline-none h-60 w-60 mb-4 lg:mb-0 mr-4">
+                                <img src={require(`../../images/${user.profilePicture}`)} alt={user.firstName} class="h-full w-full rounded-full overflow-hidden shadow" />
+                              </div>
                               ) : (
                                     <img
                                           className="w-8 h-8 fluid rounded-full"
@@ -85,7 +99,7 @@ function UserPage() {
                   >
                         Back
                   </button>
-                  </> : <h1>Loading...</h1>
+                  </> : <Loader />
                   }
 
             </div>

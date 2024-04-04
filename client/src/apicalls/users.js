@@ -61,12 +61,23 @@ export const GetUserById = async (id) => {
 // Update user picture
 export const UpdateUserPictureFunc = async (id, picture) => {
     try {
-        const formData = new FormData();
-        formData.append("profilePicture", picture);
-
         const response = await axios.put(`/api/users/update-picture/${id}`, picture, {
             headers:{
-                "content-type": "application/json",
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bear ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+// Delete picture
+export const DeleteUserPicture = async (id) => {
+    try {
+        const response = await axios.delete(`/api/users/delete-picture/${id}`, {
+            headers:{
                 Authorization: `Bear ${localStorage.getItem('token')}`
             }
         });

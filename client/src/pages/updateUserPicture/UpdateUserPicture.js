@@ -7,7 +7,7 @@ import { UpdateUserPictureFunc } from '../../apicalls/users';
 
 function UpdateUserPicture() {
     const [pictureName, setPictureName] = useState('');
-    const[ selectedFile, setSelectedFile] = useState('');
+    const[ selectedFile, setSelectedFile] = useState(null);
 
 
     const userId = useParams();
@@ -23,9 +23,14 @@ function UpdateUserPicture() {
             return;
         }
 
+        const formData = new FormData();
+        formData.append('profilePicture', selectedFile);
+        console.log(formData);
+
         try {
             showLoader();
-            const response = await UpdateUserPictureFunc(userId.id, selectedFile);
+            const response = await UpdateUserPictureFunc(userId.id, formData);
+            console.log(response);
             hideLoader();
 
             if(response.success){

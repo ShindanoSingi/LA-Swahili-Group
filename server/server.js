@@ -10,17 +10,19 @@ const bodyParser = require('body-parser');
 const usersRouter = require('./routes/usersRoutes');
 const paymentsRoutes = require('./routes/paymentsRoutes');
 
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
+app.use(cors());
+
+// app.use(cors({
+//     origin: 'http://localhost:3000/',
+// }));
 
 app.use(express.json());
 app.use(bodyParser.json({
-    limit: '50mb'
+    limit: '100mb'
 }));
 app.use(bodyParser.urlencoded({
     extended: true,
-    limit: '50mb'
+    limit: '10mb'
 }));
 
 const server = require('http').createServer(app);

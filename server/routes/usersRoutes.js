@@ -283,12 +283,12 @@ router.delete('/delete-user/:id', async (req, res) => {
                         success: false
                   })
             }
-            
+
             res.send({
                   success: true,
                   message: 'User deleted successfully'
             });
-      
+
       } catch (error) {
             res.send({
                     message: error.message,
@@ -300,7 +300,7 @@ router.delete('/delete-user/:id', async (req, res) => {
 
 // Update user profile picture
 router.put('/update-picture/:id', upload.single('profilePicture'), async (req, res) => {
-    console.log(req.file.path)
+    // console.log(req.file.path)
       try {
             const user = await User.findOneAndUpdate(
                   { _id: req.params.id },
@@ -309,22 +309,56 @@ router.put('/update-picture/:id', upload.single('profilePicture'), async (req, r
                   },
                   { new: true }
             );
-            
+
             if (!user) {
                   return res.send({
                         message: "User not found",
                         success: false
                   })
             }
-            
+
             user.save();
-            
+
             res.send({
                   user,
                   success: true,
                   message: 'Profile picture updated successfully'
             });
-      
+
+      } catch (error) {
+            res.send({
+                    message: error.message,
+                    success: false
+            })
+      }
+});
+
+// Delete picture
+router.delete('/delete-picture/:id', async (req, res) => {
+      try {
+            const user = await User.findOneAndUpdate(
+                  { _id: req.params.id },
+                  {
+                        profilePicture: '',
+                  },
+                  { new: true }
+            );
+
+            if (!user) {
+                  return res.send({
+                        message: "User not found",
+                        success: false
+                  })
+            }
+
+            user.save();
+
+            res.send({
+                  user,
+                  success: true,
+                  message: 'Profile picture deleted successfully'
+            });
+
       } catch (error) {
             res.send({
                     message: error.message,
