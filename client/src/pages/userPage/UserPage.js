@@ -18,8 +18,9 @@ function UserPage() {
       const getUserById = async () => {
             try {
                   const response = await GetUserById(userId.id);
-                  showLoader();
                   console.log(response);
+                  showLoader();
+
                   dispatch(setUser(response.user));
                   hideLoader();
             } catch (error) {
@@ -36,6 +37,7 @@ function UserPage() {
                         toast.success(response.message);
                   }
             } catch (error) {
+                console.log(error.message);
                     hideLoader();
                   toast.error(error.message);
             }

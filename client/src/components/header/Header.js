@@ -48,6 +48,7 @@ function Header() {
                               }}>
                                     <li className="menu-item">Logout</li>
                               </Link>
+                              <li className="menu-item menu-item-cancel" onClick={() => setShow(!show)}>Cancel</li>
                         </ul>
                   )}
             </div>

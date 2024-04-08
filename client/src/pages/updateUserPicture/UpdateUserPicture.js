@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Button from '../../components/header/button/Button'
+import Button from '../../components/button/Button'
 import { useParams } from 'react-router-dom';
 import { hideLoader, showLoader } from '../../redux/loaderSlice';
 import toast from 'react-hot-toast';
@@ -44,7 +44,7 @@ function UpdateUserPicture() {
     }
 
   return (
-    <div className='mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]'>
+    <div className='mt-[64px] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]'>
         <div className="col-span-full">
           <label htmlFor="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
           <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900 px-6 py-10">

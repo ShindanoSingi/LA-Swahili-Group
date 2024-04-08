@@ -30,7 +30,19 @@ background: #486D8A;
 box-shadow: inset -15px -15px 13px #2a3f50,
             inset 15px 15px 13px #669bc4;
             width: 5rem;
-            text-align: center;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 0.2rem;
             padding: 0.2rem 0.5rem;
+}
+
+.menu-item-cancel{
+    box-shadow: inset -15px -15px 13px #2d211e,
+                inset 15px 15px 13px #af7f74;
+                width: 5rem;
+                text-align: center;
+                margin: 0.2rem;
+                padding: 0.2rem 0.5rem;
 }
