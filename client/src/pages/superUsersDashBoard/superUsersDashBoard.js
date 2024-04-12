@@ -1,13 +1,16 @@
+/* eslint-disable no-lone-blocks */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { GetUsers } from "../../apicalls/users";
 import { setGrandTotal, setUsers } from "../../redux/userSlice";
 import md5 from "md5";
+import { Link } from "react-router-dom";
 
 function SuperUsersDashBoard() {
       const { users, grandTotal } = useSelector((state) => state.userReducer);
       const [isRotated, setIsRotated] = useState(false);
+      const [userId, setUserId] = useState('');
 
       const dispatch = useDispatch();
 
@@ -27,16 +30,19 @@ function SuperUsersDashBoard() {
             const cleanedPhoneNumber = phone.replace(/\D/g, "");
             const hash = md5(cleanedPhoneNumber);
             const colorCode = hash.substring(0, 6);
-            // console.log(colorCode);
             return `#${colorCode}`;
       };
 
-        //  console.log(getPhoneNumberToColor("2077133140"))
-
       const handleButtonClick = () => {
-            // console.log(isRotated);
             setIsRotated(!isRotated);
       };
+
+    //   Get userId from current user
+       const getUserId = (id) => {
+           setUserId(id)
+
+    }
+
 
     //   Add dashes in the middle of the phone number
         const formatPhoneNumber = (phoneNumber) => {
@@ -46,8 +52,13 @@ function SuperUsersDashBoard() {
         }
 
       useEffect(() => {
-
             getUsers();
+            getUserId();
+
+            if(userId){
+                console.log(userId)
+
+            }
       }, []);
 
       return (
@@ -88,11 +99,11 @@ function SuperUsersDashBoard() {
                                                                                                 alt={
                                                                                                       user.firstName
                                                                                                 }
-                                                                                                className={`h-8 w-8  fluid rounded-full`}
+                                                                                                className={`h-10 w-10  fluid rounded-full`}
                                                                                           />
                                                                                     ) : (
                                                                                           <img
-                                                                                                className="w-8 h-8 fluid text-white dark:text-white rounded-full"
+                                                                                                className="w-10 h-10 fluid text-white dark:text-white rounded-full"
                                                                                                 src={
                                                                                                       user.profilePicture
                                                                                                             ? user.profilePicture
@@ -111,12 +122,12 @@ function SuperUsersDashBoard() {
                                                                                     )}
                                                                               </div>
                                                                               <div className="flex-1 min-w-0 ms-4 text-red-800">
-                                                                                    <p className="text-sm font-medium  truncate dark:text-black">
+                                                                                    <p className="text-lg font-medium  truncate dark:text-black">
                                                                                           {
                                                                                             user.fullName
                                                                                           }
                                                                                     </p>
-                                                                                    <p className="text-sm text-black truncate dark:text-black">
+                                                                                    <p className="text-md text-black truncate dark:text-black">
                                                                                           {
                                                                                             formatPhoneNumber(user.phone)
                                                                                           }
@@ -125,7 +136,7 @@ function SuperUsersDashBoard() {
                                                                         </div>
                                                                         <div className="flex flex-col items-center">
                                                                               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
-                                                                                    $320
+                                                                                    ${user.totalAmount}
                                                                               </div>
                                                                               <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +168,13 @@ function SuperUsersDashBoard() {
                                                                                     : "invisible"
                                                                         } flex justify-around h-auto max-h-0 items-center opacity-0 transition-all `}
                                                                   >
-                                                                        <button className="flex justify-center items-center bg-green-800 rounded-full w-16 p-1 max-w-20">
+                                                                    <Link to={`/addpayment/${userId}`}>
+                                                                    <button
+                                                                        className="flex justify-center items-center bg-green-800 rounded-full w-16 p-1 max-w-20"
+                                                                        onClick={()=>{
+                                                                            getUserId(index)
+                                                                        }}
+                                                                        >
                                                                               <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="18"
@@ -184,6 +201,8 @@ function SuperUsersDashBoard() {
                                                                                     ></line>
                                                                               </svg>
                                                                         </button>
+                                                                    </Link>
+
                                                                         <button className="flex justify-center items-center bg-yellow-800 rounded-full w-16 p-1 max-w-20">
                                                                               <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
