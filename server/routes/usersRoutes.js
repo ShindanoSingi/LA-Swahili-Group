@@ -216,7 +216,7 @@ router.get('/get-user', authMiddleware, async (req, res) => {
 router.get('/get-user/:id', async (req, res) => {
 
         try {
-                const user = await User.findById({_id: req.params.id});
+                const user = await User.findById({_id: req.params.id}).populate('payments');
                 res.send({
                         user,
                         success: true,

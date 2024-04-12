@@ -35,6 +35,9 @@ function UpdateUserPicture() {
 
             if(response.success){
                 toast.success(response.message);
+                setTimeout(() => {
+                    window.history.back();
+                }, 2000);
             }
 
         } catch (error) {

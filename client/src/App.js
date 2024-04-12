@@ -25,7 +25,7 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
+
         if(!localStorage.getItem("token")){
             // navigate("/login")
 }}, [navigate, userRole]);
@@ -41,7 +41,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/edit" element={<EditUser />} />
-                        <Route path="/user" element={<UserDashBoard />} />
+                        <Route path="/users" element={<UserDashBoard />} />
                         <Route path="/user/:id" element={<UserPage />} />
                         <Route path="/updateuserpicture/:id" element={<UpdateUserPicture />} />
                         <Route

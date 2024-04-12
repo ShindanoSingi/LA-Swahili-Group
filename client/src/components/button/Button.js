@@ -4,7 +4,7 @@ const Button = ({background, color, width, text, onClick, type}) => {
     const buttonStyle = {
         color: color ||'lightgrey',
         width: width || '120px',
-        padding: '10px 20px',
+        padding: '0.25rem 0.75rem',
         borderRadius: '100px',
         height:'30px',
         border: 'none',
@@ -12,50 +12,25 @@ const Button = ({background, color, width, text, onClick, type}) => {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: background || 'none',
+        onClick: onClick || null
     }
 
-    if (type === 'green') {
-        buttonStyle.backgroundColor = '#38556c'
-    }
-    if (type === 'inactive') {
-        buttonStyle.backgroundColor = 'red'
-    }
-    if (type === 'warning') {
-        buttonStyle.backgroundColor = 'orange'
-    }
-    if (type === 'success') {
-        buttonStyle.backgroundColor = 'green'
-    }
-    if (type === 'info') {
-        buttonStyle.backgroundColor = 'lightblue'
-    }
-    if (type === 'dark') {
-        buttonStyle.backgroundColor = 'black'
-    }
-    if (type === 'light') {
-        buttonStyle.backgroundColor = 'white'
-    }
-    if (type === 'primary') {
-        buttonStyle.backgroundColor = 'blue'
-    }
-    if (type === 'secondary') {
-        buttonStyle.backgroundColor = 'grey'
-    }
-    if (type === 'tertiary') {
-        buttonStyle.backgroundColor = 'lightgrey'
-    }
-    if (type === 'outline') {
-        buttonStyle.backgroundColor = 'none'
-        buttonStyle.border = '1px solid grey'
-    }
     if (type === 'default') {
-        buttonStyle.backgroundColor = 'none'
-        buttonStyle.border = '1px solid grey'
+        return (
+            <button style={buttonStyle}>{text}</button>
+        )
     }
+
+
   return (
-    <button style={buttonStyle} onClick={onClick} type={type}>
-        {text}
-    </button>
+    <button
+                                    className="bg-gray-400 hover:bg-gray-700 mt-2 text-white w-full font-bold px-3 py-1 rounded-full"
+                                    onClick={() => {
+                                          window.history.back();
+                                    }}
+                              >
+                                    Back
+                              </button>
   )
 }
 

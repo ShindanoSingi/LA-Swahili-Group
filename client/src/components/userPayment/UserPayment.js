@@ -7,7 +7,7 @@ import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
 
-function UserPage() {
+function UserPayment() {
       const { user } = useSelector((state) => state.userReducer);
 
       const dispatch = useDispatch();
@@ -52,24 +52,16 @@ function UserPage() {
                   {user ? (
                         <>
                               <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                                    <div className="flex justify-between w-full mb-4">
+                                    <div className="flex justify-between w-full">
                                           <Link
                                                 to={`/updateuserpicture/${user._id}`}
                                           >
-                                                <button className="bg-green-700 rounded-full w-24 px-3 py-1 hover:bg-green-900">
+                                                <button className="bg-green-700 rounded-full px-3 py-1 hover:bg-green-900">
                                                       Update
                                                 </button>
                                           </Link>
                                           <button
-                                                className="bg-gray-500 w-24 hover:bg-gray-700 px-3 py-1 rounded-full"
-                                                onClick={() => {
-                                                      window.history.back();
-                                                }}
-                                          >
-                                                Back
-                                          </button>
-                                          <button
-                                                className="bg-red-700 rounded-full w-24 px-3 py-1 hover:bg-red-900 "
+                                                className="bg-red-700 rounded-full px-3 py-1 hover:bg-red-900 "
                                                 onClick={deletePicture}
                                           >
                                                 Delete
@@ -110,22 +102,29 @@ function UserPage() {
                                           </div>
                                     </div>
                               </div>
+                              <button
+                                    className="bg-gray-400 hover:bg-gray-700 mt-2 text-white w-full font-bold px-3 py-1 rounded-full"
+                                    onClick={() => {
+                                          window.history.back();
+                                    }}
+                              >
+                                    Back
+                              </button>
                         </>
-                  ) : (
-                        <div className="grid justify-center items-center h-[100vh] w-100w">
-                              <Hourglass
-                                    visible={true}
-                                    height="80"
-                                    width="80"
-                                    ariaLabel="hourglass-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClass=""
-                                    colors={["#306cce", "#72a1ed"]}
-                              />
-                        </div>
-                  )}
+                  ) : <div className="grid justify-center items-center h-[100vh] w-100w">
+                  <Hourglass
+                              visible={true}
+                              height="80"
+                              width="80"
+                              ariaLabel="hourglass-loading"
+                              wrapperStyle={{}}
+                              wrapperClass=""
+                              colors={["#306cce", "#72a1ed"]}
+                        />
+                  </div>
+                  }
             </div>
       );
 }
 
-export default UserPage;
+export default UserPayment;

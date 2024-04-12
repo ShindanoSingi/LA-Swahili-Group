@@ -12,11 +12,6 @@ const md5 = require("md5");
 
 function UserDashBoard() {
       const {users, grandTotal} = useSelector((state) => state.userReducer);
-      const [sizes, setSizes] = [{
-            width: 0,
-            height: 0
-
-      }]
 
       const dispatch = useDispatch();
 
@@ -33,7 +28,9 @@ function UserDashBoard() {
         try {
             dispatch(showLoader())
             const response = await GetUsers();
-            console.log(response);
+            dispatch(setUsers(response.users));
+            dispatch(setGrandTotal(response.grandTotal));
+            console.log(response.users);
             dispatch(hideLoader())
 
             if(response.success){
@@ -42,7 +39,6 @@ function UserDashBoard() {
             }
         } catch (error) {
             dispatch(hideLoader())
-            toast.error(error.message)
         }
     }
 
