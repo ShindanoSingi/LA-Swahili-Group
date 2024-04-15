@@ -8,6 +8,7 @@ import { showLoader, hideLoader } from "../../redux/loaderSlice";
 import { GetUsers } from "../../apicalls/users";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 const md5 = require("md5");
 
 function UserDashBoard() {
@@ -48,7 +49,9 @@ function UserDashBoard() {
 
       return (
             <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
-                  <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                  {
+                        users ?
+                        <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex items-center justify-between mb-4">
                               <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
                                     Members Contrib.
@@ -110,7 +113,8 @@ function UserDashBoard() {
                                     ))}
                               </ul>
                         </div>
-                  </div>
+                  </div> : <Loader />
+                  }
             </div>
       );
 }

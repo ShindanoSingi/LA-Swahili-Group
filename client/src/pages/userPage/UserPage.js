@@ -121,13 +121,13 @@ function UserPage() {
 
                                           <div className="flex flex-col items-center gap-2">
 
-                                                <h1 className="text-2xl">
+                                                <h1 className="text-2xl text-center w-full">
                                                       Michango
                                                 </h1>
 
-                                                <div className="flex flex-col items-center">
-                                                <h2 className="font-bold bg-green-500 w-full text-center px-6 py-4">Mwaka Wa 2024</h2>
-                                                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                                <div className="flex flex-col items-center w-full">
+                                                <h2 className="font-bold bg-green-500 rounded-tl-lg rounded-tr-lg w-full text-center px-6 py-4">Mwaka Wa 2024</h2>
+                                                <div className="relative overflow-x-auto shadow-md w-full sm:rounded-lg">
                                                       <table className="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-gray-100">
                                                             <thead className="text-xs text-white uppercase bg-gray-600 dark:text-white">
                                                                   <tr>
@@ -139,7 +139,7 @@ function UserPage() {
                                                                         </th>
                                                                         <th
                                                                               scope="col"
-                                                                              class="px-6 py-4"
+                                                                              class="px-6 py-4 text-right"
                                                                         >
                                                                               Pesa
                                                                         </th>
@@ -153,7 +153,7 @@ function UserPage() {
                                                                         >
                                                                               1
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -165,7 +165,7 @@ function UserPage() {
                                                                         >
                                                                               2
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -176,7 +176,7 @@ function UserPage() {
                                                                         >
                                                                               3
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -187,7 +187,7 @@ function UserPage() {
                                                                         >
                                                                               4
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -198,7 +198,7 @@ function UserPage() {
                                                                         >
                                                                               5
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -209,7 +209,7 @@ function UserPage() {
                                                                         >
                                                                               6
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -220,7 +220,7 @@ function UserPage() {
                                                                         >
                                                                               7
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -231,7 +231,7 @@ function UserPage() {
                                                                         >
                                                                               8
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -242,7 +242,7 @@ function UserPage() {
                                                                         >
                                                                               9
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -253,7 +253,7 @@ function UserPage() {
                                                                         >
                                                                               10
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -264,10 +264,13 @@ function UserPage() {
                                                                         >
                                                                               11
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
+                                                                  <div className="rounded-bl-lg rounded-br-lg">
+
+                                                                  </div>
                                                                   <tr className="bg-gray-500 border-b border-gray-400">
                                                                         <th
                                                                               scope="row"
@@ -275,7 +278,7 @@ function UserPage() {
                                                                         >
                                                                               12
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        <td class="px-6 py-4 text-right">
                                                                               $10
                                                                         </td>
                                                                   </tr>
@@ -289,7 +292,7 @@ function UserPage() {
                               </div>
                         </>
                   ) : (
-                        <div className="grid justify-center items-center h-[100vh] w-100vw">
+                        <div className="grid justify-center items-center h-[80vh] w-100vw">
                               <Hourglass
                                     visible={true}
                                     height="80"

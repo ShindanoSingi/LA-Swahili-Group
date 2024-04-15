@@ -1,19 +1,21 @@
 import React from "react";
-import { Radio } from "react-loader-spinner";
+import { Hourglass } from "react-loader-spinner";
 
 function Loader() {
       return (
-            <div class="custom-loader absolute">
-                  <Radio
-                        visible={true}
-                        height="80"
-                        width="80"
-                        color="#4fa94d"
-                        ariaLabel="radio-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                  />
-            </div>
+
+                  <div className="flex justify-center items-center h-[80vh] w-100vw">
+                              <Hourglass
+                                    visible={true}
+                                    height="80"
+                                    width="80"
+                                    ariaLabel="hourglass-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    colors={["#306cce", "#72a1ed"]}
+                              />
+                        </div>
+
       );
 }
 
