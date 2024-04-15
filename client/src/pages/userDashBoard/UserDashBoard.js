@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 'use strict';
 
-import React, { useEffect, useState } from "react";
-import { setGrandTotal, setUsers } from "../../redux/userSlice";
+import React, { useEffect} from "react";
+import { SetGrandTotal, SetUsers } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoader, hideLoader } from "../../redux/loaderSlice";
 import { GetUsers } from "../../apicalls/users";
@@ -29,14 +29,14 @@ function UserDashBoard() {
         try {
             dispatch(showLoader())
             const response = await GetUsers();
-            dispatch(setUsers(response.users));
-            dispatch(setGrandTotal(response.grandTotal));
+            dispatch(SetUsers(response.users));
+            dispatch(SetGrandTotal(response.grandTotal));
             console.log(response.users);
             dispatch(hideLoader())
 
             if(response.success){
-                dispatch(setUsers(response.users));
-                dispatch(setGrandTotal(response.grandTotal));
+                dispatch(SetUsers(response.users));
+                dispatch(SetGrandTotal(response.grandTotal));
             }
         } catch (error) {
             dispatch(hideLoader())

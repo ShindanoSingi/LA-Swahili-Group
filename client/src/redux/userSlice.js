@@ -11,29 +11,32 @@ const userSlice = createSlice({
         userRole: '',
         userFirstName: '',
         userLastName: '',
-
+        userId:'',
     },
     reducers: {
-        setUser: (state, action) => {
+        SetUser: (state, action) => {
             state.user = action.payload;
         },
-        setUserPhone: (state, action) => {
+        SetUserPhone: (state, action) => {
             state.userPhone = action.payload;
         },
-        setUserEmail: (state, action) => {
+        SetUserEmail: (state, action) => {
             state.userEmail = action.payload;
         },
-        setUserRole: (state, action) => {
+        SetUserRole: (state, action) => {
             state.userRole = action.payload;
         },
-        setUsers: (state, action) => {
+        SetUsers: (state, action) => {
             state.users = action.payload;
         },
-        setGrandTotal: (state, action) => {
+        SetGrandTotal: (state, action) => {
             state.grandTotal = action.payload;
+        },
+        SetUserId: (state, action) => {
+            state.userId = action.payload;
         },
     },
 });
 
-export const {setUser, setUserRole, setUserEmail, setUserPhone, setUsers, setGrandTotal} = userSlice.actions;
+export const {SetUser, SetUserRole, SetUserEmail, SetUserPhone, SetUsers, SetGrandTotal , SetUserId} = userSlice.actions;
 export default userSlice.reducer;

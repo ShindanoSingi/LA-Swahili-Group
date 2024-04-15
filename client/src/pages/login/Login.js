@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { LoginUser, loginUser } from "../../apicalls/users";
-import { setUserRole } from '../../redux/userSlice'
+import { SetUserRole } from '../../redux/userSlice'
 
 import './Login.css'
 
@@ -38,7 +38,7 @@ function Login() {
                   if(response.success){
                         toast.success(response.message);
                         localStorage.setItem("token", response.token);
-                        dispatch(setUserRole(response.role))
+                        dispatch(SetUserRole(response.role))
                   } else{
                         toast.error(response.message)
                   }

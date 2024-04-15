@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { GetUsers } from "../../apicalls/users";
-import { setGrandTotal, setUsers } from "../../redux/userSlice";
+import { SetGrandTotal, SetUsers } from "../../redux/userSlice";
 import md5 from "md5";
 import { Link } from "react-router-dom";
 
@@ -18,8 +18,8 @@ function SuperUsersDashBoard() {
             try {
                   dispatch(showLoader());
                   const response = await GetUsers();
-                  dispatch(setUsers(response.users));
-                  dispatch(setGrandTotal(response.grandTotal));
+                  dispatch(SetUsers(response.users));
+                  dispatch(SetGrandTotal(response.grandTotal));
                   dispatch(hideLoader());
             } catch (error) {
                   dispatch(hideLoader());

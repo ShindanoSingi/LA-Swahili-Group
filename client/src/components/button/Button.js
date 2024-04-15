@@ -1,37 +1,52 @@
-import React from 'react'
+import React from "react";
 
-const Button = ({background, color, width, text, onClick, type}) => {
-    const buttonStyle = {
-        color: color ||'lightgrey',
-        width: width || '120px',
-        padding: '0.25rem 0.75rem',
-        borderRadius: '100px',
-        height:'30px',
-        border: 'none',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: background || 'none',
-        onClick: onClick || null
-    }
+const Button = ({ background, onClick, text, type, width }) => {
+      let buttonStyle = `w-24 px-3 py-1 rounded-full w-${width}`;
 
-    if (type === 'default') {
-        return (
-            <button style={buttonStyle}>{text}</button>
-        )
-    }
+      switch (type) {
+            case "success":
+                  buttonStyle += " bg-green-700 hover:bg-green-900";
+                  break;
+            case "default":
+                  buttonStyle += " bg-gray-500 hover:bg-gray-700";
+                  break;
+            case "disabled":
+                  buttonStyle +=
+                        " border-gray-500 text-gray-500 cursor-not-allowed";
+                  break;
+            case "danger":
+                  buttonStyle += " bg-red-700 hover:bg-red-900";
+                  break;
+            case "warning":
+                  buttonStyle += " bg-orange-700 hover:bg-orange-900";
+                  break;
+            case "submitted":
+                    buttonStyle += " bg-blue-700 hover:bg-blue-900";
+                    break;
+            case "pending":
+                    buttonStyle += " bg-yellow-700 hover:bg-yellow-900";
+                    break;
+            case "complete":
+                    buttonStyle += " bg-green-700 hover:bg-green-900";
+                    break;
+            case "outline":
+                  buttonStyle +=
+                        " border border-gray-500 text-gray-500 hover:text-black hover:bg-gray-500";
+                  break;
+            default:
+                  buttonStyle += " bg-gray-500 hover:bg-gray-700";
+                  break;
+      }
 
+      return (
+            <button
+                  className={buttonStyle}
+                  onClick={onClick}
+                  disabled={type === "disabled"}
+            >
+                  {text}
+            </button>
+      );
+};
 
-  return (
-    <button
-                                    className="bg-gray-400 hover:bg-gray-700 mt-2 text-white w-full font-bold px-3 py-1 rounded-full"
-                                    onClick={() => {
-                                          window.history.back();
-                                    }}
-                              >
-                                    Back
-                              </button>
-  )
-}
-
-export default Button
+export default Button;

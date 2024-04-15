@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import UserPage from "./pages/userPage/UserPage";
 import UpdateUserPicture from "./pages/updateUserPicture/UpdateUserPicture";
 import AddPayment from "./pages/addPayment/AddPayment";
+import Contributions from "./pages/contributions/Contributions";
 
 function App() {
     const {userRole} = useSelector((state) => state.userReducer)
@@ -46,6 +47,7 @@ function App() {
                         <Route path="/users" element={<UserDashBoard />} />
                         <Route path="/user/:id" element={<UserPage />} />
                         <Route path="/updateuserpicture/:id" element={<UpdateUserPicture />} />
+                        <Route path="/mic/:id" element={<Contributions />} />
                         <Route
                               path="/super"
                               element={<SuperUsersDashBoard />}

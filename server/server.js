@@ -10,11 +10,9 @@ const bodyParser = require('body-parser');
 const usersRouter = require('./routes/usersRoutes');
 const paymentsRoutes = require('./routes/paymentsRoutes');
 
-app.use(cors());
-
-// app.use(cors({
-//     origin: 'http://localhost:3000/',
-// }));
+app.use(cors({
+    origin: '*',
+}));
 
 app.use(express.json());
 app.use(bodyParser.json({
