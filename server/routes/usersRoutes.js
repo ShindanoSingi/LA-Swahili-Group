@@ -7,6 +7,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const multer = require('multer');
 const path = require('path');
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
+const userId = require('shortid').generate();
 
 // Multer configuration
 const storage = multer.diskStorage({
@@ -89,7 +90,8 @@ router.post('/register', async (req, res) => {
                         lastName: lastName,
                         fullName: `${firstName} ${lastName}`,
                         phone: phoneNumber,
-                        password: hashedPassword
+                        password: hashedPassword,
+                        userId: userId,
                   }
             ).save();
 
