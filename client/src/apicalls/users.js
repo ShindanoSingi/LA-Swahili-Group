@@ -86,3 +86,17 @@ export const DeleteUserPicture = async (id) => {
         return error.message;
     }
 }
+
+// Get user's payments
+export const GetUserPayments = async (id) => {
+    try {
+        const response = await axios.get(`/api/payments/get-user-payments/${id}`, {
+            headers:{
+                Authorization: `Bear ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
