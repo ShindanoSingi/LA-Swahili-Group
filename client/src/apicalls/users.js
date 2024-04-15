@@ -95,7 +95,8 @@ export const GetUserPayments = async (id) => {
                 Authorization: `Bear ${localStorage.getItem('token')}`
             }
         });
-        return response.data;
+        console.log(response)
+        return response.data.allYearsPayments;
     } catch (error) {
         return error.message;
     }

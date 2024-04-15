@@ -22,9 +22,9 @@ function Contributions() {
       const getUserPayments = async () => {
             try {
                   const response = await GetUserPayments(id);
-                  console.log(response.payments);
+                  console.log(response);
                   showLoader();
-                  setUserPayments(response.payments);
+                  setUserPayments(response);
                   hideLoader();
             } catch (error) {
                   console.log(error.message);
@@ -42,11 +42,13 @@ function Contributions() {
                               <div className="grid gap-2">
                                     <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                                           <div className="flex flex-col items-center gap-2">
-                                                <h1 className="text-2xl text-center w-full">
+                                                {
+                                                    userPayments ? <h1 className="text-2xl text-center w-full">
                                                       Michango
-                                                </h1>
-                                                {userPayments ? (
-                                                      <div className="flex flex-col items-center w-full">
+                                                </h1> : ''
+                                                }
+                                                {userPayments ? userPayments.map((userPayment) => {
+                                                    <div className="flex flex-col items-center w-full">
                                                             <h2 className="font-bold bg-green-500 rounded-tl-lg rounded-tr-lg w-full text-center px-6 py-4">
                                                                   Mwaka Wa 2024
                                                             </h2>
@@ -92,7 +94,7 @@ function Contributions() {
                                                                   </table>
                                                             </div>
                                                       </div>
-                                                ) : (
+                                                }) : (
                                                       <Loader />
                                                 )}
                                           </div>

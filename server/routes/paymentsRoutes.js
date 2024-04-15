@@ -236,13 +236,13 @@ router.get("/get-user-payments/:id", async (req, res) => {
         allYears.sort((a, b) => parseInt(a) - parseInt(b));
 
         // Include all years with their respective total amount and payments
-        const allYearsPayments = {};
+        const allYearsPayments = [];
         allYears.forEach((year) => {
             const allPayments = paymentsByYear[year] || [];
-            allYearsPayments[year] = {
+            allYearsPayments.push({
                 totalAmount: totalAmountByYear[year],
                 payments: allPayments,
-            };
+            });
         });
 
         res.send({
