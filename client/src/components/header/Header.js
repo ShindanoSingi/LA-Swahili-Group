@@ -11,7 +11,7 @@ function Header() {
       }
 
       return (
-            <div className="header fixed top-0 w-full flex items-center justify-between p-2">
+            <div className="header fixed top-0 z-50 w-full flex items-center justify-between p-2">
                   <Link to="/">
                   <div className="w-12 h-12 rounded-full text-[0.8rem] logo-button flex font-extrabold text-[#EBEBEB] justify-center items-center">
                         LASG

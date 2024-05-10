@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
 import Button from "../../components/button/Button";
 
-
 function UserPage() {
       const { user } = useSelector((state) => state.userReducer);
 
@@ -60,18 +59,28 @@ function UserPage() {
                                                 <Link
                                                       to={`/updateuserpicture/${user._id}`}
                                                 >
-                                                      <button className="bg-green-700 rounded-full w-24 px-3 py-1 hover:bg-green-900">
-                                                            Update
-                                                      </button>
+                                                      <div className="rounded-full hover:bg-green-900">
+                                                            <Button
+                                                                  text="Update"
+                                                                  type="success"
+                                                                  width="24"
+                                                            />
+                                                      </div>
                                                 </Link>
-                                                <button
-                                                      className="bg-gray-500 w-24 hover:bg-gray-700 px-3 py-1 rounded-full"
+
+                                                <div
+                                                      className="rounded-full hover:bg-gray-700"
                                                       onClick={() => {
                                                             window.history.back();
                                                       }}
                                                 >
-                                                      Back
-                                                </button>
+                                                      <Button
+                                                            text="Back"
+                                                            type="default"
+                                                            width="24"
+                                                      />
+                                                </div>
+
                                                 <button
                                                       className="bg-red-700 rounded-full w-24 px-3 py-1 hover:bg-red-900 "
                                                       onClick={deletePicture}

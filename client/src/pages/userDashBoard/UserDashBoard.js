@@ -71,7 +71,7 @@ function UserDashBoard() {
                                     className="divide-y divide-gray-200 dark:divide-gray-700"
                               >
                                     {users && users.map((user, index) => (
-                                        <Link to={`/user/${
+                                        <Link to={`/users/${
                                             user._id
                                         }`} key={`${
                                             user._id

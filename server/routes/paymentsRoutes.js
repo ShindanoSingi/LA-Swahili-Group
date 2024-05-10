@@ -246,7 +246,9 @@ router.get("/get-user-payments/:id", async (req, res) => {
         });
 
         res.send({
-            allYearsPayments,
+            fullName:user.fullName,
+            years: allYears,
+            userPayments:allYearsPayments,
             success: true
         });
     } catch (error) {

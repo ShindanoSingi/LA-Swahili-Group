@@ -45,7 +45,7 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/edit" element={<EditUser />} />
                         <Route path="/users" element={<UserDashBoard />} />
-                        <Route path="/user/:id" element={<UserPage />} />
+                        <Route path="/users/:id" element={<UserPage />} />
                         <Route path="/updateuserpicture/:id" element={<UpdateUserPicture />} />
                         <Route path="/mic/:id" element={<Contributions />} />
                         <Route

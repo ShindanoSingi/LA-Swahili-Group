@@ -96,7 +96,22 @@ export const GetUserPayments = async (id) => {
             }
         });
         console.log(response)
-        return response.data.allYearsPayments;
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+// Add payment
+export const AddPayment = async (payment) => {
+    try {
+        const response = await axios.post(`/api/payments/add-payment`, payment, {
+            headers:{
+                "content-type": "application/json",
+                Authorization: `Bear ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
     } catch (error) {
         return error.message;
     }

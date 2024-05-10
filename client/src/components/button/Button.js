@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = ({ background, onClick, text, type, width }) => {
-      let buttonStyle = `w-24 px-3 py-1 rounded-full w-${width}`;
+      let buttonStyle = `px-3 py-1 rounded-full w-${width}`;
 
       switch (type) {
             case "success":
