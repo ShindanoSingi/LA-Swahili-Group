@@ -59,34 +59,31 @@ function UserPage() {
                                                 <Link
                                                       to={`/updateuserpicture/${user._id}`}
                                                 >
-                                                      <div className="rounded-full hover:bg-green-900">
-                                                            <Button
-                                                                  text="Update"
-                                                                  type="success"
-                                                                  width="24"
-                                                            />
-                                                      </div>
+                                                      <Button
+                                                            text="Update"
+                                                            type="success"
+                                                            width="24"
+                                                            className="rounded-full hover:bg-green-900"
+                                                      />
                                                 </Link>
 
-                                                <div
+                                                <Button
+                                                      text="Back"
+                                                      type="default"
+                                                      width="24"
                                                       className="rounded-full hover:bg-gray-700"
                                                       onClick={() => {
                                                             window.history.back();
                                                       }}
-                                                >
-                                                      <Button
-                                                            text="Back"
-                                                            type="default"
-                                                            width="24"
-                                                      />
-                                                </div>
+                                                />
 
-                                                <button
-                                                      className="bg-red-700 rounded-full w-24 px-3 py-1 hover:bg-red-900 "
+                                                <Button
+                                                      text="Delete"
+                                                      type="danger"
+                                                      width="24"
+                                                      className="rounded-full hover:bg-red-900"
                                                       onClick={deletePicture}
-                                                >
-                                                      Delete
-                                                </button>
+                                                />
                                           </div>
                                           <div className="flex items-center mb-4 flex-col">
                                                 {user.profilePicture ? (
@@ -130,7 +127,7 @@ function UserPage() {
                                           </div>
                                           <Link to={`/mic/${userId.id}`}>
                                                 <Button
-                                                      text="Michango"
+                                                      text="Contributions"
                                                       type="submitted"
                                                       width="full"
                                                 />

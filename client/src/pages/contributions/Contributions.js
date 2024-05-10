@@ -62,9 +62,6 @@ function Contributions() {
                                                                   text="Changia Pesa"
                                                                   type="default"
                                                                   width="full"
-                                                                  onClick={
-                                                                        goBack
-                                                                  }
                                                             />
                                                             </Link>
                                                         <div><Button
