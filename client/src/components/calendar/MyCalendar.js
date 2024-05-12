@@ -16,7 +16,6 @@ dispatch(SetMyDate(selectedDate));
   return (
     <div className='calendar-container'>
         <Calendar onChange={setSelectedDate} value={selectedDate} />
-        <p className='mt-2'>Selected date is: {selectedDate && selectedDate.toDateString()}</p>
     </div>
   )
 }
