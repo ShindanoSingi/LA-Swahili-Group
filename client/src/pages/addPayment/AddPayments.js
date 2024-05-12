@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import "./AddPayment.css";
+import "./AddPayments.css";
 import { useSelector } from "react-redux";
 import Button from "../../components/button/Button";
+import { AddPayment } from "../../apicalls/users";
+import toast from "react-hot-toast";
 
 const AddPayments = () => {
       const { fullName } = useSelector((state) => state.userReducer);
@@ -14,20 +16,29 @@ const AddPayments = () => {
             fullName: fullName
       });
 
-      const addPayment = async (payment) => {
+      const addPayment = async () => {
             try {
-                const response = await AddPayment(payment);
+                const response = await AddPayment(userPayment);
+                console.log(response);
             } catch (error) {
+                console.log(error.message);
 
             }
       }
 
       const handleSubmit = (e) => {
             e.preventDefault();
-            console.log(userPayment);
+            const { day, month, year, fullName } = userPayment;
+        if (day.length > 1 && month.length > 1 && year.length > 1 && fullName.length > 1) {
+            addPayment();
+        }
+        else {
+            console.log(day, month, year, fullName)
+            toast.error("Please fill all fields");
 
+        }
 
-      };
+        };
 
       return (
             <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
@@ -54,15 +65,15 @@ const AddPayments = () => {
                                     />
                               </div>
 
-                              <div class="w-full max-w-lg p-6 mx-auto bg-gray-800 rounded-2xl shadow-xl flex flex-col">
-                                    <div class="flex items-center justify-between mb-4">
+                              <div className="w-full max-w-lg p-6 mx-auto bg-gray-800 rounded-2xl shadow-xl flex flex-col">
+                                    <div className="flex items-center justify-between mb-4">
                                           <div className="flex flex-col items-start">
                                                 <h1 className="uppercase font-semibold text-lg">
                                                       Month
                                                 </h1>
                                                 <select
                                                       id="month"
-                                                      class="uppercase text-sm font-semibold text-gray-200 bg-transparent border-none"
+                                                      className="uppercase text-sm font-semibold text-gray-200 bg-transparent border-none"
                                                       onChange={(e) => {
                                                             setUserPayment({
                                                                   ...userPayment,
@@ -147,39 +158,39 @@ const AddPayments = () => {
                                           </div>
                                     </div>
 
-                                    <div class="w-full max-w-lg mx-auto flex flex-col">
-                                          <div class="flex justify-between font-medium uppercase text-xs pt-4 pb-2 border-t">
-                                                <div class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-red-500 text-red-500 shadow-md">
+                                    <div className="w-full max-w-lg mx-auto flex flex-col">
+                                          <div className="flex justify-between font-medium uppercase text-xs pt-4 pb-2 border-t">
+                                                <div className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-red-500 text-red-500 shadow-md">
                                                       sun
                                                 </div>
 
-                                                <span class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
+                                                <span className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
                                                       mon
                                                 </span>
 
-                                                <span class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
+                                                <span className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
                                                       tue
                                                 </span>
 
-                                                <span class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
+                                                <span className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
                                                       wed
                                                 </span>
 
-                                                <span class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
+                                                <span className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
                                                       thu
                                                 </span>
 
-                                                <span class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
+                                                <span className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
                                                       fri
                                                 </span>
 
-                                                <span class="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
+                                                <span className="px-3 border rounded-sm w-8 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">
                                                       sat
                                                 </span>
                                           </div>
 
-                                          <div class="flex justify-between font-medium text-sm pb-2">
-                                                <span class="px-1 text-gray-400 w-8 flex justify-center items-center"
+                                          <div className="flex justify-between font-medium text-sm pb-2">
+                                                <span className="px-1 text-gray-400 w-8 flex justify-center items-center"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -189,7 +200,7 @@ const AddPayments = () => {
                                                       30
                                                 </span>
 
-                                                <span class="px-1 text-gray-400 w-8 flex justify-center items-center"
+                                                <span className="px-1 text-gray-400 w-8 flex justify-center items-center"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -199,7 +210,7 @@ const AddPayments = () => {
                                                       31
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -209,7 +220,7 @@ const AddPayments = () => {
                                                       01
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -219,7 +230,7 @@ const AddPayments = () => {
                                                       02
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -229,7 +240,7 @@ const AddPayments = () => {
                                                       03
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -239,7 +250,7 @@ const AddPayments = () => {
                                                       04
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -250,8 +261,8 @@ const AddPayments = () => {
                                                 </span>
                                           </div>
 
-                                          <div class="flex justify-between font-medium text-sm pb-2">
-                                                <span class="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
+                                          <div className="flex justify-between font-medium text-sm pb-2">
+                                                <span className="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -261,7 +272,7 @@ const AddPayments = () => {
                                                       06
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -271,7 +282,7 @@ const AddPayments = () => {
                                                       07
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -281,7 +292,7 @@ const AddPayments = () => {
                                                       08
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -291,7 +302,7 @@ const AddPayments = () => {
                                                       09
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -301,7 +312,7 @@ const AddPayments = () => {
                                                       10
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -311,7 +322,7 @@ const AddPayments = () => {
                                                       11
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -322,8 +333,8 @@ const AddPayments = () => {
                                                 </span>
                                           </div>
 
-                                          <div class="flex justify-between font-medium text-sm pb-2">
-                                                <span class="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
+                                          <div className="flex justify-between font-medium text-sm pb-2">
+                                                <span className="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -333,7 +344,7 @@ const AddPayments = () => {
                                                       13
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -343,7 +354,7 @@ const AddPayments = () => {
                                                       14
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -353,7 +364,7 @@ const AddPayments = () => {
                                                       15
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -363,7 +374,7 @@ const AddPayments = () => {
                                                       16
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -373,7 +384,7 @@ const AddPayments = () => {
                                                       17
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -383,7 +394,7 @@ const AddPayments = () => {
                                                       18
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -394,8 +405,8 @@ const AddPayments = () => {
                                                 </span>
                                           </div>
 
-                                          <div class="flex justify-between font-medium text-sm pb-2">
-                                                <span class="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
+                                          <div className="flex justify-between font-medium text-sm pb-2">
+                                                <span className="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -405,7 +416,7 @@ const AddPayments = () => {
                                                       20
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -415,7 +426,7 @@ const AddPayments = () => {
                                                       21
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -425,7 +436,7 @@ const AddPayments = () => {
                                                       22
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -435,7 +446,7 @@ const AddPayments = () => {
                                                       23
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -445,7 +456,7 @@ const AddPayments = () => {
                                                       24
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border border-green-500 text-white bg-green-500 rounded-2xl cursor-pointer shadow-md"
+                                                <span className="px-1 w-8 flex justify-center items-center border border-green-500 text-white bg-green-500 rounded-2xl cursor-pointer shadow-md"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -455,7 +466,7 @@ const AddPayments = () => {
                                                       25
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -466,8 +477,8 @@ const AddPayments = () => {
                                                 </span>
                                           </div>
 
-                                          <div class="flex justify-between font-medium text-sm pb-2">
-                                                <span class="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
+                                          <div className="flex justify-between font-medium text-sm pb-2">
+                                                <span className="px-1 w-8 flex justify-center items-center border border-red-500 text-red-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -477,7 +488,7 @@ const AddPayments = () => {
                                                       27
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -487,7 +498,7 @@ const AddPayments = () => {
                                                       28
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
 
                                                 onClick={(e) => {
                                                     setUserPayment({
@@ -497,7 +508,7 @@ const AddPayments = () => {
                                                       29
                                                 </span>
 
-                                                <span class="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
+                                                <span className="px-1 w-8 flex justify-center items-center border hover:border-green-500 hover:text-green-500 cursor-pointer"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -507,7 +518,7 @@ const AddPayments = () => {
                                                       30
                                                 </span>
 
-                                                <span class="px-1 text-gray-400 w-8 flex justify-center items-center"
+                                                <span className="px-1 text-gray-400 w-8 flex justify-center items-center"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -517,7 +528,7 @@ const AddPayments = () => {
                                                       01
                                                 </span>
 
-                                                <span class="px-1 text-gray-400 w-8 flex justify-center items-center"
+                                                <span className="px-1 text-gray-400 w-8 flex justify-center items-center"
                                                 onClick={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText
@@ -527,7 +538,7 @@ const AddPayments = () => {
                                                       02
                                                 </span>
 
-                                                <span class="px-1 text-gray-400 w-8 flex justify-center items-center"
+                                                <span className="px-1 text-gray-400 w-8 flex justify-center items-center"
                                                 onChange={(e) => {
                                                     setUserPayment({
                                                         ...userPayment, day: e.target.innerText

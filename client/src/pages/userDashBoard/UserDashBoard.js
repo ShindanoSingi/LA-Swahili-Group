@@ -43,6 +43,10 @@ function UserDashBoard() {
         }
     }
 
+    const formatDollar = (amount) => {
+        return amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
     useEffect(() => {
         getUsers();
     }, [])
@@ -61,7 +65,7 @@ function UserDashBoard() {
                                     Total:
                               </h2>
                               <h2 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                                    ${grandTotal}
+                                    {formatDollar(grandTotal)}
                               </h2>
                               </div>
                         </div>
@@ -104,7 +108,7 @@ function UserDashBoard() {
                                                     </p>
                                               </div>
                                               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    ${user.totalAmount}
+                                                    {formatDollar(user.totalAmount)}
                                               </div>
                                         </div>
                                   </li>

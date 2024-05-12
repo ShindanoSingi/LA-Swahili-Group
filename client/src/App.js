@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import UserPage from "./pages/userPage/UserPage";
 import UpdateUserPicture from "./pages/updateUserPicture/UpdateUserPicture";
-import AddPayment from "./pages/addPayment/AddPayment";
+import AddPayments from "./pages/addPayment/AddPayments";
 import Contributions from "./pages/contributions/Contributions";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
                   <Header />
                   <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/addpayment/:id" element={<AddPayment />} />
+                        <Route path="/addpayment/:id" element={<AddPayments />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/login" element={<Login />} />

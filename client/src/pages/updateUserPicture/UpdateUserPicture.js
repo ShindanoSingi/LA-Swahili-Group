@@ -14,10 +14,6 @@ function UpdateUserPicture() {
       const userId = useParams();
       console.log(userId.id);
 
-      const handleFileChange = (e) => {
-            setSelectedFile(e.target.files[0]);
-      };
-
       const handleUpload = async () => {
             if (!selectedFile) {
                   toast.error("Please select a file");
@@ -49,14 +45,21 @@ function UpdateUserPicture() {
             }
       };
 
+      const handleInputChange = (e) => {
+        e.preventDefault();
+        setSelectedFile(e.target.files[0]);
+            setPictureName(e.target.files[0]?.name);
+      }
+
       const handleDrop = (event) => {
             event.preventDefault();
             setSelectedFile(event.dataTransfer.files[0]);
-            setPictureName(event.dataTransfer.files[0].name);
+            setPictureName(event.dataTransfer.files[0]?.name);
       };
 
       return (
-            <div className="mt-[64px] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
+        <div className=" w-full px-2 h-[100vh] flex items-center justify-center bg-[#595954] text-[#FFFFFF]">
+            <div className="flex flex-col w-full" >
                   <div className="col-span-full">
                     <div
                     onDrop={handleDrop}
@@ -64,11 +67,11 @@ function UpdateUserPicture() {
                     >
                             <label
                               htmlFor="cover-photo"
-                              class="block text-sm font-medium leading-6 text-gray-900"
+                              class="block text-md font-medium leading-6 text-gray-900"
                         >
                               Cover photo
                         </label>
-                        <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900 px-6 py-10">
+                        <div className="mt-2 flex justify-center rounded-lg border-2 border-dashed border-gray-900 px-6 py-10">
                               <div className="text-center flex flex-col items-center">
                                     {
                                         user ?
@@ -90,29 +93,20 @@ function UpdateUserPicture() {
                                     <div className="mt-4 flex text-sm leading-6 text-gray-600">
                                           <label
                                                 htmlFor="file-upload"
-                                                className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-grey-600 focus-within:ring-offset-2 hover:text-grey-500"
+                                                className="px-2 rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-grey-600 focus-within:ring-offset-2 hover:text-grey-500"
                                           >
-                                                <span className="px-2">
                                                       Upload a file
-                                                </span>
                                                 <input
-                                                      onChange={(e) => {
-                                                            setPictureName(
-                                                                  e.target
-                                                                        .files[0]
-                                                                        .name
-                                                            );
-                                                            handleFileChange(e);
-                                                      }}
                                                       id="file-upload"
                                                       name="file-upload"
                                                       type="file"
                                                       className="sr-only"
+                                                      onChange={handleInputChange}
                                                 />
                                           </label>
                                     </div>
                                     <div className="mt-2">
-                                          <i>{pictureName}</i>
+                                          <i>{pictureName && pictureName}</i>
                                           <p className="pl-1 text-gray-100">
                                                 or drag and drop
                                           </p>
@@ -124,27 +118,26 @@ function UpdateUserPicture() {
                         </div>
                     </div>
                   </div>
-                  <div>
-                        <button
-                              className="bg-blue-400 hover:bg-blue-700 mt-2 text-white w-full font-bold px-2 py-1 rounded-full"
-                              type="submit"
-                              onClick={() => {
-                                    handleUpload();
-                                    console.log("update");
-                              }}
-                        >
-                              Update
-                        </button>
-                        <button
-                              className="bg-gray-400 hover:bg-gray-700 mt-2 text-white w-full font-bold px-2 py-1 rounded-full"
-                              onClick={() => {
-                                    window.history.back();
-                              }}
-                        >
-                              Cancel
-                        </button>
+                  <div className="flex flex-col gap-4 mt-4">
+                    <Button
+                        text="Update"
+                        type="light-blue"
+                        width="full"
+                        onClick={() => {
+                              handleUpload();
+                        }}
+                     />
+                     <Button
+                        text="Cancel"
+                        type="default"
+                        width="full"
+                        onClick={() => {
+                              window.history.back();
+                        }}
+                     />
                   </div>
             </div>
+        </div>
       );
 }
 

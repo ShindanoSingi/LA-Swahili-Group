@@ -20,6 +20,9 @@ const Button = ({ background, onClick, text, type, width }) => {
             case "warning":
                   buttonStyle += " bg-orange-700 hover:bg-orange-900";
                   break;
+                  case "light-blue":
+                    buttonStyle += " bg-blue-400 hover:bg-blue-500";
+                    break;
             case "submitted":
                     buttonStyle += " bg-blue-700 hover:bg-blue-900";
                     break;

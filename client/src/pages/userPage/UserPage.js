@@ -50,8 +50,9 @@ function UserPage() {
       }, []);
 
       return (
-            <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
-                  {user ? (
+            <div className="flex justify-center items-center place-content-center px-2 h-[100vh] bg-[#595954] text-[#FFFFFF]">
+                <div className="w-full">
+                {user ? (
                         <>
                               <div className="grid gap-2">
                                     <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -68,7 +69,7 @@ function UserPage() {
                                                 </Link>
 
                                                 <Button
-                                                      text="Back"
+                                                      text="Cancel"
                                                       type="default"
                                                       width="24"
                                                       className="rounded-full hover:bg-gray-700"
@@ -148,6 +149,7 @@ function UserPage() {
                               />
                         </div>
                   )}
+                </div>
             </div>
       );
 }
