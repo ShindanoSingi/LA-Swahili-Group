@@ -67,7 +67,7 @@ function UpdateUserPicture() {
                     >
                             <label
                               htmlFor="cover-photo"
-                              class="block text-md font-medium leading-6 text-gray-900"
+                              class="block text-lg font-medium leading-6 text-gray-900"
                         >
                               Cover photo
                         </label>

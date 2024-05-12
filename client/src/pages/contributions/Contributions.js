@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
 import Loader from "../../components/loader/Loader";
 import Button from "../../components/button/Button";
+import { formatDollar } from "../../functions/function";
 
 function Contributions() {
       const [userPayments, setUserPayments] = useState([]);
@@ -46,11 +47,11 @@ function Contributions() {
       }, []);
 
       return (
-            <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] pb-4 overflow-auto bg-[#595954] text-[#FFFFFF]">
+            <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
                   {id ? (
                         <>
                               <div className="grid gap-2">
-                                    <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                                    <div className="w-full rounded-lg shadow  ">
                                           <div className="flex flex-col items-center gap-2">
                                                 {userPayments ? (
                                                       <div className="flex items-center justify-around w-full">
@@ -82,7 +83,7 @@ function Contributions() {
                                                                   userPayment,
                                                                   index
                                                             ) => (
-                                                                  <div className="font-bold bg-gray-500 rounded-lg w-full text-center pb-4 p-1">
+                                                                  <div className="font-bold bg-gray-500 rounded-lg w-full text-center pb-4 px-2">
                                                                         <div className="flex flex-col items-center w-full">
                                                                               <h2 className="font-bold bg-gray-500 rounded-lg w-full text-center px-6 py-4">
                                                                                     Mwaka
@@ -128,9 +129,9 @@ function Contributions() {
                                                                                                                               }
                                                                                                                         </th>
                                                                                                                         <td class="px-6 py-4 text-right">
-                                                                                                                              $
+
                                                                                                                               {
-                                                                                                                                    payment.amount
+                                                                                                                                    formatDollar(payment.amount)
                                                                                                                               }
                                                                                                                         </td>
                                                                                                                   </tr>
@@ -141,7 +142,7 @@ function Contributions() {
                                                                                                 <Loader />
                                                                                           )}
                                                                                     </table>
-                                                                                    <h1 className="bg-gray-900 px-6 py-4">
+                                                                                    <h1 className="bg-gray-900 px-6 py-4 ">
                                                                                           Jumla
                                                                                           kwa
                                                                                           mwaka
@@ -151,10 +152,10 @@ function Contributions() {
                                                                                                       index
                                                                                                 ]
                                                                                           }
-                                                                                          :
-                                                                                          $
+                                                                                          {" "} : {" "}
+
                                                                                           {
-                                                                                                userPayment.totalAmount
+                                                                                                formatDollar(userPayment.totalAmount)
                                                                                           }
                                                                                     </h1>
                                                                               </div>

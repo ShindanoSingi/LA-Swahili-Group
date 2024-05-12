@@ -9,6 +9,7 @@ import { GetUsers } from "../../apicalls/users";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
+import { formatDollar } from "../../functions/function";
 const md5 = require("md5");
 
 function UserDashBoard() {
@@ -41,10 +42,6 @@ function UserDashBoard() {
         } catch (error) {
             dispatch(hideLoader())
         }
-    }
-
-    const formatDollar = (amount) => {
-        return amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
     }
 
     useEffect(() => {
