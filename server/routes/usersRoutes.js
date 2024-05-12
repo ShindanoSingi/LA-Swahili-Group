@@ -369,5 +369,39 @@ router.delete('/delete-picture/:id', async (req, res) => {
       }
 });
 
+// Add About
+router.put('/add-about/', async (req, res) => {
+        try {
+                const user = await User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    {
+                            about: req.body.about,
+                    },
+                    { new: true }
+                );
+
+                if (!user) {
+                    return res.send({
+                            message: "User not found",
+                            success: false
+                    })
+                }
+
+                user.save();
+
+                res.send({
+                    user,
+                    success: true,
+                    message: 'About updated successfully'
+                });
+
+        } catch (error) {
+                res.send({
+                        message: error.message,
+                        success: false
+                })
+        }
+})
+
 
 module.exports = router;
