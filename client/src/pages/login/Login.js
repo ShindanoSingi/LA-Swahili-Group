@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
-import { LoginUser, loginUser } from "../../apicalls/users";
+import { LoginUser } from "../../apicalls/users";
 import { SetUserRole } from '../../redux/userSlice'
 
 import './Login.css'
@@ -23,9 +23,7 @@ function Login() {
       })
       const [hideEye, setHideEye] = useState(false)
 
-      const {userRole} = useSelector((state) => state.userReducer)
-      console.log(userRole)
-      console.log(localStorage.getItem('token'))
+      const {userRole} = useSelector((state) => state.userReducer);
 
       const handleLogin = async (e) => {
             e.preventDefault();
@@ -66,6 +64,10 @@ function Login() {
             else {
                 navigate("/login");
             }
+
+            console.log(userRole)
+            console.log(localStorage.getItem('token'))
+
       }, [userRole, navigate]);
 
       return (

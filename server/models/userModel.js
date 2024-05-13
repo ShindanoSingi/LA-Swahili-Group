@@ -49,8 +49,7 @@ const userSchema = new mongoose.Schema({
         }
     ],
     addedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String,
     },
 },
 {

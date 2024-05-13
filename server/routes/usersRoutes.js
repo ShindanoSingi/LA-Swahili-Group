@@ -6,6 +6,7 @@ const router = require("express").Router();
 const authMiddleware = require('../middlewares/authMiddleware');
 const multer = require('multer');
 const path = require('path');
+const middlewareWrapper = require('cors');
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 const userId = require('shortid').generate();
 
@@ -36,15 +37,16 @@ const isLegalPhoneNumber = (phoneNumber) => {
 }
 
 // Register User
-router.post('/register', async (req, res) => {
-    console.log(req.body)
+router.post('/register', authMiddleware, async (req, res) => {
+
+    const user = await User.findById({_id: req.body.userId});
+    console.log(user.fullName);
+
       try {
             // Check if the user is already registered
             const firstName = req.body.firstName;
             const lastName = req.body.lastName;
             const phoneNumber = req.body.phone.replace(/\D/g, '');
-
-            console.log(phoneNumber)
 
             if (!phoneNumber || !phoneNumber.match(/^\d{10}$/)) {
                 return res.send({
@@ -92,6 +94,7 @@ router.post('/register', async (req, res) => {
                         phone: phoneNumber,
                         password: hashedPassword,
                         userId: userId,
+                        addedBy: userId.fullName,
                   }
             ).save();
 
