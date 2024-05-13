@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 // Connect to MongoDB
 const usersRouter = require('./routes/usersRoutes');
 const paymentsRoutes = require('./routes/paymentsRoutes');
+const communityRoutes = require('./routes/communityRoutes');
 
 app.use(cors({
     origin: '*',
@@ -27,5 +28,6 @@ const server = require('http').createServer(app);
 
 app.use('/api/users', usersRouter);
 app.use('/api/payments', paymentsRoutes);
+app.use('/api/com', communityRoutes);
 
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

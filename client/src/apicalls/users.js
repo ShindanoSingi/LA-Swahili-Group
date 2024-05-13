@@ -87,6 +87,8 @@ export const DeleteUserPicture = async (id) => {
     }
 }
 
+// =======================================================================
+
 // Get user's payments
 export const GetUserPayments = async (id) => {
     try {
@@ -111,6 +113,19 @@ export const AddPayment = async (payment) => {
                 Authorization: `Bear ${localStorage.getItem('token')}`
             }
         });
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+// =======================================================================
+
+// Get About
+export const GetAbout = async () => {
+    try {
+        const response = await axios.get(`/api/com/all`);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         return error.message;
