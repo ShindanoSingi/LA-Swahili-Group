@@ -40,7 +40,6 @@ const isLegalPhoneNumber = (phoneNumber) => {
 router.post('/register', authMiddleware, async (req, res) => {
 
     const user = await User.findById({_id: req.body.userId});
-    console.log(user.fullName);
 
       try {
             // Check if the user is already registered
@@ -94,7 +93,7 @@ router.post('/register', authMiddleware, async (req, res) => {
                         phone: phoneNumber,
                         password: hashedPassword,
                         userId: userId,
-                        addedBy: userId.fullName,
+                        addedBy: user.fullName,
                   }
             ).save();
 
@@ -244,6 +243,8 @@ router.put('/update-user/:id', async (req, res) => {
             const hashedPassword = await bcrypt.hash(req.body.password, salt);
             // req.body.passowrd = hashedPassword;
 
+            console.log(req.body)
+
             const user = await User.findOneAndUpdate(
                   { _id: req.params.id },
                   {
@@ -253,6 +254,7 @@ router.put('/update-user/:id', async (req, res) => {
                         phone: req.body.phone.replace(/\D/g, ''),
                         password: hashedPassword,
                         userRole: req.body.userRole,
+                        addedBy: req.body.addedBy,
                   },
                   { new: true }
             );

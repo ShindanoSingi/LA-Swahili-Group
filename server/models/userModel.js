@@ -42,15 +42,16 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    addedBy: {
+        type: String,
+
+    },
     payments: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Payment'
         }
     ],
-    addedBy: {
-        type: String,
-    },
 },
 {
     timestamps: true

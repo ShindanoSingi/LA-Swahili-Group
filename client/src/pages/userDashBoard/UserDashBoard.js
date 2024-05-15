@@ -83,14 +83,14 @@ function UserDashBoard() {
                                               <div className="flex-shrink-0">
 
                                               {
-                                                    user.profilePicture ? (
+                                                    user ? (
                                                         <img src={require(`../../images/${user.profilePicture}`)} alt={user.firstName}
-                                                        className={`h-8 w-8  fluid rounded-full`}
+                                                        className={`h-10 w-10  fluid rounded-full`}
                                                         />
                                                     ) : <img
-                                                    className="w-8 h-8 fluid rounded-full"
+                                                    className="w-10 h-10 fluid rounded-full"
                                                     src={
-                                                          user.profilePicture ? user.profilePicture : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&background=${phoneNumberToColor(user.phone)}&color=fff`
+                                                          `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&&color=fff`
                                                     }
                                                     alt={user.fullName}
                                               />

@@ -7,3 +7,8 @@ export const formatDollar = (amount) => {
 export const formatPhoneNumber = (phoneNumberString) => {
     return phoneNumberString.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
 }
+
+// Function to format the date in a readable format
+export const formatDate = (date) => {
+    return new Date(date).toLocaleDateString();
+}

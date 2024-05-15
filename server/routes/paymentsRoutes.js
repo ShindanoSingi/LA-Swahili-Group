@@ -259,7 +259,25 @@ router.get("/get-user-payments/:id", async (req, res) => {
     }
 });
 
-
+// User paid
+router.put('/user-paid', authMiddleware, async (req, res) => {
+    try {
+        const payment = await Payment.findById(req.body.paymentId);
+        payment.paid = true;
+        payment.addedBy = req.body.addedBy;
+        await payment.save();
+        res.send({
+            message: 'Payment updated successfully',
+            success: true,
+            payment
+        });
+    } catch (error) {
+        res.send({
+            error: error.message,
+            success: false,
+        });
+    }
+});
 
 
 
