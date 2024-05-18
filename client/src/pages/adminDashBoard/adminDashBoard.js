@@ -5,15 +5,22 @@ import { formatDollar } from "../../functions/function";
 import { formatPhoneNumber } from "../../functions/function";
 import { formatDate } from "../../functions/function";
 import Loader from "../../components/loader/Loader";
+import { useDispatch } from "react-redux";
+import { hideLoader, showLoader } from "../../redux/loaderSlice";
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
 
+      const dispatch = useDispatch();
+
       const getUsers = async () => {
             try {
+                dispatch(showLoader())
                   const response = await axios.get(`/api/users/get-users`);
+                    dispatch(hideLoader())
                   setUsers(response.data);
             } catch (error) {
+                    dispatch(hideLoader())
                   toast.error(error.message);
             }
       };

@@ -81,6 +81,7 @@ export const UpdateUserPictureFunc = async (id, picture) => {
 // UserPaid
 export const UserPaid = async (id) => {
       try {
+
             const response = await axios.put(`/api/users/user-paid/${id}`, {
                 headers: {
                     Authorization: `Bear ${localStorage.getItem(
