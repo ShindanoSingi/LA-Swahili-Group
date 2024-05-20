@@ -43,7 +43,7 @@ function App() {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
-                        <Route path="/edit" element={<EditUser />} />
+                        <Route path="/edit/user/:id" element={<EditUser />} />
                         <Route path="/users" element={<UserDashBoard />} />
                         <Route path="/users/:id" element={<UserPage />} />
                         <Route path="/updateuserpicture/:id" element={<UpdateUserPicture />} />

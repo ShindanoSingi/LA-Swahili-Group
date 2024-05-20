@@ -59,7 +59,7 @@ function UpdateUserPicture() {
 
       return (
         <div className=" w-full px-2 h-[100vh] flex items-center justify-center bg-[#595954] text-[#FFFFFF]">
-            <div className="flex flex-col w-full" >
+            <div className="flex flex-col w-full md:max-w-[60%] md:text-xl lg:max-w-[40%]" >
                   <div className="col-span-full">
                     <div
                     onDrop={handleDrop}
@@ -67,7 +67,7 @@ function UpdateUserPicture() {
                     >
                             <label
                               htmlFor="cover-photo"
-                              class="block text-lg font-medium leading-6 text-gray-900"
+                              class="block text-lg md:text-2xl font-medium leading-6 text-gray-900"
                         >
                               Cover photo
                         </label>

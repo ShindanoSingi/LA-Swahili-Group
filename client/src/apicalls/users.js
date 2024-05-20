@@ -57,6 +57,21 @@ export const GetUserById = async (id) => {
       }
 };
 
+// Update user by id
+export const UpdateUser = async (user, id) => {
+      try {
+            const response = await axios.put(`/api/users/update-user/${id}`, user, {
+                  headers: {
+                        "content-type": "application/json",
+                        Authorization: `Bear ${localStorage.getItem("token")}`
+                  }
+            });
+            return response.data;
+      } catch (error) {
+            return error.message;
+      }
+};
+
 // Update user picture
 export const UpdateUserPictureFunc = async (id, picture) => {
       try {

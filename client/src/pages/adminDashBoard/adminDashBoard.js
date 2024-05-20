@@ -55,16 +55,16 @@ function AdminDashBoard() {
       return (
             <div className="pt-[6rem] px-2 min-h-[100vh] bg-white  dark:bg-gray-800 dark:border-gray-700 text-[#FFFFFF]">
                   {users ? (
-                        <div className="w-full max-w-md p-0  rounded-lg sm:p-8">
+                        <div className="w-full max-w-5xl p-0 mx-auto rounded-lg sm:p-8">
                               <div className="flex items-center justify-between mb-4">
-                                    <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                    <h5 className="text-xl font-bold leading-none md:text-3xl text-gray-900 dark:text-white">
                                           Members Contributions
                                     </h5>
                                     <div className="flex gap-1">
-                                          <h2 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                          <h2 className="text-xl font-bold md:text-3xl leading-none text-gray-900 dark:text-white">
                                                 Total:
                                           </h2>
-                                          <h2 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                          <h2 className="text-xl font-bold md:text-3xl leading-none text-gray-900 dark:text-white">
                                                 {users &&
                                                       formatDollar(
                                                             users.grandTotal
@@ -80,7 +80,7 @@ function AdminDashBoard() {
                                                             <li key={user._id}>
                                                                   <div>
                                                                         <div
-                                                                              class="group flex flex-col rounded-lg bg-black p-3 text-white"
+                                                                              class="group flex flex-col rounded-lg bg-black p-3 md:p-6 md:text-xl text-white"
                                                                               tabindex={
                                                                                     index
                                                                               }
@@ -94,11 +94,11 @@ function AdminDashBoard() {
                                                                                                             alt={
                                                                                                                   user.firstName
                                                                                                             }
-                                                                                                            className={`h-10 w-10  fluid rounded-full`}
+                                                                                                            className={`h-10 w-10 md:w-20 md:h-20 fluid rounded-full`}
                                                                                                       />
                                                                                                 ) : (
                                                                                                       <img
-                                                                                                            className="w-10 h-10 fluid rounded-full"
+                                                                                                            className="w-10 h-10 md:w-20 md:h-20 fluid rounded-full"
                                                                                                             src={`https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&&color=fff`}
                                                                                                             alt={
                                                                                                                   user.fullName
@@ -107,36 +107,36 @@ function AdminDashBoard() {
                                                                                                 )}
                                                                                           </div>
                                                                                           <div className="flex-1 min-w-0 ms-4">
-                                                                                                <div className="flex w-[10rem] items-center justify-between">
-                                                                                                      <p className="text-lg font-medium text-gray-900 truncate dark:text-white">
+                                                                                                <div className="flex items-center gap-4 justify-between">
+                                                                                                      <p className="text-lg font-medium md:text-3xl text-gray-900 truncate md:whitespace-normal dark:text-white">
                                                                                                             {user.fullName &&
                                                                                                                   user.fullName}
                                                                                                       </p>
-                                                                                                      <p className="text-lg rounded-full w-7 flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
+                                                                                                      <p className="text-lg rounded-full md:text-2xl w-7 md:w-10 md:h-10 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
                                                                                                             {index +
                                                                                                                   1}
                                                                                                       </p>
 
                                                                                                 </div>
-                                                                                                <p className="text-md py-2 text-gray-500 truncate dark:text-gray-400">
+                                                                                                <p className="text-md py-2 text-gray-500 truncate md:text-2xl dark:text-gray-400">
                                                                                                             {formatPhoneNumber(
                                                                                                                   user.phone
                                                                                                             )}
                                                                                                       </p>
 
                                                                                                 <div className="flex flex-col gap-2">
-                                                                                                      <span className="text-sm text-gray-200 truncate dark:text-gray-200">
+                                                                                                      <span className="text-sm text-gray-200 md:text-2xl truncate dark:text-gray-200">
                                                                                                             Added
                                                                                                             By:{" "}
-                                                                                                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                                                                                                            <span className="text-sm md:text-2xl text-gray-500 dark:text-gray-400">
                                                                                                                   {user.addedBy
                                                                                                                         ? user.addedBy
                                                                                                                         : "n/a"}
                                                                                                             </span>{" "}
                                                                                                       </span>
-                                                                                                      <span className="text-sm text-gray-200 truncate dark:text-gray-200">
+                                                                                                      <span className="text-sm text-gray-200 md:text-2xl truncate dark:text-gray-200">
                                                                                                             Added:{" "}
-                                                                                                            <span className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                                                                            <span className="text-sm md:text-2xl text-gray-500 truncate dark:text-gray-400">
                                                                                                                   {user
                                                                                                                         ? formatDate(
                                                                                                                                 user.createdAt

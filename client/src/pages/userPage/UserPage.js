@@ -56,15 +56,15 @@ function UserPage() {
                 {user ? (
                         <>
                               <div className="grid md:text-xl gap-2">
-                                    <div className="w-full md:w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                                    <div className="w-full md:w-full p-4 md:text-2xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                                           <div className="flex justify-between md:w-[30rem] mb-4">
                                                 <Link
                                                       to={`/updateuserpicture/${user._id}`}
                                                 >
                                                       <Button
-                                                            text="Update"
+                                                            text="Picture"
                                                             type="success"
-                                                            width="24 md:w-32"
+                                                            width="32 md:w-32"
                                                       />
                                                 </Link>
 
@@ -114,7 +114,7 @@ function UserPage() {
                                                             <b>Name:</b>
                                                             <b>Phone #:</b>
                                                       </div>
-                                                      <div className="text-xl">
+                                                      <div className="text-xl md:text-2xl">
                                                             <p>
                                                                   {
                                                                         user?.fullName
@@ -124,6 +124,14 @@ function UserPage() {
                                                       </div>
                                                 </div>
                                           </div>
+                                          <div className="flex flex-col gap-6">
+                                          <Link to={`/edit/user/${userId.id}`}>
+                                                <Button
+                                                      text="Edit"
+                                                      type="orange"
+                                                      width="full"
+                                                />
+                                          </Link>
                                           <Link to={`/mic/${userId.id}`}>
                                                 <Button
                                                       text="Contributions"
@@ -131,6 +139,7 @@ function UserPage() {
                                                       width="full"
                                                 />
                                           </Link>
+                                          </div>
                                     </div>
                               </div>
                         </>
