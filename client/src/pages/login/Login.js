@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -10,118 +10,123 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import { LoginUser } from "../../apicalls/users";
-import { SetUserRole } from '../../redux/userSlice'
+import { SetUserRole } from "../../redux/userSlice";
+import Loader from "../../components/loader/Loader";
 
-import './Login.css'
+import "./Login.css";
 
 function Login() {
       const dispatch = useDispatch();
       const navigate = useNavigate();
       const [user, setUser] = useState({
-            phone: '',
-            password: '',
-      })
-      const [hideEye, setHideEye] = useState(false)
-
-      const {userRole} = useSelector((state) => state.userReducer);
+            phone: "",
+            password: ""
+      });
+      const [hideEye, setHideEye] = useState(false);
+      const { userRole } = useSelector((state) => state.userReducer);
+      const isLoading = useSelector((state) => state.loader);
 
       const handleLogin = async (e) => {
             e.preventDefault();
             try {
-                  dispatch(showLoader())
+                  dispatch(showLoader());
                   const response = await LoginUser(user);
-                  console.log(response);
-                  dispatch (hideLoader());
-
-                  if(response.success){
-                        toast.success(response.message);
+                  toast.success(response.message);
                         localStorage.setItem("token", response.token);
-                        dispatch(SetUserRole(response.role))
-                  } else{
-                        toast.error(response.message)
-                  }
-
+                        dispatch(SetUserRole(response.role));
+                  dispatch(hideLoader());
             } catch (error) {
-                  dispatch(hideLoader)
+                  dispatch(hideLoader);
                   return error.message;
             }
-      }
+      };
 
       const togglePasswordVisibility = () => {
-            setHideEye(!hideEye)
-      }
+            setHideEye(!hideEye);
+      };
 
       useEffect(() => {
-            if (localStorage.getItem("token")) {
-                if (userRole === "Admin") {
-                    navigate("/admin");
-                } else if (userRole === "Superuser") {
-                    navigate("/super");
-                }   else if (userRole === "User") {
-                    navigate("/user");
-                }
-            }
-            else {
-                navigate("/login");
-            }
+        console.log(userRole)
 
-            console.log(userRole)
-            console.log(localStorage.getItem('token'))
-
-      }, [userRole, navigate]);
+                  if (userRole === "Admin") {
+                        navigate("/admin");
+                  } else if (userRole === "Superuser") {
+                        navigate("/super");
+                  } else if (userRole === "User") {
+                        navigate("/user");
+                  }
+             else {
+                  navigate("/login");
+            }
+      }, [userRole]);
 
       return (
             <div className="container">
                   <div className="w-[80%]">
-
-                              <h1 className="text-xl font-bold text-center mb-4 text-white dark:text-white">
-                                    Login Form
-                              </h1>
+                        <h1 className="text-xl font-bold text-center mb-4 text-white dark:text-white">
+                              Login Form
+                        </h1>
                         <form className="max-w-sm mx-auto">
                               <div className="mb-3">
-                                    <label
-                                          className="block mb-2 text-sm font-medium text-white dark:text-white"
-                                    >
+                                    <label className="block mb-2 text-sm font-medium text-white dark:text-white">
                                           Your phone number
                                     </label>
                                     <input
                                           type="text"
                                           id="phone"
                                           value={user.phone}
-                                          onChange={(e) => setUser({...user, phone: e.target.value})}
+                                          onChange={(e) =>
+                                                setUser({
+                                                      ...user,
+                                                      phone: e.target.value
+                                                })
+                                          }
                                           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                           placeholder="222-222-2222"
                                           autoComplete="off"
                                           required
                                     />
-
                               </div>
                               <div className="mb-3">
-                                    <label
-                                          className="block mb-2 text-sm font-medium text-white dark:text-white"
-                                    >
+                                    <label className="block mb-2 text-sm font-medium text-white dark:text-white">
                                           Your password
                                     </label>
                                     <div className="flex items-center">
                                           <input
-                                          type={
-                                                hideEye ? "password" : "text"
-                                          }
-                                          id="password"
-                                          value={user.password}
-                                          placeholder="Password"
-                                          onChange={(e) =>{
-                                                setUser({...user, password: e.target.value})
-                                          }  }
-                                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                                          required
-                                    />
-                                    {
-                                          hideEye ? (<IoEyeSharp className=" eye text-gray-200" onClick={togglePasswordVisibility} />) : (<FaEyeSlash className="eye left-[40%] text-gray-200" onClick={togglePasswordVisibility} />)
-                                    }
-
+                                                type={
+                                                      hideEye
+                                                            ? "password"
+                                                            : "text"
+                                                }
+                                                id="password"
+                                                value={user.password}
+                                                placeholder="Password"
+                                                onChange={(e) => {
+                                                      setUser({
+                                                            ...user,
+                                                            password: e.target
+                                                                  .value
+                                                      });
+                                                }}
+                                                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                                required
+                                          />
+                                          {hideEye ? (
+                                                <IoEyeSharp
+                                                      className=" eye text-gray-200"
+                                                      onClick={
+                                                            togglePasswordVisibility
+                                                      }
+                                                />
+                                          ) : (
+                                                <FaEyeSlash
+                                                      className="eye left-[40%] text-gray-200"
+                                                      onClick={
+                                                            togglePasswordVisibility
+                                                      }
+                                                />
+                                          )}
                                     </div>
-
                               </div>
                               <div>
                                     <button
@@ -132,14 +137,23 @@ function Login() {
                                           Login
                                     </button>
                                     <div className="flex gap-4 justify-center mt-2">
-                                          <p className="text-white text-center underline">Not registered yet?</p>
-                                          <Link to='/register'><p className="text-blue-500 text-center underline font-bold">Register</p></Link>
-
+                                          <p className="text-white text-center underline">
+                                                Not registered yet?
+                                          </p>
+                                          <Link to="/register">
+                                                <p className="text-blue-500 text-center underline font-bold">
+                                                      Register
+                                                </p>
+                                          </Link>
                                     </div>
-
                               </div>
                         </form>
                   </div>
+                  {isLoading && (
+
+                              <Loader />
+
+                  )}
             </div>
       );
 }

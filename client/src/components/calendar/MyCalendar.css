@@ -16,6 +16,11 @@
     font-size: 1.2rem !important;
 }
 
+.react-calendar__navigation button:enabled:hover{
+    background-color: #111113;
+    color: #ffff;
+}
+
 abbr{
     font-size: .9rem !important;
     text-decoration: none;

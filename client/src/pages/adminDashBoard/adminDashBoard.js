@@ -5,11 +5,12 @@ import { formatDollar } from "../../functions/function";
 import { formatPhoneNumber } from "../../functions/function";
 import { formatDate } from "../../functions/function";
 import Loader from "../../components/loader/Loader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
+      const isLoading = useSelector((state) => state.loader);
 
       const dispatch = useDispatch();
 
@@ -17,11 +18,12 @@ function AdminDashBoard() {
             try {
                 dispatch(showLoader())
                   const response = await axios.get(`/api/users/get-users`);
-                    dispatch(hideLoader())
                   setUsers(response.data);
+                dispatch(hideLoader())
+
             } catch (error) {
                     dispatch(hideLoader())
-                  toast.error(error.message);
+                  return error.message;
             }
       };
 
@@ -38,7 +40,7 @@ function AdminDashBoard() {
                   });
                   setUsers(response.data);
             } catch (error) {
-                  toast.error(error.message);
+                  return error.message;
             }
 
       };
@@ -71,7 +73,7 @@ function AdminDashBoard() {
                                     </div>
                               </div>
                               <div className="flow-root max-h-[82vh] overflow-y-auto">
-                                    <ul className="gap-2 flex flex-col">
+                                    <ul className="gap-2 pb-2 flex flex-col">
                                           {users &&
                                                 users.users.map(
                                                       (user, index) => (
@@ -106,7 +108,7 @@ function AdminDashBoard() {
                                                                                           </div>
                                                                                           <div className="flex-1 min-w-0 ms-4">
                                                                                                 <div className="flex w-[10rem] items-center justify-between">
-                                                                                                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                                                      <p className="text-lg font-medium text-gray-900 truncate dark:text-white">
                                                                                                             {user.fullName &&
                                                                                                                   user.fullName}
                                                                                                       </p>
@@ -116,23 +118,23 @@ function AdminDashBoard() {
                                                                                                       </p>
 
                                                                                                 </div>
-                                                                                                <p className="text-sm py-2 text-gray-500 truncate dark:text-gray-400">
+                                                                                                <p className="text-md py-2 text-gray-500 truncate dark:text-gray-400">
                                                                                                             {formatPhoneNumber(
                                                                                                                   user.phone
                                                                                                             )}
                                                                                                       </p>
 
-                                                                                                <div className="flex items-center gap-2">
-                                                                                                      <span className="text-sm text-gray-200 border px-[0.3rem] py-[0.05rem]  truncate dark:text-gray-200">
+                                                                                                <div className="flex flex-col gap-2">
+                                                                                                      <span className="text-sm text-gray-200 truncate dark:text-gray-200">
                                                                                                             Added
                                                                                                             By:{" "}
-                                                                                                            <span className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                                                                            <span className="text-sm text-gray-500 dark:text-gray-400">
                                                                                                                   {user.addedBy
                                                                                                                         ? user.addedBy
                                                                                                                         : "n/a"}
                                                                                                             </span>{" "}
                                                                                                       </span>
-                                                                                                      <span className="text-sm text-gray-200 border px-[0.3rem] py-[0.05rem]  truncate dark:text-gray-200">
+                                                                                                      <span className="text-sm text-gray-200 truncate dark:text-gray-200">
                                                                                                             Added:{" "}
                                                                                                             <span className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                                                                                   {user
@@ -215,6 +217,9 @@ function AdminDashBoard() {
                   ) : (
                         <Loader />
                   )}
+                  {
+                        isLoading && <Loader />
+                  }
             </div>
       );
 }

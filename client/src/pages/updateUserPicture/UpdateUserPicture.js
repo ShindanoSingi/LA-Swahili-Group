@@ -5,14 +5,15 @@ import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import toast from "react-hot-toast";
 import { UpdateUserPictureFunc } from "../../apicalls/users";
 import { useSelector } from "react-redux";
+import Loader from "../../components/loader/Loader";
 
 function UpdateUserPicture() {
       const [pictureName, setPictureName] = useState("");
       const [selectedFile, setSelectedFile] = useState(null);
       const {user} = useSelector((state) => state.userReducer);
+      const isLoading = useSelector((state) => state.loader);
 
       const userId = useParams();
-      console.log(userId.id);
 
       const handleUpload = async () => {
             if (!selectedFile) {
@@ -30,7 +31,6 @@ function UpdateUserPicture() {
                         userId.id,
                         formData
                   );
-                  console.log(response);
                   hideLoader();
 
                   if (response.success) {
@@ -41,7 +41,7 @@ function UpdateUserPicture() {
                   }
             } catch (error) {
                   hideLoader();
-                  toast.error(error.message);
+                  return error.message;
             }
       };
 
@@ -137,6 +137,9 @@ function UpdateUserPicture() {
                      />
                   </div>
             </div>
+            {
+                isLoading && <Loader />
+            }
         </div>
       );
 }

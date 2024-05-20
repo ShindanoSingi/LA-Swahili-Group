@@ -29,7 +29,7 @@ function App() {
     useEffect(() => {
 
         if(!localStorage.getItem("token")){
-            // navigate("/login")
+            navigate("/login")
 }}, [navigate, userRole]);
 
       return (

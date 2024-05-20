@@ -14,15 +14,16 @@ const md5 = require("md5");
 
 function UserDashBoard() {
       const {users, grandTotal} = useSelector((state) => state.userReducer);
+      const isLoading = useSelector((state) => state.loader);
 
       const dispatch = useDispatch();
 
-      const phoneNumberToColor = (phoneNumber) => {
-            const cleanedPhoneNumber = phoneNumber.replace(/\D/g, "");
-            const hash = md5(cleanedPhoneNumber);
-            const colorCode = hash.substring(0, 6);
-            return `#${colorCode}`;
-      };
+    //   const phoneNumberToColor = (phoneNumber) => {
+    //         const cleanedPhoneNumber = phoneNumber.replace(/\D/g, "");
+    //         const hash = md5(cleanedPhoneNumber);
+    //         const colorCode = hash.substring(0, 6);
+    //         return `#${colorCode}`;
+    //   };
 
     //   console.log(phoneNumberToColor("2077133140"))
 
@@ -41,6 +42,7 @@ function UserDashBoard() {
             }
         } catch (error) {
             dispatch(hideLoader())
+            return error.message
         }
     }
 
@@ -49,7 +51,7 @@ function UserDashBoard() {
     }, [])
 
       return (
-            <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
+            <div className="pt-[5rem] px-2 min-h-[100vh] flex flex-col items-center bg-[#595954] text-[#FFFFFF]">
                   {
                         users ?
                         <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -66,7 +68,7 @@ function UserDashBoard() {
                               </h2>
                               </div>
                         </div>
-                        <div className="flow-root max-h-[82vh] overflow-y-auto">
+                        <div className="flow-root max-h-[82vh] overflow-y-scroll overflow-x-hidden">
                               <ul
                                     role="list"
                                     className="divide-y divide-gray-200 dark:divide-gray-700"
@@ -83,7 +85,7 @@ function UserDashBoard() {
                                               <div className="flex-shrink-0">
 
                                               {
-                                                    user ? (
+                                                    user.profilePicture ? (
                                                         <img src={require(`../../images/${user.profilePicture}`)} alt={user.firstName}
                                                         className={`h-10 w-10  fluid rounded-full`}
                                                         />
@@ -115,6 +117,9 @@ function UserDashBoard() {
                               </ul>
                         </div>
                   </div> : <Loader />
+                  }
+                  {
+                        !isLoading && <Loader />
                   }
             </div>
       );
