@@ -7,11 +7,13 @@ import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
 import Button from "../../components/button/Button";
+import Loader from "../../components/loader/Loader";
 
 function UserPage() {
       const { user } = useSelector((state) => state.userReducer);
 
       const dispatch = useDispatch();
+      const isLoading = useSelector((state) => state.loader);
 
       const userId = useParams();
       console.log(userId.id);
@@ -38,9 +40,8 @@ function UserPage() {
                         toast.success(response.message);
                   }
             } catch (error) {
-                  console.log(error.message);
                   hideLoader();
-                  toast.error(error.message);
+                  return error.message;
             }
       };
 
@@ -50,29 +51,27 @@ function UserPage() {
       }, []);
 
       return (
-            <div className="flex justify-center items-center place-content-center px-2 h-[100vh] bg-[#595954] text-[#FFFFFF]">
+            <div className="flex justify-center md:grid md:place-content-center items-center place-content-center px-2 h-[100vh] bg-[#595954] text-[#FFFFFF]">
                 <div className="w-full">
                 {user ? (
                         <>
-                              <div className="grid gap-2">
-                                    <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                                          <div className="flex justify-between w-full mb-4">
+                              <div className="grid md:text-xl gap-2">
+                                    <div className="w-full md:w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                                          <div className="flex justify-between md:w-[30rem] mb-4">
                                                 <Link
                                                       to={`/updateuserpicture/${user._id}`}
                                                 >
                                                       <Button
                                                             text="Update"
                                                             type="success"
-                                                            width="24"
-                                                            className="rounded-full hover:bg-green-900"
+                                                            width="24 md:w-32"
                                                       />
                                                 </Link>
 
                                                 <Button
                                                       text="Cancel"
                                                       type="default"
-                                                      width="24"
-                                                      className="rounded-full hover:bg-gray-700"
+                                                      width="24 md:w-32"
                                                       onClick={() => {
                                                             window.history.back();
                                                       }}
@@ -81,8 +80,7 @@ function UserPage() {
                                                 <Button
                                                       text="Delete"
                                                       type="danger"
-                                                      width="24"
-                                                      className="rounded-full hover:bg-red-900"
+                                                      width="24 md:w-32"
                                                       onClick={deletePicture}
                                                 />
                                           </div>
@@ -150,6 +148,9 @@ function UserPage() {
                         </div>
                   )}
                 </div>
+                {
+                    isLoading && <Loader />
+                }
             </div>
       );
 }

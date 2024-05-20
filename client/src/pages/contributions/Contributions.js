@@ -50,8 +50,8 @@ function Contributions() {
             <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
                   {id ? (
                         <>
-                              <div className="grid gap-2">
-                                    <div className="w-full rounded-lg shadow  ">
+                              <div className="flex justify-center md:text-xl ">
+                                    <div className="w-full rounded-lg shadow md:w-[80%] lg:w-[50%] ">
                                           <div className="flex flex-col items-center gap-2">
                                                 {userPayments ? (
                                                       <div className="flex items-center justify-around w-full">
@@ -85,7 +85,7 @@ function Contributions() {
                                                             ) => (
                                                                   <div className="font-bold bg-gray-500 rounded-lg w-full text-center pb-4 px-2">
                                                                         <div className="flex flex-col items-center w-full">
-                                                                              <h2 className="font-bold bg-gray-500 rounded-lg w-full text-center px-6 py-4">
+                                                                              <h2 className="font-bold md:text-2xl bg-gray-500 rounded-lg w-full text-center px-6 py-4">
                                                                                     Mwaka
                                                                                     Wa{" "}
                                                                                     {
@@ -96,7 +96,7 @@ function Contributions() {
                                                                               </h2>
                                                                               <div className="relative shadow-md w-full sm:rounded-lg">
                                                                                     <table className="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-gray-100">
-                                                                                          <thead className="text-xs text-white uppercase bg-gray-600 dark:text-white">
+                                                                                          <thead className="text-xs md:text-xl text-white uppercase bg-gray-600 dark:text-white">
                                                                                                 <tr>
                                                                                                       <th
                                                                                                             scope="col"
@@ -119,13 +119,13 @@ function Contributions() {
                                                                                                             index
                                                                                                       ) => (
                                                                                                             <tbody>
-                                                                                                                  <tr className="bg-gray-500 border-b border-gray-400">
+                                                                                                                  <tr className="bg-gray-500 md:text-xl border-b border-gray-400">
                                                                                                                         <th
                                                                                                                               scope="row"
                                                                                                                               className="px-6 py-4 font-medium text-gray-50 whitespace-nowrap dark:text-gray-100"
                                                                                                                         >
                                                                                                                               {
-                                                                                                                                    payment.month
+                                                                                                                                    payment.month.length > 1 ? payment.month : `0${payment.month}`
                                                                                                                               }
                                                                                                                         </th>
                                                                                                                         <td class="px-6 py-4 text-right">
@@ -142,11 +142,8 @@ function Contributions() {
                                                                                                 <Loader />
                                                                                           )}
                                                                                     </table>
-                                                                                    <h1 className="bg-gray-900 px-6 py-4 ">
-                                                                                          Jumla
-                                                                                          kwa
-                                                                                          mwaka
-                                                                                          wa{" "}
+                                                                                    <h1 className="bg-gray-900 md:text-2xl px-6 py-4 ">
+                                                                                          Total Amount in {" "}
                                                                                           {
                                                                                                 years[
                                                                                                       index
