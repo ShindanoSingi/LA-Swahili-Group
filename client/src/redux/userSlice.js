@@ -14,7 +14,7 @@ const userSlice = createSlice({
         userId:'',
         fullName: '',
         myDate: null,
-        show: true,
+        show: false,
     },
     reducers: {
         SetUser: (state, action) => {

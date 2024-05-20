@@ -119,7 +119,7 @@ function UserDashBoard() {
                   </div> : <Loader />
                   }
                   {
-                        !isLoading && <Loader />
+                    isLoading && <Loader />
                   }
             </div>
       );
