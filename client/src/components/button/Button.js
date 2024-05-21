@@ -47,7 +47,7 @@ const Button = ({ background, onClick, text, type, width, icon }) => {
                   onClick={onClick}
                   disabled={type === "disabled"}
             >
-                  {icon && <span className="icon">{icon}</span>}
+                  {icon && <span className="icon p-[.3rem]">{icon}</span>}
                   {text}
             </button>
       );

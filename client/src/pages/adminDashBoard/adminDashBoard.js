@@ -7,8 +7,10 @@ import { formatDate } from "../../functions/function";
 import Loader from "../../components/loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
-import { FaCheck } from "react-icons/fa6";
+import { FaCheck, FaTrash } from "react-icons/fa6";
 import Button from "../../components/button/Button";
+import Spinner from "../../components/spinner/Spinner";
+import { IoIosArrowDown } from "react-icons/io";
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
@@ -18,33 +20,32 @@ function AdminDashBoard() {
 
       const getUsers = async () => {
             try {
-                dispatch(showLoader())
+                  dispatch(showLoader());
                   const response = await axios.get(`/api/users/get-users`);
                   setUsers(response.data);
-                dispatch(hideLoader())
-
+                  dispatch(hideLoader());
             } catch (error) {
-                    dispatch(hideLoader())
+                  dispatch(hideLoader());
                   return error.message;
             }
       };
 
       const userPaid = async () => {
             try {
-                  const response = await axios.put(`/api/users/user-paid`,{
-
+                  dispatch(showLoader());
+                  const response = await axios.put(`/api/users/user-paid`, {
                         headers: {
-                            Authorization: `Bear ${localStorage.getItem(
-                                  "token"
-                            )}`
-                      }
-
+                              Authorization: `Bear ${localStorage.getItem(
+                                    "token"
+                              )}`
+                        }
                   });
                   setUsers(response.data);
+                  dispatch(hideLoader());
             } catch (error) {
+                  dispatch(hideLoader());
                   return error.message;
             }
-
       };
 
       users && console.log(users);
@@ -82,7 +83,7 @@ function AdminDashBoard() {
                                                             <li key={user._id}>
                                                                   <div>
                                                                         <div
-                                                                              class="group flex flex-col rounded-lg bg-black p-3 md:p-4 md:text-lg text-white"
+                                                                              class="group flex flex-col rounded-lg  h-auto  group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000 group-focus:visible transition-all bg-black p-3 md:p-4 md:text-lg text-white"
                                                                               tabindex={
                                                                                     index
                                                                               }
@@ -118,13 +119,12 @@ function AdminDashBoard() {
                                                                                                             {index +
                                                                                                                   1}
                                                                                                       </p>
-
                                                                                                 </div>
                                                                                                 <p className="text-sm md:text-lg py-2 text-gray-500 truncate dark:text-gray-400">
-                                                                                                            {formatPhoneNumber(
-                                                                                                                  user.phone
-                                                                                                            )}
-                                                                                                      </p>
+                                                                                                      {formatPhoneNumber(
+                                                                                                            user.phone
+                                                                                                      )}
+                                                                                                </p>
 
                                                                                                 <div className="flex flex-col gap-2">
                                                                                                       <span className="text-sm text-gray-200 md:text-lg truncate dark:text-gray-200">
@@ -155,64 +155,49 @@ function AdminDashBoard() {
                                                                                                       user.totalAmount
                                                                                                 )}
                                                                                           </div>
-                                                                                          <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                width="20"
-                                                                                                height="20"
-                                                                                                viewBox="0 0 24 24"
-                                                                                                fill="none"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="2"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round"
-                                                                                                className="feather transition-all duration-500  group-focus:-rotate-180 dark:text-whitefeather-chevron-down"
-                                                                                          >
-                                                                                                <polyline points="6 9 12 15 18 9"></polyline>
-                                                                                          </svg>
+                                                                                          <IoIosArrowDown className="feather transition-all duration-500  group-focus:-rotate-180 dark:text-whitefeather-chevron-down" />
                                                                                     </div>
                                                                               </div>
-                                                                              <div class="invisible flex justify-around h-auto max-h-0 pt-4 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
-
-                                                                                    <button className="flex justify-center items-center bg-green-600 rounded-full  p-1 md:p-2 w-[10rem]">
-                                                                                          <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                width="18"
-                                                                                                height="18"
-                                                                                                viewBox="0 0 24 24"
-                                                                                                fill="none"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="2"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round"
-                                                                                                class="feather feather-check"
-                                                                                          >
-                                                                                                <polyline points="20 6 9 17 4 12"></polyline>
-                                                                                          </svg>
-                                                                                    </button>
+                                                                              <div class="invisible w-full flex md:flex-row gap-4 flex-col justify-around h-auto max-h-0 pt-4 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
+                                                                                    {isLoading ? (
+                                                                                          <Button
+                                                                                                type="disabled"
+                                                                                                width='full'
+                                                                                                icon={
+                                                                                                      <Spinner />
+                                                                                                }
+                                                                                          />
+                                                                                    ) : (
+                                                                                          <Button
+                                                                                                type="success"
+                                                                                                width="full md:w-40"
+                                                                                                icon={
+                                                                                                      <FaCheck
+                                                                                                            size={
+                                                                                                                  20
+                                                                                                            }
+                                                                                                      />
+                                                                                                }
+                                                                                          />
+                                                                                    )}
 
                                                                                     <Button
-                                                                                    type = "success"
-                                                                                    width = "36"
-                                                                                    icon = {<FaCheck size={20} />}
-                                                                                     />
+                                                                                          type="danger"
+                                                                                          width="full md:w-40"
+                                                                                          icon={
+                                                                                                <FaTrash
+                                                                                                      size={
+                                                                                                            20
+                                                                                                      }
+                                                                                                />
+                                                                                          }
+                                                                                    />
 
-                                                                                    <button className="flex justify-center items-center bg-red-800 md:p-2 rounded-full w-[10rem] p-1">
-                                                                                          <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                width="24"
-                                                                                                height="24"
-                                                                                                viewBox="0 0 30 30"
-                                                                                                fill="none"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="2"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round"
-                                                                                                class="feather feather-trash"
-                                                                                          >
-                                                                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                                                          </svg>
-                                                                                    </button>
+                                                                                    <Button
+                                                                                          type="default"
+                                                                                          width="full md:w-40"
+                                                                                          text="Cancel"
+                                                                                    />
                                                                               </div>
                                                                         </div>
                                                                   </div>
@@ -225,9 +210,7 @@ function AdminDashBoard() {
                   ) : (
                         <Loader />
                   )}
-                  {
-                        isLoading && <Loader />
-                  }
+                  {isLoading && <Loader />}
             </div>
       );
 }
