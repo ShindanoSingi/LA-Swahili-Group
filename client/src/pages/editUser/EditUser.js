@@ -49,6 +49,7 @@ function EditUser() {
         try {
             dispatch(showLoader());
             const response = await UpdateUser(user, userId);
+            console.log(response);
             dispatch(hideLoader());
             if (response.success) {
                 toast.success(response.message);

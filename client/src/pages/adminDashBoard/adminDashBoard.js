@@ -7,6 +7,8 @@ import { formatDate } from "../../functions/function";
 import Loader from "../../components/loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
+import { FaCheck } from "react-icons/fa6";
+import Button from "../../components/button/Button";
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
@@ -57,14 +59,14 @@ function AdminDashBoard() {
                   {users ? (
                         <div className="w-full max-w-5xl p-0 mx-auto rounded-lg sm:p-8">
                               <div className="flex items-center justify-between mb-4">
-                                    <h5 className="text-xl font-bold leading-none md:text-3xl text-gray-900 dark:text-white">
+                                    <h5 className="text-xl font-bold leading-none md:text-2xl text-gray-900 dark:text-white">
                                           Members Contributions
                                     </h5>
                                     <div className="flex gap-1">
-                                          <h2 className="text-xl font-bold md:text-3xl leading-none text-gray-900 dark:text-white">
+                                          <h2 className="text-xl font-bold md:text-2xl leading-none text-gray-900 dark:text-white">
                                                 Total:
                                           </h2>
-                                          <h2 className="text-xl font-bold md:text-3xl leading-none text-gray-900 dark:text-white">
+                                          <h2 className="text-xl font-bold md:text-2xl leading-none text-gray-900 dark:text-white">
                                                 {users &&
                                                       formatDollar(
                                                             users.grandTotal
@@ -80,7 +82,7 @@ function AdminDashBoard() {
                                                             <li key={user._id}>
                                                                   <div>
                                                                         <div
-                                                                              class="group flex flex-col rounded-lg bg-black p-3 md:p-6 md:text-xl text-white"
+                                                                              class="group flex flex-col rounded-lg bg-black p-3 md:p-4 md:text-lg text-white"
                                                                               tabindex={
                                                                                     index
                                                                               }
@@ -108,35 +110,35 @@ function AdminDashBoard() {
                                                                                           </div>
                                                                                           <div className="flex-1 min-w-0 ms-4">
                                                                                                 <div className="flex items-center gap-4 justify-between">
-                                                                                                      <p className="text-lg font-medium md:text-3xl text-gray-900 truncate md:whitespace-normal dark:text-white">
+                                                                                                      <p className="text-lg font-medium md:text-xl text-gray-900 truncate md:whitespace-normal dark:text-white">
                                                                                                             {user.fullName &&
                                                                                                                   user.fullName}
                                                                                                       </p>
-                                                                                                      <p className="text-lg rounded-full md:text-2xl w-7 md:w-10 md:h-10 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
+                                                                                                      <p className="text-lg rounded-full w-7 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
                                                                                                             {index +
                                                                                                                   1}
                                                                                                       </p>
 
                                                                                                 </div>
-                                                                                                <p className="text-md py-2 text-gray-500 truncate md:text-2xl dark:text-gray-400">
+                                                                                                <p className="text-sm md:text-lg py-2 text-gray-500 truncate dark:text-gray-400">
                                                                                                             {formatPhoneNumber(
                                                                                                                   user.phone
                                                                                                             )}
                                                                                                       </p>
 
                                                                                                 <div className="flex flex-col gap-2">
-                                                                                                      <span className="text-sm text-gray-200 md:text-2xl truncate dark:text-gray-200">
+                                                                                                      <span className="text-sm text-gray-200 md:text-lg truncate dark:text-gray-200">
                                                                                                             Added
                                                                                                             By:{" "}
-                                                                                                            <span className="text-sm md:text-2xl text-gray-500 dark:text-gray-400">
+                                                                                                            <span className="text-sm md:text-lg text-gray-500 dark:text-gray-400">
                                                                                                                   {user.addedBy
                                                                                                                         ? user.addedBy
                                                                                                                         : "n/a"}
                                                                                                             </span>{" "}
                                                                                                       </span>
-                                                                                                      <span className="text-sm text-gray-200 md:text-2xl truncate dark:text-gray-200">
+                                                                                                      <span className="text-sm text-gray-200 md:text-lg truncate dark:text-gray-200">
                                                                                                             Added:{" "}
-                                                                                                            <span className="text-sm md:text-2xl text-gray-500 truncate dark:text-gray-400">
+                                                                                                            <span className="text-sm md:text-lg text-gray-500 truncate dark:text-gray-400">
                                                                                                                   {user
                                                                                                                         ? formatDate(
                                                                                                                                 user.createdAt
@@ -148,7 +150,7 @@ function AdminDashBoard() {
                                                                                           </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
-                                                                                          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                                                          <div className="inline-flex items-center md:text-lg text-base font-semibold text-gray-900 dark:text-white">
                                                                                                 {formatDollar(
                                                                                                       user.totalAmount
                                                                                                 )}
@@ -171,7 +173,7 @@ function AdminDashBoard() {
                                                                               </div>
                                                                               <div class="invisible flex justify-around h-auto max-h-0 pt-4 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
 
-                                                                                    <button className="flex justify-center items-center bg-green-600 rounded-full w-16 p-1 max-w-20">
+                                                                                    <button className="flex justify-center items-center bg-green-600 rounded-full  p-1 md:p-2 w-[10rem]">
                                                                                           <svg
                                                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                                                 width="18"
@@ -187,13 +189,25 @@ function AdminDashBoard() {
                                                                                                 <polyline points="20 6 9 17 4 12"></polyline>
                                                                                           </svg>
                                                                                     </button>
+                                                                                    <div>
+                                                                                        <FaCheck />
+                                                                                        <Button
+                                                                                                text="Paid"
+                                                                                                type="success"
+                                                                                                width="full"
+                                                                                                onClick={() => {
+                                                                                                        userPaid();
+                                                                                                }}
+                                                                                         />
+                                                                                    </div>
 
-                                                                                    <button className="flex justify-center items-center bg-red-800 rounded-full w-16 p-1 max-w-20">
+
+                                                                                    <button className="flex justify-center items-center bg-red-800 md:p-2 rounded-full w-[10rem] p-1">
                                                                                           <svg
                                                                                                 xmlns="http://www.w3.org/2000/svg"
-                                                                                                width="18"
-                                                                                                height="18"
-                                                                                                viewBox="0 0 24 24"
+                                                                                                width="24"
+                                                                                                height="24"
+                                                                                                viewBox="0 0 30 30"
                                                                                                 fill="none"
                                                                                                 stroke="currentColor"
                                                                                                 stroke-width="2"
