@@ -54,7 +54,7 @@ function UserDashBoard() {
             <div className="pt-[5rem] px-2 min-h-[100vh] flex flex-col items-center bg-[#595954] text-[#FFFFFF]">
                   {
                         users ?
-                        <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                        <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow md:max-w-[90%] lg:max-w-[60%] sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex items-center justify-between mb-4">
                               <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
                                     Members Contrib.

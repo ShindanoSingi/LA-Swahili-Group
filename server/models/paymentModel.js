@@ -30,7 +30,10 @@ const paymentSchema = new mongoose.Schema({
     },
     addedBy:{
         type: String,
-    }
+    },
+    receivedBy: {
+        type: String,
+    },
 },
 {
     timestamps: true

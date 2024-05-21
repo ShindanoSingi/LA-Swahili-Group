@@ -13,10 +13,13 @@ import { Hourglass } from "react-loader-spinner";
 import Loader from "../../components/loader/Loader";
 import Button from "../../components/button/Button";
 import { formatDollar } from "../../functions/function";
+import Spinner from "../../components/spinner/Spinner";
 
 function Contributions() {
       const [userPayments, setUserPayments] = useState([]);
       const [years, setYear] = useState([]);
+        const { fullName } = useSelector((state) => state.userReducer);
+        const isLoading = useSelector((state) => state.loader);
 
       const { id } = useParams();
       const dispatch = useDispatch();
@@ -51,27 +54,40 @@ function Contributions() {
                   {id ? (
                         <>
                               <div className="flex justify-center md:text-xl ">
-                                    <div className="w-full rounded-lg shadow md:w-[80%] lg:w-[50%] ">
+                                    <div className="w-full rounded-lg shadow lg:w-[50%] ">
                                           <div className="flex flex-col items-center gap-2">
                                                 {userPayments ? (
-                                                      <div className="flex items-center justify-around w-full">
-                                                        <div><h1 className="text-2xl w-full">
-                                                                  Michango
-                                                            </h1></div>
-                                                        <Link to={`/addpayment/${id}`}>
-                                                            <Button
-                                                                  text="Changia Pesa"
-                                                                  type="default"
-                                                                  width="full"
-                                                            />
-                                                            </Link>
-                                                        <div><Button
-                                                                  text="Cancel"
-                                                                  type="outline"
-                                                                  onClick={
-                                                                        goBack
+                                                      <div className="w-full">
+                                                            <div className="text-3xl bg-gray-500 rounded-lg w-full text-center py-4">
+                                                                  {
+                                                                    !isLoading ?<div className="grid place-content-center"><Spinner /></div>  : fullName
                                                                   }
-                                                            /></div>
+                                                            </div>
+                                                            <div className="flex items-center py-4 justify-around w-full">
+                                                                  <div>
+                                                                        <h1 className="text-2xl w-full">
+                                                                              Michango
+                                                                        </h1>
+                                                                  </div>
+                                                                  <Link
+                                                                        to={`/addpayment/${id}`}
+                                                                  >
+                                                                        <Button
+                                                                              text="Changia Pesa"
+                                                                              type="default"
+                                                                              width="full"
+                                                                        />
+                                                                  </Link>
+                                                                  <div>
+                                                                        <Button
+                                                                              text="Cancel"
+                                                                              type="outline"
+                                                                              onClick={
+                                                                                    goBack
+                                                                              }
+                                                                        />
+                                                                  </div>
+                                                            </div>
                                                       </div>
                                                 ) : (
                                                       ""
@@ -95,20 +111,34 @@ function Contributions() {
                                                                                     }
                                                                               </h2>
                                                                               <div className="relative shadow-md w-full sm:rounded-lg">
-                                                                                    <table className="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-gray-100">
+                                                                                    <table className="w-full text-sm rtl:text-right text-gray-100 dark:text-gray-100">
                                                                                           <thead className="text-xs md:text-xl text-white uppercase bg-gray-600 dark:text-white">
                                                                                                 <tr>
                                                                                                       <th
                                                                                                             scope="col"
+                                                                                                            class="px-6 text-left py-4"
+                                                                                                      >
+                                                                                                            Month
+                                                                                                      </th>
+                                                                                                      <th
+                                                                                                            scope="col"
                                                                                                             class="px-6 py-4"
                                                                                                       >
-                                                                                                            Mwezi
+                                                                                                            Paid
+                                                                                                            ?
+                                                                                                      </th>
+                                                                                                      <th
+                                                                                                            scope="col"
+                                                                                                            class="px-6 py-4"
+                                                                                                      >
+                                                                                                            Recvd
+                                                                                                            By
                                                                                                       </th>
                                                                                                       <th
                                                                                                             scope="col"
                                                                                                             class="px-6 py-4 text-right"
                                                                                                       >
-                                                                                                            Pesa
+                                                                                                            Amount
                                                                                                       </th>
                                                                                                 </tr>
                                                                                           </thead>
@@ -120,19 +150,28 @@ function Contributions() {
                                                                                                       ) => (
                                                                                                             <tbody>
                                                                                                                   <tr className="bg-gray-500 md:text-xl border-b border-gray-400">
-                                                                                                                        <th
-                                                                                                                              scope="row"
-                                                                                                                              className="px-6 py-4 font-medium text-gray-50 whitespace-nowrap dark:text-gray-100"
-                                                                                                                        >
-                                                                                                                              {
-                                                                                                                                    payment.month.length > 1 ? payment.month : `0${payment.month}`
-                                                                                                                              }
-                                                                                                                        </th>
+                                                                                                                        <td className="px-6 py-4 font-medium text-left text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                              {payment
+                                                                                                                                    .month
+                                                                                                                                    .length >
+                                                                                                                              1
+                                                                                                                                    ? payment.month
+                                                                                                                                    : `0${payment.month}`}
+                                                                                                                        </td>
+                                                                                                                        <td className="px-6 py-4 font-medium text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                              {payment.receivdBy
+                                                                                                                                    ? payment.receivdBy
+                                                                                                                                    : `N/A`}
+                                                                                                                        </td>
+                                                                                                                        <td className="px-6 py-4 font-medium text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                              {payment.paid
+                                                                                                                                    ? "Yes"
+                                                                                                                                    : `No`}
+                                                                                                                        </td>
                                                                                                                         <td class="px-6 py-4 text-right">
-
-                                                                                                                              {
-                                                                                                                                    formatDollar(payment.amount)
-                                                                                                                              }
+                                                                                                                              {formatDollar(
+                                                                                                                                    payment.amount
+                                                                                                                              )}
                                                                                                                         </td>
                                                                                                                   </tr>
                                                                                                             </tbody>
@@ -143,17 +182,18 @@ function Contributions() {
                                                                                           )}
                                                                                     </table>
                                                                                     <h1 className="bg-gray-900 md:text-2xl px-6 py-4 ">
-                                                                                          Total Amount in {" "}
+                                                                                          Total
+                                                                                          Amount
+                                                                                          in{" "}
                                                                                           {
                                                                                                 years[
                                                                                                       index
                                                                                                 ]
-                                                                                          }
-                                                                                          {" "} : {" "}
-
-                                                                                          {
-                                                                                                formatDollar(userPayment.totalAmount)
-                                                                                          }
+                                                                                          }{" "}
+                                                                                          :{" "}
+                                                                                          {formatDollar(
+                                                                                                userPayment.totalAmount
+                                                                                          )}
                                                                                     </h1>
                                                                               </div>
                                                                         </div>

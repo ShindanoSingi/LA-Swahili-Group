@@ -149,6 +149,11 @@ function AdminDashBoard() {
                                                                                                 </div>
                                                                                           </div>
                                                                                     </div>
+
+                                                                                    <div>
+                                                                                        {user.paid}
+                                                                                    </div>
+
                                                                                     <div className="flex flex-col items-center">
                                                                                           <div className="inline-flex items-center md:text-lg text-base font-semibold text-gray-900 dark:text-white">
                                                                                                 {formatDollar(
@@ -178,6 +183,7 @@ function AdminDashBoard() {
                                                                                                             }
                                                                                                       />
                                                                                                 }
+                                                                                                onClick={userPaid}
                                                                                           />
                                                                                     )}
 
@@ -210,7 +216,6 @@ function AdminDashBoard() {
                   ) : (
                         <Loader />
                   )}
-                  {isLoading && <Loader />}
             </div>
       );
 }
