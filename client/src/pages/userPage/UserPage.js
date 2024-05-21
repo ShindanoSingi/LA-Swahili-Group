@@ -64,14 +64,14 @@ function UserPage() {
                                                       <Button
                                                             text="Picture"
                                                             type="success"
-                                                            width="32 md:w-32"
+                                                            width="24 md:w-36"
                                                       />
                                                 </Link>
 
                                                 <Button
                                                       text="Cancel"
                                                       type="default"
-                                                      width="24 md:w-32"
+                                                      width="24 md:w-36"
                                                       onClick={() => {
                                                             window.history.back();
                                                       }}
@@ -80,7 +80,7 @@ function UserPage() {
                                                 <Button
                                                       text="Delete"
                                                       type="danger"
-                                                      width="24 md:w-32"
+                                                      width="24 md:w-36"
                                                       onClick={deletePicture}
                                                 />
                                           </div>

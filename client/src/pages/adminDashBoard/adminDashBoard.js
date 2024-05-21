@@ -189,18 +189,12 @@ function AdminDashBoard() {
                                                                                                 <polyline points="20 6 9 17 4 12"></polyline>
                                                                                           </svg>
                                                                                     </button>
-                                                                                    <div>
-                                                                                        <FaCheck />
-                                                                                        <Button
-                                                                                                text="Paid"
-                                                                                                type="success"
-                                                                                                width="full"
-                                                                                                onClick={() => {
-                                                                                                        userPaid();
-                                                                                                }}
-                                                                                         />
-                                                                                    </div>
 
+                                                                                    <Button
+                                                                                    type = "success"
+                                                                                    width = "36"
+                                                                                    icon = {<FaCheck size={20} />}
+                                                                                     />
 
                                                                                     <button className="flex justify-center items-center bg-red-800 md:p-2 rounded-full w-[10rem] p-1">
                                                                                           <svg
