@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
       DeleteUserPicture,
       GetUserById,
-      GetUserPayments
+      GetUserPayments,
+      UpdateUser
 } from "../../apicalls/users";
 import { Link, useParams } from "react-router-dom";
-import { SetFullName, SetUser } from "../../redux/userSlice";
+import { SetFullName, SetUser, SetUsers } from "../../redux/userSlice";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
@@ -14,12 +15,15 @@ import Loader from "../../components/loader/Loader";
 import Button from "../../components/button/Button";
 import { formatDollar } from "../../functions/function";
 import Spinner from "../../components/spinner/Spinner";
+import { FaSquareCheck } from "react-icons/fa6";
+import axios from "axios";
 
 function Contributions() {
       const [userPayments, setUserPayments] = useState([]);
       const [years, setYear] = useState([]);
-        const { fullName } = useSelector((state) => state.userReducer);
-        const isLoading = useSelector((state) => state.loader);
+      const { fullName } = useSelector((state) => state.userReducer);
+      const isLoading = useSelector((state) => state.loader);
+      const [users, setUsers] = useState(null);
 
       const { id } = useParams();
       const dispatch = useDispatch();
@@ -40,6 +44,30 @@ function Contributions() {
             }
       };
 
+      const userPaid = async () => {
+            try {
+                  dispatch(showLoader());
+                  const response = await axios.put(`/api/users/user-paid`, {
+                        headers: {
+                              Authorization: `Bear ${localStorage.getItem(
+                                    "token"
+                              )}`
+                        }
+                  });
+                  setUsers(response.data);
+                  dispatch(hideLoader());
+            } catch (error) {
+                  dispatch(hideLoader());
+                  return error.message;
+            }
+      };
+
+      users && console.log(users);
+
+      useEffect(() => {
+            userPaid();
+      }, []);
+
       //   Send the user to the previous page
       const goBack = () => {
             window.history.back();
@@ -59,16 +87,15 @@ function Contributions() {
                                                 {userPayments ? (
                                                       <div className="w-full">
                                                             <div className="text-3xl bg-gray-500 rounded-lg w-full text-center py-4">
-                                                                  {
-                                                                    !isLoading ?<div className="grid place-content-center"><Spinner /></div>  : fullName
-                                                                  }
+                                                                  {isLoading ? (
+                                                                        <div className="grid place-content-center">
+                                                                              <Spinner />
+                                                                        </div>
+                                                                  ) : (
+                                                                        fullName
+                                                                  )}
                                                             </div>
-                                                            <div className="flex items-center py-4 justify-around w-full">
-                                                                  <div>
-                                                                        <h1 className="text-2xl w-full">
-                                                                              Michango
-                                                                        </h1>
-                                                                  </div>
+                                                            <div className="flex items-center py-4 justify-between w-full">
                                                                   <Link
                                                                         to={`/addpayment/${id}`}
                                                                   >
@@ -116,27 +143,27 @@ function Contributions() {
                                                                                                 <tr>
                                                                                                       <th
                                                                                                             scope="col"
-                                                                                                            class="px-6 text-left py-4"
+                                                                                                            class="text-left p-4"
                                                                                                       >
                                                                                                             Month
                                                                                                       </th>
                                                                                                       <th
                                                                                                             scope="col"
-                                                                                                            class="px-6 py-4"
+                                                                                                            class="p-4"
                                                                                                       >
                                                                                                             Paid
                                                                                                             ?
                                                                                                       </th>
                                                                                                       <th
                                                                                                             scope="col"
-                                                                                                            class="px-6 py-4"
+                                                                                                            class="p-4"
                                                                                                       >
                                                                                                             Recvd
                                                                                                             By
                                                                                                       </th>
                                                                                                       <th
                                                                                                             scope="col"
-                                                                                                            class="px-6 py-4 text-right"
+                                                                                                            class="p-6 text-right"
                                                                                                       >
                                                                                                             Amount
                                                                                                       </th>
@@ -150,7 +177,7 @@ function Contributions() {
                                                                                                       ) => (
                                                                                                             <tbody>
                                                                                                                   <tr className="bg-gray-500 md:text-xl border-b border-gray-400">
-                                                                                                                        <td className="px-6 py-4 font-medium text-left text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                        <td className="p-2 grid place-content-start font-medium text-left text-gray-50 whitespace-nowrap dark:text-gray-100">
                                                                                                                               {payment
                                                                                                                                     .month
                                                                                                                                     .length >
@@ -158,17 +185,40 @@ function Contributions() {
                                                                                                                                     ? payment.month
                                                                                                                                     : `0${payment.month}`}
                                                                                                                         </td>
-                                                                                                                        <td className="px-6 py-4 font-medium text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                        <td className="p-2 font-medium  text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
                                                                                                                               {payment.receivdBy
                                                                                                                                     ? payment.receivdBy
                                                                                                                                     : `N/A`}
                                                                                                                         </td>
-                                                                                                                        <td className="px-6 py-4 font-medium text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
-                                                                                                                              {payment.paid
-                                                                                                                                    ? "Yes"
-                                                                                                                                    : `No`}
+                                                                                                                        <td className="p-2 font-medium grid place-content-center text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                              <div className="flex justify-between w-20 md:w-24 items-center">
+                                                                                                                                    {payment.paid
+                                                                                                                                          ? "Yes"
+                                                                                                                                          : `No`}
+                                                                                                                                    {isLoading ? (
+                                                                                                                                          <Button
+                                                                                                                                                type="disabled"
+                                                                                                                                                width="full"
+                                                                                                                                                icon={
+                                                                                                                                                      <Spinner />
+                                                                                                                                                }
+                                                                                                                                          />
+                                                                                                                                    ) : (
+
+                                                                                                                                            <FaSquareCheck
+                                                                                                                                                size={
+                                                                                                                                                      30
+                                                                                                                                                }
+                                                                                                                                                color="white"
+                                                                                                                                                className="text-white bg-green-700 hover:bg-red-900 "
+                                                                                                                                                onClick={userPaid}
+                                                                                                                                          />
+
+
+                                                                                                                                    )}
+                                                                                                                              </div>
                                                                                                                         </td>
-                                                                                                                        <td class="px-6 py-4 text-right">
+                                                                                                                        <td class="px-2 text-right">
                                                                                                                               {formatDollar(
                                                                                                                                     payment.amount
                                                                                                                               )}

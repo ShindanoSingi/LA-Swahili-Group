@@ -6,8 +6,8 @@ function Spinner() {
       return (
             <div>
                   <CirclesWithBar
-                        height="50"
-                        width="50"
+                        height="40"
+                        width="40"
                         color="#4fa94d"
                         outerCircleColor="#4fa94d"
                         innerCircleColor="#4fa94d"

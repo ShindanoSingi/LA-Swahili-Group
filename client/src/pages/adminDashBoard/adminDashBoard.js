@@ -30,29 +30,10 @@ function AdminDashBoard() {
             }
       };
 
-      const userPaid = async () => {
-            try {
-                  dispatch(showLoader());
-                  const response = await axios.put(`/api/users/user-paid`, {
-                        headers: {
-                              Authorization: `Bear ${localStorage.getItem(
-                                    "token"
-                              )}`
-                        }
-                  });
-                  setUsers(response.data);
-                  dispatch(hideLoader());
-            } catch (error) {
-                  dispatch(hideLoader());
-                  return error.message;
-            }
-      };
-
       users && console.log(users);
 
       useEffect(() => {
             getUsers();
-            userPaid();
       }, []);
 
       return (
@@ -164,29 +145,6 @@ function AdminDashBoard() {
                                                                                     </div>
                                                                               </div>
                                                                               <div class="invisible w-full flex md:flex-row gap-4 flex-col justify-around h-auto max-h-0 pt-4 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
-                                                                                    {isLoading ? (
-                                                                                          <Button
-                                                                                                type="disabled"
-                                                                                                width='full'
-                                                                                                icon={
-                                                                                                      <Spinner />
-                                                                                                }
-                                                                                          />
-                                                                                    ) : (
-                                                                                          <Button
-                                                                                                type="success"
-                                                                                                width="full md:w-40"
-                                                                                                icon={
-                                                                                                      <FaCheck
-                                                                                                            size={
-                                                                                                                  20
-                                                                                                            }
-                                                                                                      />
-                                                                                                }
-                                                                                                onClick={userPaid}
-                                                                                          />
-                                                                                    )}
-
                                                                                     <Button
                                                                                           type="danger"
                                                                                           width="full md:w-40"
