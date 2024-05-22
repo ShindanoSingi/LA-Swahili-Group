@@ -15,6 +15,7 @@ const userSlice = createSlice({
         fullName: '',
         myDate: null,
         show: false,
+        paymentId: '',
     },
     reducers: {
         SetUser: (state, action) => {
@@ -47,8 +48,11 @@ const userSlice = createSlice({
         SetShow: (state, action) => {
             state.show = action.payload;
         },
+        SetPaymentId: (state, action) => {
+            state.paymentId = action.payload;
+        },
     },
 });
 
-export const {SetUser, SetUserRole, SetUserEmail, SetUserPhone, SetUsers, SetGrandTotal , SetUserId, SetFullName, SetMyDate, SetShow} = userSlice.actions;
+export const {SetUser, SetUserRole, SetUserEmail, SetUserPhone, SetUsers, SetGrandTotal , SetUserId, SetFullName, SetMyDate, SetShow, SetPaymentId} = userSlice.actions;
 export default userSlice.reducer;

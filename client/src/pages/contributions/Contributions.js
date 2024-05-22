@@ -7,7 +7,7 @@ import {
       UpdateUser
 } from "../../apicalls/users";
 import { Link, useParams } from "react-router-dom";
-import { SetFullName, SetUser, SetUsers } from "../../redux/userSlice";
+import { SetFullName, SetPaymentId, SetUser, SetUsers } from "../../redux/userSlice";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
@@ -17,6 +17,7 @@ import { formatDollar } from "../../functions/function";
 import Spinner from "../../components/spinner/Spinner";
 import { FaSquareCheck } from "react-icons/fa6";
 import axios from "axios";
+
 
 function Contributions() {
       const [userPayments, setUserPayments] = useState([]);
@@ -47,7 +48,7 @@ function Contributions() {
       const userPaid = async () => {
             try {
                   dispatch(showLoader());
-                  const response = await axios.put(`/api/users/user-paid`, {
+                  const response = await axios.put(`/api/users/`, {
                         headers: {
                               Authorization: `Bear ${localStorage.getItem(
                                     "token"

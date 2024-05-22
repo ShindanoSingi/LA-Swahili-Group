@@ -80,7 +80,7 @@ function UserDashBoard() {
                                             user._id
 
                                         }`}>
-                                            <li className={`py-3 sm:py-4`}>
+                                            <li className='py-3 sm:py-4'>
                                         <div className="flex items-center border-b pb-1 border-b-slate-500">
                                               <div className="flex-shrink-0">
 

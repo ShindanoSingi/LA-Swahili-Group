@@ -260,17 +260,34 @@ router.get("/get-user-payments/:id", async (req, res) => {
 });
 
 // User paid
-router.put('/user/payment/:id', authMiddleware, async (req, res) => {
+router.put("/user-paid/:id", authMiddleware, async (req, res) => {
+    // console.log(req.body.userId);
     try {
-        const payment = await payment.findById(req.params.id);
-        payment.paid = true;
-        payment.paidBy = req.body.paidBy;
-        await payment.save();
-        res.send({
-            payment,
-            success: true,
-            message: "Payment paid successfully"
+        const user = await User.findOne({
+            _id: req.body.userId
         });
+
+        if (user.role === "Admin" || user.role === "Superuser") {
+            const payment = await Payment.findByIdAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    paid: true,
+                },
+                { new: true }
+            );
+            res.send({
+                payment,
+                success: true,
+                message: "Payment updated successfully"
+            });
+        } else {
+            res.send({
+                message: "You are not authorized to update payments",
+                success: false
+            });
+        }
     } catch (error) {
         res.send({
             message: error.message,
