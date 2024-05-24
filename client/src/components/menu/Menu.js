@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Menu() {
     const {show} = useSelector(state => state.userReducer);
-
     const dispatch = useDispatch()
 
     const logout = () => {
@@ -33,12 +32,14 @@ function Menu() {
                               <Link to="/login" onClick={() => dispatch(SetShow(!show))}>
                                     <li className="menu-item">Login</li>
                               </Link>
-                              <Link to='/login' onClick={() => {
-                                    logout();
-                                    dispatch(SetShow(!show));
+                              <Link to='/login'>
+                                    <li className="menu-item"
+                                    onClick={() => {
+                                        logout();
+                                        dispatch(SetShow(!show));
 
-                              }}>
-                                    <li className="menu-item">Logout</li>
+                                  }}
+                                    >Logout</li>
                               </Link>
                               <li className="menu-item menu-item-cancel" onClick={() => dispatch(SetShow(!show))}>Cancel</li>
                         </ul>
