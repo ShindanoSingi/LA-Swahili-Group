@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-redundant-roles */
-'use strict';
-
 import React, { useEffect} from "react";
 import { SetGrandTotal, SetUsers } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";

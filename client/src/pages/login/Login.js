@@ -1,5 +1,3 @@
-"use strict";
-
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoEyeSharp } from "react-icons/io5";
@@ -44,8 +42,6 @@ function Login() {
       };
 
       useEffect(() => {
-        console.log(userRole)
-
                   if (localStorage.getItem("token") && userRole === 'Admin'){
                         navigate("/admin");
                   } else if (localStorage.getItem("token") && userRole === "Superuser") {
@@ -59,7 +55,7 @@ function Login() {
       }, [userRole]);
 
       return (
-            <div className="container w-screen">
+            <div className="container md:w-full">
                   <div className="w-[80%]">
                         <h1 className="text-xl font-bold text-center mb-4 text-white dark:text-white">
                               Login Form
@@ -89,7 +85,7 @@ function Login() {
                                     <label className="block md:text-lg mb-2 text-sm font-medium text-white dark:text-white">
                                           Your password
                                     </label>
-                                    <div className="flex items-center">
+                                    <div className="flex items-center relative">
                                           <input
                                                 type={
                                                       hideEye
@@ -111,14 +107,14 @@ function Login() {
                                           />
                                           {hideEye ? (
                                                 <IoEyeSharp
-                                                      className=" eye text-gray-200"
+                                                      className=" eye absolute  text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility
                                                       }
                                                 />
                                           ) : (
                                                 <FaEyeSlash
-                                                      className="eye left-[40%] text-gray-200"
+                                                      className="eye absolute right-3 md:right-4 lg:right-5 text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility
                                                       }

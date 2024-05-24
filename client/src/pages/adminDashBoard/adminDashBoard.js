@@ -23,7 +23,8 @@ function AdminDashBoard() {
             try {
                   dispatch(showLoader());
                   const response = await GetUsers();
-                  setUsers(response.data);
+                    console.log(response);
+                  setUsers(response);
                   dispatch(hideLoader());
             } catch (error) {
                   dispatch(hideLoader());

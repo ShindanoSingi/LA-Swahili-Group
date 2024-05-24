@@ -41,7 +41,9 @@ function Menu() {
                                   }}
                                     >Logout</li>
                               </Link>
+                              <Link >
                               <li className="menu-item menu-item-cancel" onClick={() => dispatch(SetShow(!show))}>Cancel</li>
+                              </Link>
                         </ul>
             )
         }
