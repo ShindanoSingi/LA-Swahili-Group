@@ -4,7 +4,8 @@ import {
       DeleteUserPicture,
       GetUserById,
       GetUserPayments,
-      UpdateUser
+      UpdateUser,
+      UserPaid
 } from "../../apicalls/users";
 import { Link, useParams } from "react-router-dom";
 import { SetFullName, SetPaymentId, SetUser, SetUsers } from "../../redux/userSlice";
@@ -16,7 +17,7 @@ import Button from "../../components/button/Button";
 import { formatDollar } from "../../functions/function";
 import Spinner from "../../components/spinner/Spinner";
 import { FaSquareCheck } from "react-icons/fa6";
-import axios from "axios";
+
 
 
 function Contributions() {
@@ -25,16 +26,15 @@ function Contributions() {
       const { fullName } = useSelector((state) => state.userReducer);
       const isLoading = useSelector((state) => state.loader);
       const [users, setUsers] = useState(null);
+      const {paymentId} = useSelector((state) => state.userReducer);
 
       const { id } = useParams();
       const dispatch = useDispatch();
 
-      console.log(id);
 
       const getUserPayments = async () => {
             try {
                   const response = await GetUserPayments(id);
-                  console.log(response);
                   showLoader();
                   setUserPayments(response.userPayments);
                   setYear(response.years);
@@ -47,27 +47,17 @@ function Contributions() {
 
       const userPaid = async () => {
             try {
-                  dispatch(showLoader());
-                  const response = await axios.put(`/api/users/`, {
-                        headers: {
-                              Authorization: `Bear ${localStorage.getItem(
-                                    "token"
-                              )}`
-                        }
-                  });
-                  setUsers(response.data);
-                  dispatch(hideLoader());
+                dispatch(showLoader());
+                const response = await UserPaid(paymentId);
+                console.log(response);
+                dispatch(hideLoader());
             } catch (error) {
-                  dispatch(hideLoader());
-                  return error.message;
+            dispatch(hideLoader());
+            return error.message;
             }
       };
 
       users && console.log(users);
-
-      useEffect(() => {
-            userPaid();
-      }, []);
 
       //   Send the user to the previous page
       const goBack = () => {
@@ -75,8 +65,9 @@ function Contributions() {
       };
 
       useEffect(() => {
+        userPaid();
             getUserPayments();
-      }, []);
+      }, [paymentId]);
 
       return (
             <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
@@ -129,6 +120,7 @@ function Contributions() {
                                                             ) => (
                                                                   <div className="font-bold bg-gray-500 rounded-lg w-full text-center pb-4 px-2">
                                                                         <div className="flex flex-col items-center w-full">
+
                                                                               <h2 className="font-bold md:text-2xl bg-gray-500 rounded-lg w-full text-center px-6 py-4">
                                                                                     Mwaka
                                                                                     Wa{" "}
@@ -148,13 +140,7 @@ function Contributions() {
                                                                                                       >
                                                                                                             Month
                                                                                                       </th>
-                                                                                                      <th
-                                                                                                            scope="col"
-                                                                                                            class="p-4"
-                                                                                                      >
-                                                                                                            Paid
-                                                                                                            ?
-                                                                                                      </th>
+
                                                                                                       <th
                                                                                                             scope="col"
                                                                                                             class="p-4"
@@ -162,6 +148,15 @@ function Contributions() {
                                                                                                             Recvd
                                                                                                             By
                                                                                                       </th>
+
+                                                                                                      <th
+                                                                                                            scope="col"
+                                                                                                            class="p-4"
+                                                                                                      >
+                                                                                                            Paid
+                                                                                                            ?
+                                                                                                      </th>
+
                                                                                                       <th
                                                                                                             scope="col"
                                                                                                             class="p-6 text-right"
@@ -175,7 +170,7 @@ function Contributions() {
                                                                                                       (
                                                                                                             payment,
                                                                                                             index
-                                                                                                      ) => (
+                                                                                                      ) => (<>
                                                                                                             <tbody>
                                                                                                                   <tr className="bg-gray-500 md:text-xl border-b border-gray-400">
                                                                                                                         <td className="p-2 grid place-content-start font-medium text-left text-gray-50 whitespace-nowrap dark:text-gray-100">
@@ -187,8 +182,8 @@ function Contributions() {
                                                                                                                                     : `0${payment.month}`}
                                                                                                                         </td>
                                                                                                                         <td className="p-2 font-medium  text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
-                                                                                                                              {payment.receivdBy
-                                                                                                                                    ? payment.receivdBy
+                                                                                                                              {payment.receivedBy
+                                                                                                                                    ? payment.receivedBy
                                                                                                                                     : `N/A`}
                                                                                                                         </td>
                                                                                                                         <td className="p-2 font-medium grid place-content-center text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
@@ -212,7 +207,14 @@ function Contributions() {
                                                                                                                                                 }
                                                                                                                                                 color="white"
                                                                                                                                                 className="text-white bg-green-700 hover:bg-red-900 "
-                                                                                                                                                onClick={userPaid}
+                                                                                                                                                onClick={() => {
+                                                                                                                                                        dispatch(
+                                                                                                                                                                SetPaymentId(
+                                                                                                                                                                    payment._id
+                                                                                                                                                                )
+                                                                                                                                                        );
+                                                                                                                                                        userPaid();
+                                                                                                                                                }}
                                                                                                                                           />
 
 
@@ -225,7 +227,10 @@ function Contributions() {
                                                                                                                               )}
                                                                                                                         </td>
                                                                                                                   </tr>
+
                                                                                                             </tbody>
+                                                                                                      </>
+
                                                                                                       )
                                                                                                 )
                                                                                           ) : (

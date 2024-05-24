@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = ({ background, onClick, text, type, width, icon }) => {
-      let buttonStyle = `p-2 rounded-full w-${width} flex items-center justify-center`;
+      let buttonStyle = `p-1 px-4 rounded-full w-${width} flex items-center justify-center`;
 
       switch (type) {
             case "success":

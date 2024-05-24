@@ -11,6 +11,7 @@ import { FaCheck, FaTrash } from "react-icons/fa6";
 import Button from "../../components/button/Button";
 import Spinner from "../../components/spinner/Spinner";
 import { IoIosArrowDown } from "react-icons/io";
+import { GetUsers } from "../../apicalls/users";
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
@@ -21,7 +22,7 @@ function AdminDashBoard() {
       const getUsers = async () => {
             try {
                   dispatch(showLoader());
-                  const response = await axios.get(`/api/users/get-users`);
+                  const response = await GetUsers();
                   setUsers(response.data);
                   dispatch(hideLoader());
             } catch (error) {

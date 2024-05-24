@@ -261,7 +261,7 @@ router.get("/get-user-payments/:id", async (req, res) => {
 
 // User paid
 router.put("/user-paid/:id", authMiddleware, async (req, res) => {
-    // console.log(req.body.userId);
+    console.log(req.body.userId);
     try {
         const user = await User.findOne({
             _id: req.body.userId
