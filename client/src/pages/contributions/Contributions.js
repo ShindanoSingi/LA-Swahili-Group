@@ -46,11 +46,14 @@ function Contributions() {
       };
 
       const userPaid = async () => {
+        console.log(paymentId);
             try {
                 dispatch(showLoader());
-                const response = await UserPaid(paymentId);
-                console.log(response);
-                dispatch(hideLoader());
+                if (paymentId) {
+                    const response = await UserPaid(paymentId);
+                    console.log(response);
+                    dispatch(hideLoader());
+                }
             } catch (error) {
             dispatch(hideLoader());
             return error.message;
@@ -67,14 +70,14 @@ function Contributions() {
       useEffect(() => {
         userPaid();
             getUserPayments();
-      }, [paymentId]);
+      }, []);
 
       return (
             <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
                   {id ? (
                         <>
                               <div className="flex justify-center md:text-xl ">
-                                    <div className="w-full rounded-lg shadow lg:w-[50%] ">
+                                    <div className="w-full rounded-lg shadow lg:w-[50%] lg:w-[70%] ">
                                           <div className="flex flex-col items-center gap-2">
                                                 {userPayments ? (
                                                       <div className="w-full">
@@ -145,7 +148,7 @@ function Contributions() {
                                                                                                             scope="col"
                                                                                                             class="p-4"
                                                                                                       >
-                                                                                                            Recvd
+                                                                                                            Received
                                                                                                             By
                                                                                                       </th>
 

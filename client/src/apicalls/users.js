@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const LoginUser = async (user) => {
       try {
@@ -93,17 +94,24 @@ export const UpdateUserPictureFunc = async (id, picture) => {
 
 // UserPaid
 export const UserPaid = async (id) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+            toast.error("You are not authorized to perform this action");
+    }
+
       try {
 
-            const response = await axios.put(`/api/users/user-paid/${id}`, {
+            const response = await axios.put(`/api/payments/user-paid/${id}`, {},{
                 headers: {
-                    Authorization: `Bear ${localStorage.getItem(
-                          "token"
-                    )}`
+                    "content-type": "application/json",
+                    Authorization: `Bear ${token}`
               }
-            });
+        });
+            console.log(response);
             return response.data;
       } catch (error) {
+        console.log('Error in UserPaid function:', error);
             return error.message;
       }
 };
