@@ -273,6 +273,7 @@ router.put("/user-paid/:id", authMiddleware, async (req, res) => {
                     _id: req.params.id
                 },
                 {
+                    receivedBy: user.fullName,
                     paid: true,
                 },
                 { new: true }

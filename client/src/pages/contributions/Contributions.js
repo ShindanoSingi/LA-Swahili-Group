@@ -8,7 +8,12 @@ import {
       UserPaid
 } from "../../apicalls/users";
 import { Link, useParams } from "react-router-dom";
-import { SetFullName, SetPaymentId, SetUser, SetUsers } from "../../redux/userSlice";
+import {
+      SetFullName,
+      SetPaymentId,
+      SetUser,
+      SetUsers
+} from "../../redux/userSlice";
 import { hideLoader, showLoader } from "../../redux/loaderSlice";
 import toast from "react-hot-toast";
 import { Hourglass } from "react-loader-spinner";
@@ -17,8 +22,7 @@ import Button from "../../components/button/Button";
 import { formatDollar } from "../../functions/function";
 import Spinner from "../../components/spinner/Spinner";
 import { FaSquareCheck } from "react-icons/fa6";
-
-
+import Chart from "../../components/chart/Chart";
 
 function Contributions() {
       const [userPayments, setUserPayments] = useState([]);
@@ -26,11 +30,12 @@ function Contributions() {
       const { fullName } = useSelector((state) => state.userReducer);
       const isLoading = useSelector((state) => state.loader);
       const [users, setUsers] = useState(null);
-      const {paymentId} = useSelector((state) => state.userReducer);
+      const { paymentId } = useSelector((state) => state.userReducer);
+      const[clicked, setClicked] = useState(false);
+      const [value, setValue] = useState(null);
 
       const { id } = useParams();
       const dispatch = useDispatch();
-
 
       const getUserPayments = async () => {
             try {
@@ -41,26 +46,26 @@ function Contributions() {
                   dispatch(SetFullName(response.fullName));
                   hideLoader();
             } catch (error) {
-                  console.log(error.message);
+                  return error.message;
             }
       };
 
       const userPaid = async () => {
-        console.log(paymentId);
             try {
-                dispatch(showLoader());
-                if (paymentId) {
-                    const response = await UserPaid(paymentId);
-                    console.log(response);
-                    dispatch(hideLoader());
-                }
+                  dispatch(showLoader());
+                  if (paymentId) {
+                        const response = await UserPaid(paymentId);
+                        dispatch(hideLoader());
+                  }
             } catch (error) {
-            dispatch(hideLoader());
-            return error.message;
+                  dispatch(hideLoader());
+                  return error.message;
             }
       };
 
-      users && console.log(users);
+      const getVal = (v) => {
+        setValue(v)
+      };
 
       //   Send the user to the previous page
       const goBack = () => {
@@ -68,12 +73,19 @@ function Contributions() {
       };
 
       useEffect(() => {
-        userPaid();
+            userPaid();
             getUserPayments();
-      }, []);
+            if(clicked) {
+                    getUserPayments();
+            }
+      }, [paymentId,!isLoading,setClicked]);
+
+      let val = 95;
 
       return (
             <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
+                <Chart val={val} />
+
                   {id ? (
                         <>
                               <div className="flex justify-center md:text-xl ">
@@ -123,7 +135,6 @@ function Contributions() {
                                                             ) => (
                                                                   <div className="font-bold bg-gray-500 rounded-lg w-full text-center pb-4 px-2">
                                                                         <div className="flex flex-col items-center w-full">
-
                                                                               <h2 className="font-bold md:text-2xl bg-gray-500 rounded-lg w-full text-center px-6 py-4">
                                                                                     Mwaka
                                                                                     Wa{" "}
@@ -173,67 +184,65 @@ function Contributions() {
                                                                                                       (
                                                                                                             payment,
                                                                                                             index
-                                                                                                      ) => (<>
-                                                                                                            <tbody>
-                                                                                                                  <tr className="bg-gray-500 md:text-xl border-b border-gray-400">
-                                                                                                                        <td className="p-2 grid place-content-start font-medium text-left text-gray-50 whitespace-nowrap dark:text-gray-100">
-                                                                                                                              {payment
-                                                                                                                                    .month
-                                                                                                                                    .length >
-                                                                                                                              1
-                                                                                                                                    ? payment.month
-                                                                                                                                    : `0${payment.month}`}
-                                                                                                                        </td>
-                                                                                                                        <td className="p-2 font-medium  text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
-                                                                                                                              {payment.receivedBy
-                                                                                                                                    ? payment.receivedBy
-                                                                                                                                    : `N/A`}
-                                                                                                                        </td>
-                                                                                                                        <td className="p-2 font-medium grid place-content-center text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
-                                                                                                                              <div className="flex justify-between w-20 md:w-24 items-center">
-                                                                                                                                    {payment.paid
-                                                                                                                                          ? "Yes"
-                                                                                                                                          : `No`}
-                                                                                                                                    {isLoading ? (
-                                                                                                                                          <Button
-                                                                                                                                                type="disabled"
-                                                                                                                                                width="full"
-                                                                                                                                                icon={
-                                                                                                                                                      <Spinner />
+                                                                                                      ) => (
+                                                                                                            <>
+                                                                                                                  <tbody>
+                                                                                                                        <tr className="bg-gray-500 md:text-xl border-b border-gray-400">
+                                                                                                                              <td className="p-2 grid place-content-start font-medium text-left text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                                    {payment
+                                                                                                                                          .month
+                                                                                                                                          .length >
+                                                                                                                                    1
+                                                                                                                                          ? payment.month
+                                                                                                                                          : `0${payment.month}`}
+                                                                                                                              </td>
+                                                                                                                              <td className="p-2 font-medium  text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                                    {payment.receivedBy
+                                                                                                                                          ? payment.receivedBy
+                                                                                                                                          : `N/A`}
+                                                                                                                              </td>
+                                                                                                                              <td className="p-2 font-medium grid place-content-center text-center text-gray-50 whitespace-nowrap dark:text-gray-100">
+                                                                                                                                    <div className="flex justify-between w-20 md:w-24 items-center">
+                                                                                                                                          {payment.paid
+                                                                                                                                                ? "Yes"
+                                                                                                                                                : `No`
                                                                                                                                                 }
-                                                                                                                                          />
-                                                                                                                                    ) : (
-
-                                                                                                                                            <FaSquareCheck
-                                                                                                                                                size={
-                                                                                                                                                      30
-                                                                                                                                                }
-                                                                                                                                                color="white"
-                                                                                                                                                className="text-white bg-green-700 hover:bg-red-900 "
-                                                                                                                                                onClick={() => {
-                                                                                                                                                        dispatch(
-                                                                                                                                                                SetPaymentId(
-                                                                                                                                                                    payment._id
-                                                                                                                                                                )
-                                                                                                                                                        );
+                                                                                                                                          {isLoading ? (
+                                                                                                                                                <Button
+                                                                                                                                                      type="disabled"
+                                                                                                                                                      width="full"
+                                                                                                                                                      icon={
+                                                                                                                                                            <Spinner />
+                                                                                                                                                      }
+                                                                                                                                                />
+                                                                                                                                          ) : !payment.paid ? (
+                                                                                                                                                <FaSquareCheck
+                                                                                                                                                      size={
+                                                                                                                                                            30
+                                                                                                                                                      }
+                                                                                                                                                      color="white"
+                                                                                                                                                      className="text-white bg-green-700 hover:bg-red-900 "
+                                                                                                                                                      onClick={() => {
                                                                                                                                                         userPaid();
-                                                                                                                                                }}
-                                                                                                                                          />
-
-
+                                                                                                                                                        setClicked(true);
+                                                                                                                                                            dispatch(
+                                                                                                                                                                  SetPaymentId(
+                                                                                                                                                                        payment._id
+                                                                                                                                                                  )
+                                                                                                                                                            );
+                                                                                                                                                      }}
+                                                                                                                                                />
+                                                                                                                                          ) : null}
+                                                                                                                                    </div>
+                                                                                                                              </td>
+                                                                                                                              <td class="px-2 text-right">
+                                                                                                                                    {formatDollar(
+                                                                                                                                          payment.amount
                                                                                                                                     )}
-                                                                                                                              </div>
-                                                                                                                        </td>
-                                                                                                                        <td class="px-2 text-right">
-                                                                                                                              {formatDollar(
-                                                                                                                                    payment.amount
-                                                                                                                              )}
-                                                                                                                        </td>
-                                                                                                                  </tr>
-
-                                                                                                            </tbody>
-                                                                                                      </>
-
+                                                                                                                              </td>
+                                                                                                                        </tr>
+                                                                                                                  </tbody>
+                                                                                                            </>
                                                                                                       )
                                                                                                 )
                                                                                           ) : (
@@ -252,7 +261,8 @@ function Contributions() {
                                                                                           :{" "}
                                                                                           {formatDollar(
                                                                                                 userPayment.totalAmount
-                                                                                          )}
+                                                                                          )
+                                                                                          }
                                                                                     </h1>
                                                                               </div>
                                                                         </div>
