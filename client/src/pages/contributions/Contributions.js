@@ -63,10 +63,6 @@ function Contributions() {
             }
       };
 
-      const getVal = (v) => {
-        setValue(v)
-      };
-
       //   Send the user to the previous page
       const goBack = () => {
             window.history.back();
@@ -80,11 +76,8 @@ function Contributions() {
             }
       }, [paymentId,!isLoading,setClicked]);
 
-      let val = 95;
-
       return (
             <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
-                <Chart val={val} />
 
                   {id ? (
                         <>
