@@ -98,7 +98,7 @@ function AdminDashBoard() {
                                                                                                             {user.fullName &&
                                                                                                                   user.fullName}
                                                                                                       </p>
-                                                                                                      <p className="text-lg rounded-full w-7 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
+                                                                                                      <p className="text-lg relative left-[10rem] rounded-full w-7 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
                                                                                                             {index +
                                                                                                                   1}
                                                                                                       </p>

@@ -16,7 +16,7 @@ function Menu() {
     <div>
         {
             show && (
-                <ul className="flex flex-col items-center p-2 top-[4.2rem] right-2 menu text-[#FFFFFF] absolute">
+                <ul className="flex flex-col items-center p-2 top-[4.2rem] right-2 menu z-10 text-[#FFFFFF] absolute">
                               <Link to="/" onClick={() => dispatch(SetShow(!show))}>
                                     <li className="menu-item">Home</li>
                               </Link>
