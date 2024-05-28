@@ -107,7 +107,7 @@ function Login() {
                                           />
                                           {hideEye ? (
                                                 <IoEyeSharp
-                                                      className=" eye absolute  text-gray-200"
+                                                      className="eye absolute right-3 md:right-4 lg:right-5 text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility
                                                       }
