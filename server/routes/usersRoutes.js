@@ -152,7 +152,7 @@ role:user.role,
 
       } catch (error) {
             res.send({
-                    message: error.message,
+                    message: 'Invalid phone number or password',
                     success: false
             })
       }
