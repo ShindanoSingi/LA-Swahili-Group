@@ -407,5 +407,39 @@ router.put('/add-about/', async (req, res) => {
         }
 })
 
+// Update user position
+router.put('/update-position/:id', authMiddleware, async (req, res) => {
+        try {
+                const user = await User.findOneAndUpdate(
+                    { _id: req.params.id },
+                    {
+                        position: req.body.position,
+                    },
+                    { new: true }
+                );
+
+                if (!user) {
+                    return res.send({
+                            message: "User not found",
+                            success: false
+                    })
+                }
+
+                user.save();
+
+                res.send({
+                    user,
+                    success: true,
+                    message: 'Position updated successfully'
+                });
+
+        } catch (error) {
+                res.send({
+                        message: error.message,
+                        success: false
+                })
+        }
+})
+
 
 module.exports = router;

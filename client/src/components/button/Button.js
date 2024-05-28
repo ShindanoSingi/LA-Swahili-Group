@@ -34,7 +34,7 @@ const Button = ({ background, onClick, text, type, width, icon }) => {
                   break;
             case "outline":
                   buttonStyle +=
-                        " border border-gray-500 text-gray-500 hover:text-black hover:bg-gray-500";
+                        "border border-2 border-gray-500 text-gray-500 hover:text-black hover:bg-gray-500 flex justify-center items-center";
                   break;
             default:
                   buttonStyle += " bg-gray-500 hover:bg-gray-700";

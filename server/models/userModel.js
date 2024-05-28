@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'User'
     },
+    position: {
+        type: String,
+        default: 'Member'
+    },
     isMember: {
         type: Boolean,
         default: false

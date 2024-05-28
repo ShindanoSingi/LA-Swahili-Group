@@ -71,6 +71,27 @@ export const UpdateUser = async (user, id) => {
       }
 };
 
+// Update user position
+export const UpdateUserPosition = async (id, position) => {
+      try {
+            const response = await axios.put(
+                  `/api/users/update-position/${id}`,
+                  position,
+                  {
+                        headers: {
+                              "content-type": "application/json",
+                              Authorization: `Bear ${localStorage.getItem(
+                                    "token"
+                              )}`
+                        }
+                  }
+            );
+            return response.data;
+      } catch (error) {
+            return error.message;
+      }
+};
+
 // Update user picture
 export const UpdateUserPictureFunc = async (id, picture) => {
       try {

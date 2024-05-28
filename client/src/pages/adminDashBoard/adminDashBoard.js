@@ -12,10 +12,15 @@ import Button from "../../components/button/Button";
 import Spinner from "../../components/spinner/Spinner";
 import { IoIosArrowDown } from "react-icons/io";
 import { GetUsers } from "../../apicalls/users";
+import { FaUser } from "react-icons/fa";
+import Input from "../input/Input";
+import { SetShowInput } from "../../redux/userSlice";
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
       const isLoading = useSelector((state) => state.loader);
+      const [id, setId] = useState(null);
+      const showInput = useSelector((state) => state.userReducer.showInput);
 
       const dispatch = useDispatch();
 
@@ -23,7 +28,7 @@ function AdminDashBoard() {
             try {
                   dispatch(showLoader());
                   const response = await GetUsers();
-                    console.log(response);
+                  console.log(response);
                   setUsers(response);
                   dispatch(hideLoader());
             } catch (error) {
@@ -32,7 +37,20 @@ function AdminDashBoard() {
             }
       };
 
-      users && console.log(users);
+      //   Update the user position
+      const updateUserPosition = async (user, id) => {
+            try {
+                  dispatch(showLoader());
+                  const response = await updateUserPosition(user, id);
+                  toast.success(response.message);
+                  dispatch(hideLoader());
+            } catch (error) {
+                  dispatch(hideLoader());
+                  return error.message;
+            }
+      };
+
+      id && console.log(id);
 
       useEffect(() => {
             getUsers();
@@ -98,7 +116,7 @@ function AdminDashBoard() {
                                                                                                             {user.fullName &&
                                                                                                                   user.fullName}
                                                                                                       </p>
-                                                                                                      <p className="text-lg relative left-[10rem] rounded-full w-7 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
+                                                                                                      <p className="text-lg relative left-[2rem] md:left-[6rem] rounded-full w-7 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
                                                                                                             {index +
                                                                                                                   1}
                                                                                                       </p>
@@ -134,7 +152,9 @@ function AdminDashBoard() {
                                                                                     </div>
 
                                                                                     <div>
-                                                                                        {user.paid}
+                                                                                          {
+                                                                                                user.paid
+                                                                                          }
                                                                                     </div>
 
                                                                                     <div className="flex flex-col items-center">
@@ -158,6 +178,16 @@ function AdminDashBoard() {
                                                                                                 />
                                                                                           }
                                                                                     />
+                                                                                    <Button
+                                                                                          type="success"
+                                                                                          width="full md:w-40"
+                                                                                          text="Update position"
+                                                                                          onClick={() => {
+                                                                                                dispatch(SetShowInput(!showInput));
+                                                                                                console.log(showInput);
+                                                                                          }
+                                                                                        }
+                                                                                    />
 
                                                                                     <Button
                                                                                           type="default"
@@ -171,11 +201,16 @@ function AdminDashBoard() {
                                                       )
                                                 )}
                                     </ul>
+                                    {
+                                        showInput && <Input label='Enter' />
+                                    }
+
                               </div>
                         </div>
                   ) : (
                         <Loader />
                   )}
+
             </div>
       );
 }
