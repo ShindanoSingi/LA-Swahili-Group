@@ -16,8 +16,9 @@ function Input({ label, placeholder, onChange}) {
       };
 
       return (
-        <>
-            <div className=" flex flex-col gap-1 items-start">
+        <div className="grid place-content-center h-[100vh]">
+            <div className="bg-gray-900 rounded-lg  max-w-xl p-4">
+            <div className=" flex flex-col gap-1  items-start">
                   <label
                         htmlFor="input"
                         className="text-lg text-white font-bold"
@@ -36,10 +37,10 @@ function Input({ label, placeholder, onChange}) {
             </div>
             <div className="flex place-items-center gap-8 justify-between">
                 <Button text="Submit" type="success" width="full" />
-                <Button text="Cancel" type="outline" width="full" onClick={() =>showInput && dispatch(SetShowInput(showInput))} />
+                <Button text="Cancel" type="outline" width="full" onClick={() => dispatch(SetShowInput(!showInput))} />
             </div>
-        </>
-
+        </div>
+        </div>
       );
 }
 

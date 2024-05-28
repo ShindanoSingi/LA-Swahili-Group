@@ -202,7 +202,7 @@ function AdminDashBoard() {
                                                 )}
                                     </ul>
                                     {
-                                        showInput && <Input label='Enter' />
+                                        showInput && <Input label='What is the position?' />
                                     }
 
                               </div>
