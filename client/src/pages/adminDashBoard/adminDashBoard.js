@@ -80,11 +80,11 @@ function AdminDashBoard() {
                                                                                                             alt={
                                                                                                                   user.firstName
                                                                                                             }
-                                                                                                            className={`h-10 w-10 md:w-20 md:h-20 fluid rounded-full`}
+                                                                                                            className={`h-10 w-10 md:w-[8rem] md:h-[8rem] fluid rounded-full`}
                                                                                                       />
                                                                                                 ) : (
                                                                                                       <img
-                                                                                                            className="w-10 h-10 md:w-20 md:h-20 fluid rounded-full"
+                                                                                                            className="h-10 w-10 md:w-[8rem] md:h-[8rem] fluid rounded-full"
                                                                                                             src={`https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&&color=fff`}
                                                                                                             alt={
                                                                                                                   user.fullName
@@ -92,7 +92,7 @@ function AdminDashBoard() {
                                                                                                       />
                                                                                                 )}
                                                                                           </div>
-                                                                                          <div className="flex-1 min-w-0 ms-4">
+                                                                                          <div className="flex-1 min-w-0 ml-8 ms-4">
                                                                                                 <div className="flex items-center gap-4 justify-between">
                                                                                                       <p className="text-lg font-medium md:text-xl text-gray-900 truncate md:whitespace-normal dark:text-white">
                                                                                                             {user.fullName &&
