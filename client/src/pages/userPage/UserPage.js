@@ -132,7 +132,7 @@ function UserPage() {
                                                       width="full"
                                                 />
                                           </Link>
-                                          <Link to={`/mic/${userId.id}`}>
+                                          <Link to={`/mcontrib/${userId.id}`}>
                                                 <Button
                                                       text="Contributions"
                                                       type="submitted"

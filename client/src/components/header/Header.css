@@ -25,13 +25,17 @@ box-shadow:  -5px -5px 10px #262e37,
 }
 
 .menu-item, .menu-item-cancel{
-            width: 8rem;
-            height: 2rem;
+            width: 10rem;
+            height: 2.5rem;
             align-items: center;
             display: grid;
             place-content: center;
             margin: 0.2rem;
             padding: 0.2rem 0.5rem;
+
+            @media screen and (min-width: 768px){
+                width: 12rem;
+            }
 }
 
 .menu-item{

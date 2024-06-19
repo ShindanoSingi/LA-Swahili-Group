@@ -6,6 +6,8 @@ import { GetUsers } from "../../apicalls/users";
 import { SetGrandTotal, SetUsers } from "../../redux/userSlice";
 import md5 from "md5";
 import { Link } from "react-router-dom";
+import Button from "../../components/button/Button";
+import { FaPencil, FaPlus, FaTrash } from "react-icons/fa6";
 
 function SuperUsersDashBoard() {
       const { users, grandTotal } = useSelector((state) => state.userReducer);
@@ -62,8 +64,8 @@ function SuperUsersDashBoard() {
       }, []);
 
       return (
-            <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
-                  <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div className="mt-[4rem] pt-2 px-2 flex justify-center min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
+                  <div className="w-full max-w-5xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex items-center justify-between mb-4">
                               <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
                                     Members Contributions
@@ -89,21 +91,20 @@ function SuperUsersDashBoard() {
                                                                   style={{ backgroundColor: getPhoneNumberToColor(user.phone) }}
                                                                   tabindex={index}
                                                             >
-                                                                <div className="absolute bg-black py-[0.3rem] min-w-[1.6rem] rounded-full left-[1.8rem] -translate-y-4 text-xs flex justify-center items-center px-[0.4rem]">{index + 1}</div>
                                                                   <div class="flex cursor-pointer items-center justify-between">
                                                                         <div className="flex items-center">
-                                                                              <div className=" border-4 border-slate-950 bg-black rounded-full">
+                                                                              <div className=" border-4 md:text-xl border-slate-950 text-white bg-black rounded-full">
                                                                                     {user.profilePicture ? (
                                                                                           <img
                                                                                                 src={require(`../../images/${user.profilePicture}`)}
                                                                                                 alt={
                                                                                                       user.firstName
                                                                                                 }
-                                                                                                className={`h-10 w-10  fluid rounded-full`}
+                                                                                                className={`h-10 md:text-xl w-10 md:h-14 md:w-14 text-white  fluid rounded-full`}
                                                                                           />
                                                                                     ) : (
                                                                                           <img
-                                                                                                className="w-10 h-10 fluid text-white dark:text-white rounded-full"
+                                                                                                className="w-10 h-10 md:text-xl md:h-14 md:w-14 fluid text-white dark:text-white rounded-full"
                                                                                                 src={
                                                                                                       user.profilePicture
                                                                                                             ? user.profilePicture
@@ -122,20 +123,24 @@ function SuperUsersDashBoard() {
                                                                                     )}
                                                                               </div>
                                                                               <div className="flex-1 min-w-0 ms-4 text-red-800">
-                                                                                    <p className="text-lg font-medium  truncate dark:text-black">
+                                                                                    <p className="text-xl font-medium md:text-2xl  truncate dark:text-black">
                                                                                           {
                                                                                             user.fullName
                                                                                           }
                                                                                     </p>
-                                                                                    <p className="text-md text-black truncate dark:text-black">
+                                                                                    <p className="text-md text-black md:text-xl truncate dark:text-black">
                                                                                           {
                                                                                             formatPhoneNumber(user.phone)
                                                                                           }
                                                                                     </p>
                                                                               </div>
                                                                         </div>
-                                                                        <div className="flex flex-col items-center">
-                                                                              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
+                                                                        <div className="bg-black py-[0.3rem] min-w-[1.6rem] rounded-full md:text-lg lg:text-xl h-[1.8rem] w-[1.8rem] -translate-y-4 text-xs flex justify-center items-center px-[0.4rem]">
+                                                                              {index +
+                                                                                    1}
+                                                                        </div>
+                                                                        <div className="flex flex-col md:text-xl items-center">
+                                                                              <div className="inline-flex items-center text-base md:text-xl font-semibold text-gray-900 dark:text-black">
                                                                                     ${user.totalAmount}
                                                                               </div>
                                                                               <svg
@@ -148,11 +153,11 @@ function SuperUsersDashBoard() {
                                                                                     stroke-width="2"
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round"
-                                                                                    className={`feather transition-all duration-500 ${
+                                                                                    className={`feather transition-all md:text-xl duration-500 ${
                                                                                           isRotated
                                                                                                 ? "group-focus:-rotate-0"
-                                                                                                : ""
-                                                                                    } group-focus:-rotate-180 dark:text-black feather-chevron-down`}
+                                                                                                : "roup-focus:-rotate-180"
+                                                                                    } group-focus:-rotate-180 dark:text-black md:text-xl feather-chevron-down`}
                                                                                     onClick={
                                                                                           handleButtonClick
                                                                                     }
@@ -166,76 +171,52 @@ function SuperUsersDashBoard() {
                                                                               isRotated
                                                                                     ? "visible group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000"
                                                                                     : "invisible"
-                                                                        } flex justify-around h-auto max-h-0 items-center opacity-0 transition-all `}
+                                                                        } flex justify-around h-auto max-h-0 md:text-xl items-center opacity-0 transition-all `}
                                                                   >
                                                                     <Link to={`/addpayment/${userId}`}>
-                                                                    <button
-                                                                        className="flex justify-center items-center bg-green-800 rounded-full w-16 p-1 max-w-20"
+                                                                    <Button
+                                                                        text="Add Payment"
+                                                                        type="success"
+                                                                        width="w-1/3"
                                                                         onClick={()=>{
                                                                             getUserId(index)
                                                                         }}
-                                                                        >
-                                                                              <svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    width="18"
-                                                                                    height="18"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    fill="none"
-                                                                                    stroke="currentColor"
-                                                                                    stroke-width="2"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    class="feather feather-plus"
-                                                                              >
-                                                                                    <line
-                                                                                          x1="12"
-                                                                                          y1="5"
-                                                                                          x2="12"
-                                                                                          y2="19"
-                                                                                    ></line>
-                                                                                    <line
-                                                                                          x1="5"
-                                                                                          y1="12"
-                                                                                          x2="19"
-                                                                                          y2="12"
-                                                                                    ></line>
-                                                                              </svg>
-                                                                        </button>
+                                                                        icon={
+                                                                            <FaPlus
+                                                                                  size={
+                                                                                        20
+                                                                                  }
+                                                                            />
+                                                                      }
+                                                                     />
+                                                                    </Link>
+                                                                    <Link to={`/edituser`}>
+                                                                    <Button
+                                                                        text="Edit"
+                                                                        type="default"
+                                                                        width="w-1/3"
+                                                                        icon={
+                                                                            <FaPencil
+                                                                                  size={
+                                                                                        20
+                                                                                  }
+                                                                            />
+                                                                        }
+                                                                     />
                                                                     </Link>
 
-                                                                        <button className="flex justify-center items-center bg-yellow-800 rounded-full w-16 p-1 max-w-20">
-                                                                              <svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    width="18"
-                                                                                    height="18"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    fill="none"
-                                                                                    stroke="currentColor"
-                                                                                    stroke-width="2"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    class="feather feather-edit-2"
-                                                                              >
-                                                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                                                                              </svg>
-                                                                        </button>
-                                                                        <button className="flex justify-center items-center bg-red-800 rounded-full w-16 p-1 max-w-20">
-                                                                              <svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    width="18"
-                                                                                    height="18"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    fill="none"
-                                                                                    stroke="currentColor"
-                                                                                    stroke-width="2"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    class="feather feather-trash"
-                                                                              >
-                                                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                                              </svg>
-                                                                        </button>
+                                                                    <Button
+                                                                        text="Delete"
+                                                                        type="danger"
+                                                                        width="w-1/3"
+                                                                        icon={
+                                                                            <FaTrash
+                                                                                  size={
+                                                                                        20
+                                                                                  }
+                                                                            />
+                                                                        }
+                                                                     />
                                                                   </div>
                                                             </div>
                                                       </div>

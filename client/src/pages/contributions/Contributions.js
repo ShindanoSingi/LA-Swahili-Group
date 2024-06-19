@@ -82,7 +82,7 @@ function Contributions() {
                   {id ? (
                         <>
                               <div className="flex justify-center md:text-xl ">
-                                    <div className="w-full rounded-lg shadow lg:w-[50%] lg:w-[70%] ">
+                                    <div className="w-full rounded-lg shadow max-w-full ">
                                           <div className="flex flex-col items-center gap-2">
                                                 {userPayments ? (
                                                       <div className="w-full">

@@ -53,6 +53,9 @@ function EditUserForm() {
                                           <option value="Superuser">
                                                 Superuser
                                           </option>
+                                          <option value="Superuser">
+                                                Admin
+                                          </option>
                                     </select>
                               </div>
                               <button

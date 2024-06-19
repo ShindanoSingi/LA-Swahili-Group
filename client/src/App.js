@@ -47,7 +47,7 @@ function App() {
                         <Route path="/users" element={<UserDashBoard />} />
                         <Route path="/users/:id" element={<UserPage />} />
                         <Route path="/updateuserpicture/:id" element={<UpdateUserPicture />} />
-                        <Route path="/mic/:id" element={<Contributions />} />
+                        <Route path="/mcontrib/:id" element={<Contributions />} />
                         <Route
                               path="/super"
                               element={<SuperUsersDashBoard />}
