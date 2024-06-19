@@ -27,10 +27,17 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-
-        if(!localStorage.getItem("token")){
-            navigate("/login")
-}}, [navigate, userRole]);
+        if (localStorage.getItem("token") && userRole === 'Admin'){
+              navigate("/admin");
+        } else if (localStorage.getItem("token") && userRole === "Superuser") {
+              navigate("/super");
+        } else if (localStorage.getItem("token") && userRole === "User") {
+              navigate("/user");
+        }
+   else {
+        navigate("/users");
+  }
+}, [userRole]);
 
       return (
             <>

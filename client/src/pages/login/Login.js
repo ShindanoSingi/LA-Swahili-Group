@@ -41,19 +41,6 @@ function Login() {
             setHideEye(!hideEye);
       };
 
-      useEffect(() => {
-                  if (localStorage.getItem("token") && userRole === 'Admin'){
-                        navigate("/admin");
-                  } else if (localStorage.getItem("token") && userRole === "Superuser") {
-                        navigate("/super");
-                  } else if (localStorage.getItem("token") && userRole === "User") {
-                        navigate("/user");
-                  }
-             else {
-                  navigate("/login");
-            }
-      }, [userRole]);
-
       return (
             <div className="container md:w-full">
                   <div className="w-[80%]">

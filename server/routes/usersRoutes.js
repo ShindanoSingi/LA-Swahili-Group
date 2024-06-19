@@ -435,7 +435,7 @@ router.put('/update-position/:id', authMiddleware, async (req, res) => {
 
         } catch (error) {
                 res.send({
-                        message: error.message,
+                        message: 'Something went wrong. Please try again',
                         success: false
                 })
         }

@@ -13,8 +13,9 @@ import Spinner from "../../components/spinner/Spinner";
 import { IoIosArrowDown } from "react-icons/io";
 import { GetUsers } from "../../apicalls/users";
 import { FaUser } from "react-icons/fa";
-import Input from "../input/Input";
-import { SetShowInput } from "../../redux/userSlice";
+import Input from "../../components/input/Input";
+import { SetShowInput, SetUserId } from "../../redux/userSlice";
+
 
 function AdminDashBoard() {
       const [users, setUsers] = useState(null);
@@ -37,18 +38,9 @@ function AdminDashBoard() {
             }
       };
 
-      //   Update the user position
-      const updateUserPosition = async (user, id) => {
-            try {
-                  dispatch(showLoader());
-                  const response = await updateUserPosition(user, id);
-                  toast.success(response.message);
-                  dispatch(hideLoader());
-            } catch (error) {
-                  dispatch(hideLoader());
-                  return error.message;
-            }
-      };
+      const getUserById = async (userId) => {
+        dispatch(SetUserId(userId));
+      }
 
       id && console.log(id);
 
@@ -77,7 +69,7 @@ function AdminDashBoard() {
                                     </div>
                               </div>
                               <div className="flow-root max-h-[82vh] overflow-y-auto">
-                                    <ul className="gap-2 pb-2 flex flex-col">
+                                    <ul className="gap-2 pb-2 pt-2 flex flex-col">
                                           {users &&
                                                 users.users.map(
                                                       (user, index) => (
@@ -183,10 +175,13 @@ function AdminDashBoard() {
                                                                                           width="full md:w-40"
                                                                                           text="Update position"
                                                                                           onClick={() => {
-                                                                                                dispatch(SetShowInput(!showInput));
-                                                                                                console.log(showInput);
-                                                                                          }
-                                                                                        }
+                                                                                                dispatch(
+                                                                                                      SetShowInput(
+                                                                                                            !showInput
+                                                                                                      )
+                                                                                                );
+                                                                                                getUserById(user._id);
+                                                                                          }}
                                                                                     />
 
                                                                                     <Button
@@ -200,17 +195,23 @@ function AdminDashBoard() {
                                                             </li>
                                                       )
                                                 )}
-                                    </ul>
-                                    {
-                                        showInput && <Input label='What is the position?' />
-                                    }
+                                                {
+                                                        showInput && (
+                                                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                                            <Input
+                                                            className="w-full"
+                                                            label="What is the position?" />
+                                                      </div>
+                                                        )
+                                                }
 
+
+                                    </ul>
                               </div>
                         </div>
                   ) : (
                         <Loader />
                   )}
-
             </div>
       );
 }

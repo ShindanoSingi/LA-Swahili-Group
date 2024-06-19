@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
 export const LoginUser = async (user) => {
       try {
             const response = await axios.post(`/api/users/login`, user, {
@@ -144,6 +145,27 @@ export const DeleteUserPicture = async (id) => {
                   `/api/users/delete-picture/${id}`,
                   {
                         headers: {
+                              Authorization: `Bear ${localStorage.getItem(
+                                    "token"
+                              )}`
+                        }
+                  }
+            );
+            return response.data;
+      } catch (error) {
+            return error.message;
+      }
+};
+
+// Update user's position
+export const UpdateUserPositionFunc = async (id, position) => {
+      try {
+            const response = await axios.put(
+                  `/api/users/update-position/${id}`,
+                  position,
+                  {
+                        headers: {
+                              "content-type": "application/json",
                               Authorization: `Bear ${localStorage.getItem(
                                     "token"
                               )}`
