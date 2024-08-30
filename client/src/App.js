@@ -26,18 +26,18 @@ function App() {
     const {userRole} = useSelector((state) => state.userReducer)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (localStorage.getItem("token") && userRole === 'Admin'){
-              navigate("/admin");
-        } else if (localStorage.getItem("token") && userRole === "Superuser") {
-              navigate("/super");
-        } else if (localStorage.getItem("token") && userRole === "User") {
-              navigate("/user");
-        }
-   else {
-        navigate("/users");
-  }
-}, [userRole]);
+//     useEffect(() => {
+//         if (localStorage.getItem("token") && userRole === 'Admin'){
+//               navigate("/admin");
+//         } else if (localStorage.getItem("token") && userRole === "Superuser") {
+//               navigate("/super");
+//         } else if (localStorage.getItem("token") && userRole === "User") {
+//               navigate("/user");
+//         }
+//    else {
+//         navigate("/users");
+//   }
+// }, [userRole]);
 
       return (
             <>
