@@ -85,6 +85,11 @@ function AdminDashBoard() {
                                                                                     <div className="flex items-center">
                                                                                           <div className="flex-shrink-0">
                                                                                                 {user.profilePicture ? (
+                                                                                                    <div>
+                                                                                                        <p className="text-lg relative left-[2rem] top-[2rem] md:left-[6rem] rounded-full w-10 md:rounded-full flex justify-center items-center h-10 bg-yellow-700 text-white truncate ">
+                                                                                                            {index +
+                                                                                                                  1}
+                                                                                                      </p>
                                                                                                       <img
                                                                                                             src={require(`../../images/${user.profilePicture}`)}
                                                                                                             alt={
@@ -92,7 +97,14 @@ function AdminDashBoard() {
                                                                                                             }
                                                                                                             className={`h-10 w-10 md:w-[8rem] md:h-[8rem] fluid rounded-full`}
                                                                                                       />
+                                                                                                    </div>
+
                                                                                                 ) : (
+                                                                                                    <div>
+                                                                                                        <p className="text-lg relative left-[2rem] top-[2rem] md:left-[6rem] rounded-full w-10 md:rounded-full flex justify-center items-center h-10 bg-yellow-700 text-white truncate ">
+                                                                                                            {index +
+                                                                                                                  1}
+                                                                                                      </p>
                                                                                                       <img
                                                                                                             className="h-10 w-10 md:w-[8rem] md:h-[8rem] fluid rounded-full"
                                                                                                             src={`https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&&color=fff`}
@@ -100,6 +112,8 @@ function AdminDashBoard() {
                                                                                                                   user.fullName
                                                                                                             }
                                                                                                       />
+                                                                                                    </div>
+
                                                                                                 )}
                                                                                           </div>
                                                                                           <div className="flex-1 min-w-0 ml-8 ms-4">
@@ -107,10 +121,6 @@ function AdminDashBoard() {
                                                                                                       <p className="text-lg font-medium md:text-xl text-gray-900 truncate md:whitespace-normal dark:text-white">
                                                                                                             {user.fullName &&
                                                                                                                   user.fullName}
-                                                                                                      </p>
-                                                                                                      <p className="text-lg relative left-[2rem] md:left-[6rem] rounded-full w-7 md:rounded-full flex justify-center items-center h-7 bg-yellow-700 text-white truncate ">
-                                                                                                            {index +
-                                                                                                                  1}
                                                                                                       </p>
                                                                                                 </div>
                                                                                                 <p className="text-sm md:text-lg py-2 text-gray-500 truncate dark:text-gray-400">

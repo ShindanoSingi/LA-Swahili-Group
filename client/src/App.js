@@ -37,7 +37,7 @@ function App() {
    else {
         navigate("/users");
   }
-}, [userRole]);
+}, [userRole, navigate]);
 
       return (
             <>
