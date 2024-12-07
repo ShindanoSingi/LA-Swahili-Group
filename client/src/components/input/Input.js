@@ -17,6 +17,7 @@ function Input({ label, placeholder, onChange }) {
       const handleChange = (event) => {
             const newValue = event.target.value;
             setValue(newValue.trim());
+            console.log(value);
       };
 
       const updateUserPosition = async () => {
@@ -52,7 +53,7 @@ function Input({ label, placeholder, onChange }) {
                                     type="text"
                                     id="input"
                                     name="input"
-                                    placeholder={placeholder}
+                                    placeholder='Enter User Position'
                                     value={value}
                                     onChange={handleChange}
                                     className="p-2 mb-4 border rounded-lg w-[20rem] md:w-[35rem] h-10 bg-black outline-none"

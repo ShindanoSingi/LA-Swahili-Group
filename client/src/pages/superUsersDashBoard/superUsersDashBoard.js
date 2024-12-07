@@ -194,7 +194,7 @@ function SuperUsersDashBoard() {
                                                                     <Button
                                                                         text="Edit"
                                                                         type="default"
-                                                                        width="w-1/3"
+                                                                        width="48"
                                                                         icon={
                                                                             <FaPencil
                                                                                   size={
