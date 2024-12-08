@@ -69,8 +69,8 @@ const AddPayments = () => {
       };
 
       return (
-            <div className="pt-[5rem] px-2 min-h-[100vh] bg-[#595954] text-[#FFFFFF]">
-                  <div className="form-container">
+            <div className="pt-[5rem] px-2 min-h-[100vh] grid place-content-center bg-[#595954] text-[#FFFFFF]">
+                  <div className="form-container max-w-lg">
                         <h1 className="text-white font-bold text-lg text-center uppercase">
                               {fullName}
                         </h1>

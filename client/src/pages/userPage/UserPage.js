@@ -11,6 +11,7 @@ import Loader from "../../components/loader/Loader";
 
 function UserPage() {
       const { user } = useSelector((state) => state.userReducer);
+      const {userRole} = useSelector((state) => state.userReducer);
 
       const dispatch = useDispatch();
       const isLoading = useSelector((state) => state.loader);
@@ -51,39 +52,41 @@ function UserPage() {
       }, []);
 
       return (
-            <div className="flex justify-center md:grid md:place-content-center items-center place-content-center px-2 h-[100vh] bg-[#595954] text-[#FFFFFF]">
-                <div className="w-full">
+            <div className=" flex justify-center items-center px-2  h-screen bg-[#595954] text-[#FFFFFF]">
                 {user ? (
-                        <>
-                              <div className="grid md:text-xl gap-2">
-                                    <div className="w-full md:w-full p-4 md:text-2xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                                          <div className="flex justify-between md:w-[30rem] mb-4">
-                                                <Link
-                                                      to={`/updateuserpicture/${user._id}`}
-                                                >
-                                                      <Button
-                                                            text="Picture"
-                                                            type="success"
-                                                            width="24 md:w-36"
-                                                      />
-                                                </Link>
 
-                                                <Button
-                                                      text="Cancel"
-                                                      type="default"
-                                                      width="24 md:w-36"
-                                                      onClick={() => {
-                                                            window.history.back();
-                                                      }}
-                                                />
 
-                                                <Button
-                                                      text="Delete"
-                                                      type="danger"
-                                                      width="24 md:w-36"
-                                                      onClick={deletePicture}
-                                                />
-                                          </div>
+                                    <div className="p-4 w-full md:w-[80%] lg:w-[50%] md:text-2xl bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+
+                                          {
+                                                                (userRole === "Admin") && <div className="flex justify-between  mb-4">
+                                                                <Link
+                                                                      to={`/updateuserpicture/${user._id}`}
+                                                                >
+                                                                      <Button
+                                                                            text="Picture"
+                                                                            type="success"
+                                                                            width="24 md:w-36"
+                                                                      />
+                                                                </Link>
+
+                                                                <Button
+                                                                      text="Cancel"
+                                                                      type="default"
+                                                                      width="24 md:w-36"
+                                                                      onClick={() => {
+                                                                            window.history.back();
+                                                                      }}
+                                                                />
+
+                                                                <Button
+                                                                      text="Delete"
+                                                                      type="danger"
+                                                                      width="24 md:w-36"
+                                                                      onClick={deletePicture}
+                                                                />
+                                                          </div>
+                                                            }
                                           <div className="flex items-center mb-4 flex-col">
                                                 {user.profilePicture ? (
                                                       <div
@@ -95,12 +98,12 @@ function UserPage() {
                                                                   alt={
                                                                         user.firstName
                                                                   }
-                                                                  class="h-full w-full rounded-full overflow-hidden shadow"
+                                                                  class="h-[14rem] w-[14rem] rounded-full overflow-hidden shadow"
                                                             />
                                                       </div>
                                                 ) : (
                                                       <img
-                                                            className="h-1/2 w-1/2 fluid rounded-full"
+                                                            className="h-[14rem] w-[14rem] fluid rounded-full"
                                                             src={
                                                                   user.profilePicture
                                                                         ? user.profilePicture
@@ -112,7 +115,9 @@ function UserPage() {
                                                 <div className="flex justify-center gap-6 w-full pt-2">
                                                       <div className="flex flex-col text-xl">
                                                             <b>Name:</b>
-                                                            <b>Phone #:</b>
+                                                            {
+                                                                (userRole === "Admin") === "Admin" && <b>Phone #:</b>
+                                                            }
                                                       </div>
                                                       <div className="text-xl md:text-2xl">
                                                             <p>
@@ -120,7 +125,10 @@ function UserPage() {
                                                                         user?.fullName
                                                                   }
                                                             </p>
-                                                            <p>{user?.phone}</p>
+                                                            {
+                                                                (userRole === "Admin") && <p>{user?.phone}</p>
+                                                            }
+
                                                       </div>
                                                 </div>
                                           </div>
@@ -128,38 +136,36 @@ function UserPage() {
                                           <Link to={`/edit/user/${userId.id}`}>
                                                 <Button
                                                       text="Edit"
-                                                      type="orange"
+                                                      type="success"
                                                       width="full"
                                                 />
                                           </Link>
                                           <Link to={`/mcontrib/${userId.id}`}>
                                                 <Button
-                                                      text="Contributions"
+                                                      text="View Contributions"
                                                       type="submitted"
                                                       width="full"
                                                 />
                                           </Link>
+                                          <div onClick={
+                                            () => {
+                                                  window.history.back();
+                                            }
+                                          }>
+                                          <Button
+                                                      text="Cancel"
+                                                      type="default"
+                                                      width="full"
+                                                />
+                                          </div>
+
                                           </div>
                                     </div>
-                              </div>
-                        </>
-                  ) : (
-                        <div className="grid justify-center items-center h-[80vh] w-100vw">
-                              <Hourglass
-                                    visible={true}
-                                    height="80"
-                                    width="80"
-                                    ariaLabel="hourglass-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClass=""
-                                    colors={["#306cce", "#72a1ed"]}
-                              />
-                        </div>
-                  )}
-                </div>
-                {
-                    isLoading && <Loader />
-                }
+
+                  ) : <div className="absolute">
+                    <Loader />
+                    </div>
+                  }
             </div>
       );
 }

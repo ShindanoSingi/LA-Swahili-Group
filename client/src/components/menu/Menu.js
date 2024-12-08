@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Menu() {
     const {show} = useSelector(state => state.userReducer);
+    const {userRole} = useSelector(state => state.userReducer);
     const dispatch = useDispatch()
 
     const logout = () => {
@@ -30,52 +31,59 @@ function Menu() {
                                     <li className="menu-item md:text-xl">Contact</li>
                               </Link>
                               {
-                                    localStorage.getItem("token") && (
+                                localStorage.getItem("token") && (
                                           <Link to="/users" onClick={() => dispatch(SetShow(!show))}>
                                                 <li className="menu-item md:text-xl">Users</li>
                                           </Link>
                                     )
                               }
                               {
-                                    localStorage.getItem("token") && (
+                                    (localStorage.getItem("userRole") === "Admin" && localStorage.getItem("token")) && (
+                                          <Link to="/register" onClick={() => dispatch(SetShow(!show))}>
+                                                <li className="menu-item md:text-xl">Register User</li>
+                                          </Link>
+                                    )
+                              }
+                              {/* {
+                                    userRole === "Admin" && (
                                           <Link to="/mcontrib" onClick={() => dispatch(SetShow(!show))}>
                                                 <li className="menu-item md:text-xl">My Contributions</li>
                                           </Link>
                                     )
-                              }
-                              {
-                                    localStorage.getItem("token") && (
+                              } */}
+                              {/* {
+                                    (userRole === "Admin" && localStorage.getItem("token")) && (
                                           <Link to="/addpayment" onClick={() => dispatch(SetShow(!show))}>
                                                 <li className="menu-item md:text-xl">Add Payment</li>
                                           </Link>
                                     )
-                              }
+                              } */}
                               {
-                                    localStorage.getItem("token") && (
+                                    (localStorage.getItem("userRole") === "Admin" && localStorage.getItem("token")) && (
                                           <Link to="/super" onClick={() => dispatch(SetShow(!show))}>
                                                 <li className="menu-item md:text-xl">Super Users</li>
                                           </Link>
                                     )
                               }
                               {
-                                    localStorage.getItem("token") && (
+                                    (localStorage.getItem("userRole") === "Admin" && localStorage.getItem("token")) && (
                                           <Link to="/admin" onClick={() => dispatch(SetShow(!show))}>
                                                 <li className="menu-item md:text-xl">Admin</li>
                                           </Link>
                                     )
                               }
-                              <Link to="/login" onClick={() => dispatch(SetShow(!show))}>
+                              {
+                                    localStorage.getItem("token") ? (
+                                          <div onClick={() => {
+                                            logout();
+                                            dispatch(SetShow(!show))
+                                          }}>
+                                                <li className="menu-item md:text-xl">Logout</li>
+                                          </div>
+                                    ) : <Link to="/login" onClick={() => dispatch(SetShow(!show))}>
                                     <li className="menu-item md:text-xl">Login</li>
                               </Link>
-                              <Link to='/login'>
-                                    <li className="menu-item md:text-xl"
-                                    onClick={() => {
-                                        logout();
-                                        dispatch(SetShow(!show));
-
-                                  }}
-                                    >Logout</li>
-                              </Link>
+                              }
                               <Link >
                               <li className="menu-item menu-item-cancel md:text-xl" onClick={() => dispatch(SetShow(!show))}>Cancel</li>
                               </Link>

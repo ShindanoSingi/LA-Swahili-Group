@@ -31,14 +31,16 @@ function About() {
 
       return (
             <div className=" pt-[4rem] p-2 flex justify-center md:text-lg lg:text-xl dark:bg-gray-800 min-h-[100vh]">
-                  <div className="block about-card max-w-5xl p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                              About Us
-                        </h5>
-                        <p className="font-normal text-gray-900 dark:text-gray-400">
-                                {about ? about : <Loader />}
-                        </p>
-                  </div>
+                {
+                    about ?  <div className="block about-card max-w-5xl p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                          About Us
+                    </h5>
+                    <p className="font-normal text-gray-900 dark:text-gray-200">
+                            {about ? about : <Loader />}
+                    </p>
+              </div> : <Loader />
+                }
             </div>
       );
 }

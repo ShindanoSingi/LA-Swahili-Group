@@ -14,7 +14,7 @@ dispatch(SetMyDate(selectedDate));
 
 
   return (
-    <div className='calendar-container'>
+    <div className='calendar-container max-w-lg'>
         <Calendar onChange={setSelectedDate} value={selectedDate} />
     </div>
   )

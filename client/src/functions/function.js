@@ -12,3 +12,5 @@ export const formatPhoneNumber = (phoneNumberString) => {
 export const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
 }
+
+

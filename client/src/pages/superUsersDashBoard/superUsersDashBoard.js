@@ -22,6 +22,8 @@ function SuperUsersDashBoard() {
                   const response = await GetUsers();
                   dispatch(SetUsers(response.users));
                   dispatch(SetGrandTotal(response.grandTotal));
+                  console.log(response.users);
+                  setUserId(response.users.id);
                   dispatch(hideLoader());
             } catch (error) {
                   dispatch(hideLoader());
@@ -93,17 +95,25 @@ function SuperUsersDashBoard() {
                                                             >
                                                                   <div class="flex cursor-pointer items-center justify-between">
                                                                         <div className="flex items-center">
-                                                                              <div className=" border-4 md:text-xl border-slate-950 text-white bg-black rounded-full">
+                                                                              <div className="  md:text-xl  text-white  rounded-full">
                                                                                     {user.profilePicture ? (
-                                                                                          <img
+                                                                                        <div >
+                                                                                            <img
                                                                                                 src={require(`../../images/${user.profilePicture}`)}
                                                                                                 alt={
                                                                                                       user.firstName
                                                                                                 }
-                                                                                                className={`h-10 md:text-xl w-10 md:h-14 md:w-14 text-white  fluid rounded-full`}
+                                                                                                className={`h-10 md:text-xl w-10 md:h-14 md:w-14 text-white border fluid rounded-full`}
                                                                                           />
+                                                                                          <div className="bg-black relative  border border-orange-600  py-[0.3rem] min-w-[1.6rem] rounded-full md:text-lg lg:text-xl h-[1.8rem] w-[1.8rem] -translate-y-4 text-xs flex justify-center items-center px-[0.4rem]">
+                                                                              {index +
+                                                                                    1}
+                                                                        </div>
+                                                                                        </div>
+
                                                                                     ) : (
-                                                                                          <img
+                                                                                        <div>
+                                                                                        <img
                                                                                                 className="w-10 h-10 md:text-xl md:h-14 md:w-14 fluid text-white dark:text-white rounded-full"
                                                                                                 src={
                                                                                                       user.profilePicture
@@ -120,6 +130,12 @@ function SuperUsersDashBoard() {
                                                                                                       user.fullName
                                                                                                 }
                                                                                           />
+                                                                                          <div className="bg-black relative  border border-orange-600  py-[0.3rem] min-w-[1.6rem] rounded-full md:text-lg lg:text-xl h-[1.8rem] w-[1.8rem] -translate-y-4 text-xs flex justify-center items-center px-[0.4rem]">
+                                                                              {index +
+                                                                                    1}
+                                                                        </div>
+                                                                                        </div>
+
                                                                                     )}
                                                                               </div>
                                                                               <div className="flex-1 min-w-0 ms-4 text-red-800">
@@ -135,10 +151,7 @@ function SuperUsersDashBoard() {
                                                                                     </p>
                                                                               </div>
                                                                         </div>
-                                                                        <div className="bg-black py-[0.3rem] min-w-[1.6rem] rounded-full md:text-lg lg:text-xl h-[1.8rem] w-[1.8rem] -translate-y-4 text-xs flex justify-center items-center px-[0.4rem]">
-                                                                              {index +
-                                                                                    1}
-                                                                        </div>
+
                                                                         <div className="flex flex-col md:text-xl items-center">
                                                                               <div className="inline-flex items-center text-base md:text-xl font-semibold text-gray-900 dark:text-black">
                                                                                     ${user.totalAmount}
@@ -170,7 +183,7 @@ function SuperUsersDashBoard() {
                                                                         class={`${
                                                                               isRotated
                                                                                     ? "visible group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000"
-                                                                                    : "invisible"
+                                                                                    : "invisible transition-all "
                                                                         } flex justify-around h-auto max-h-0 md:text-xl items-center opacity-0 transition-all `}
                                                                   >
                                                                     <Link to={`/addpayment/${userId}`}>

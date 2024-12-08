@@ -27,11 +27,21 @@ function Login() {
             try {
                   dispatch(showLoader());
                   const response = await LoginUser(user);
-                  toast.success(response.message);
-                        localStorage.setItem("token", response.token);
+                  if (response.success) {
+                     localStorage.setItem("token", response.token);
+                     localStorage.setItem("userRole", response.role);
                         dispatch(SetUserRole(response.role));
-                  dispatch(hideLoader());
-            } catch (error) {
+                        toast.success(response.message);
+                        localStorage.setItem("token", response.token);
+                        dispatch(hideLoader());
+                        return;
+                  }
+                  toast.error(response.message);
+                    dispatch(hideLoader());
+            }
+            catch (error) {
+                 toast.error(error.message);
+                 navigate("/home");
                   dispatch(hideLoader);
                   return error.message;
             }

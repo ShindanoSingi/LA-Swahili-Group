@@ -31,13 +31,12 @@ function App() {
               navigate("/admin");
         } else if (localStorage.getItem("token") && userRole === "Superuser") {
               navigate("/super");
-        } else if (localStorage.getItem("token") && userRole === "User") {
-              navigate("/user");
         }
-   else {
-        navigate("/users");
-  }
-}, [userRole]);
+        else if (localStorage.getItem("token")) {
+           navigate("/users");
+        }
+
+     }, [userRole], localStorage.getItem("token") );
 
       return (
             <>
@@ -45,6 +44,7 @@ function App() {
                   <Header />
                   <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/addpayment/:id" element={<AddPayments />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />

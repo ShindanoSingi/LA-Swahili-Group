@@ -1,6 +1,7 @@
 import React from "react";
 
 function Contact() {
+
       return (
             <div className="mt-[4rem] pt-2 px-2 min-h-[100vh] ">
                   <div className="bg-white py-2 text-center rounded-md shadow-lg sm:-translate-y-24 max-w-sm w-full mx-auto">

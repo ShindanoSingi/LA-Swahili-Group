@@ -160,14 +160,14 @@ function Register() {
                                           />
                                           {hideEye1 ? (
                                                 <IoEyeSharp
-                                                      className=" eye text-gray-200"
+                                                      className=" eye absolute ml-[22rem] text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility1
                                                       }
                                                 />
                                           ) : (
                                                 <FaEyeSlash
-                                                      className="eye left-[40%] text-gray-200"
+                                                      className="eye absolute ml-[22rem] text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility1
                                                       }
@@ -200,14 +200,14 @@ function Register() {
                                           />
                                           {hideEye2 ? (
                                                 <IoEyeSharp
-                                                      className=" eye text-gray-200"
+                                                      className=" eye absolute ml-[22rem] text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility2
                                                       }
                                                 />
                                           ) : (
                                                 <FaEyeSlash
-                                                      className="eye left-[40%] text-gray-200"
+                                                      className="eye absolute ml-[22rem] text-gray-200"
                                                       onClick={
                                                             togglePasswordVisibility2
                                                       }

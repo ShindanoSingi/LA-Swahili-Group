@@ -49,12 +49,14 @@ function Contributions() {
                   return error.message;
             }
       };
+      console.log(userPayments)
 
       const userPaid = async () => {
             try {
                   dispatch(showLoader());
                   if (paymentId) {
                         const response = await UserPaid(paymentId);
+
                         dispatch(hideLoader());
                   }
             } catch (error) {
@@ -77,11 +79,11 @@ function Contributions() {
       }, [paymentId,!isLoading,setClicked]);
 
       return (
-            <div className=" pt-24 px-2 h-[100vh] overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
+            <div className=" pt-24 px-2 h-[100vh]  overflow-auto border-gray-200 dark:bg-gray-800 text-[#FFFFFF]">
 
                   {id ? (
                         <>
-                              <div className="flex justify-center md:text-xl ">
+                              <div className="flex m-auto max-w-6xl justify-center md:text-xl ">
                                     <div className="w-full rounded-lg shadow max-w-full ">
                                           <div className="flex flex-col items-center gap-2">
                                                 {userPayments ? (
@@ -100,7 +102,7 @@ function Contributions() {
                                                                         to={`/addpayment/${id}`}
                                                                   >
                                                                         <Button
-                                                                              text="Changia Pesa"
+                                                                              text="Contribute"
                                                                               type="default"
                                                                               width="full"
                                                                         />
@@ -127,14 +129,12 @@ function Contributions() {
                                                                   index
                                                             ) => (
                                                                   <div className="font-bold bg-gray-500 rounded-lg w-full text-center pb-4 px-2">
-                                                                        <div className="flex flex-col items-center w-full">
+                                                                        <div className="flex flex-col items-center">
                                                                               <h2 className="font-bold md:text-2xl bg-gray-500 rounded-lg w-full text-center px-6 py-4">
                                                                                     Mwaka
                                                                                     Wa{" "}
                                                                                     {
-                                                                                          years[
-                                                                                                index
-                                                                                          ]
+                                                                                         years[index]
                                                                                     }
                                                                               </h2>
                                                                               <div className="relative shadow-md w-full sm:rounded-lg">
