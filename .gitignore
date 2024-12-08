@@ -12,6 +12,7 @@ logs/
 # Build output
 dist/
 build/
+images/
 
 # Dependency lock files
 package-lock.json
